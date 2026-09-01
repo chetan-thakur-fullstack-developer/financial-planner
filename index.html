@@ -864,7 +864,7 @@ function applyPrivacyState() {
   const masterBtn = document.getElementById('masterPrivacyBtn');
   const allTargets = document.querySelectorAll('.privacy-target, td:not(:first-child), input[type="number"]');
   
-  if (isMasterHidden) {
+  if (!isMasterHidden) {
     allTargets.forEach(el => el.classList.add('privacy-masked'));
     if (masterBtn) masterBtn.innerText = '🔒 Hide All Values';
   } else {
