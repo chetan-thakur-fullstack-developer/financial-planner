@@ -28,7 +28,12 @@
       "type": "special",
       "limitKey": "hsa"
     },
-    { "key": "espp", "label": "ESPP", "color": "#ec4899", "type": "taxable" },
+    {
+      "key": "espp",
+      "label": "ESPP",
+      "color": "#ec4899",
+      "type": "taxable"
+    },
     {
       "key": "cd",
       "label": "CD / Cash",
@@ -121,7 +126,8 @@
         "tradIra": 0,
         "hsa": 0,
         "espp": 0,
-        "c529": 0
+        "c529": 0,
+        "k401": 0
       }
     },
     {
@@ -154,7 +160,8 @@
         "tradIra": 0,
         "hsa": 0,
         "espp": 5069,
-        "c529": 0
+        "c529": 0,
+        "k401": 0
       }
     },
     {
@@ -187,7 +194,8 @@
         "tradIra": 7000,
         "hsa": 9329,
         "espp": 6929,
-        "c529": 0
+        "c529": 0,
+        "k401": 0
       }
     },
     {
@@ -196,7 +204,7 @@
       "balances": {
         "k401": 136327,
         "roth": 14152,
-        "tradIra": 0,
+        "tradIra": 10000,
         "hsa": 6126,
         "espp": 29278,
         "cd": 6552,
@@ -220,7 +228,8 @@
         "tradIra": 0,
         "hsa": 6565,
         "espp": 13821,
-        "c529": 2700
+        "c529": 2700,
+        "k401": 0
       }
     }
   ]
