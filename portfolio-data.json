@@ -1,18 +1,18 @@
 {
   "categories": [
-    { "key": "k401", "label": "401(k)", "color": "#2563eb", "type": "deferred", "limitKey": "k401" },
+    { "key": "k401", "label": "401(k)", "color": "#6366f1", "type": "deferred", "limitKey": "k401" },
     { "key": "roth", "label": "Roth IRA", "color": "#10b981", "type": "exempt", "limitKey": "ira" },
     { "key": "tradIra", "label": "Trad IRA", "color": "#f59e0b", "type": "deferred", "limitKey": "ira" },
     { "key": "hsa", "label": "HSA", "color": "#8b5cf6", "type": "special", "limitKey": "hsa" },
     { "key": "espp", "label": "ESPP", "color": "#ec4899", "type": "taxable" },
     { "key": "cd", "label": "CD / Cash", "color": "#64748b", "type": "taxable" },
-    { "key": "c529", "label": "Mysha 529", "color": "#06b6d4", "type": "special", "limitKey": "c529" }
+    { "key": "c529", "label": "529", "color": "#06b6d4", "type": "special", "limitKey": "c529" }
   ],
   "irsBaseLimits": {
     "2023": { "k401": 22500, "ira": 6500, "hsaSelf": 3850, "hsaFamily": 7750, "c529Single": 17000, "c529Joint": 34000, "k401Catch": 7500, "iraCatch": 1000, "hsaCatch": 1000 },
     "2024": { "k401": 23000, "ira": 7000, "hsaSelf": 4150, "hsaFamily": 8300, "c529Single": 18000, "c529Joint": 36000, "k401Catch": 7500, "iraCatch": 1000, "hsaCatch": 1000 },
     "2025": { "k401": 23500, "ira": 7000, "hsaSelf": 4300, "hsaFamily": 8300, "c529Single": 19000, "c529Joint": 38000, "k401Catch": 7500, "iraCatch": 1000, "hsaCatch": 1000 },
-    "2026": { "k401": 23500, "ira": 7000, "hsaSelf": 4300, "hsaFamily": 8550, "c529Single": 19000, "c529Joint": 38000, "k401Catch": 7500, "iraCatch": 1000, "hsaCatch": 1000 }
+    "2026": { "k401": 24500, "ira": 7500, "hsaSelf": 4400, "hsaFamily": 8750, "c529Single": 19000, "c529Joint": 38000, "k401Catch": 8000, "k401SuperCatch": 11250, "iraCatch": 1100, "hsaCatch": 1000 }
   },
   "defaultAccountData": [
     {
