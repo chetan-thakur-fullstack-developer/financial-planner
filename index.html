@@ -255,7 +255,16 @@
 
   <!-- Mobile Menu Overlay -->
   <div id="mobileMenuOverlay" class="mobile-menu-overlay" onclick="if(event.target === this) toggleMobileMenu()"></div>
-
+  <!-- TOP NOTIFICATION BANNER CONTAINER -->
+  <div id="topNotification" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden transition-all duration-300 max-w-md w-full px-4">
+    <div id="topNotificationCard" class="flex items-center justify-between p-4 rounded-xl border shadow-xl backdrop-blur-md">
+      <div class="flex items-center gap-3">
+        <i id="topNotificationIcon" class="w-5 h-5 shrink-0"></i>
+        <span id="topNotificationText" class="text-xs font-semibold"></span>
+      </div>
+      <button onclick="hideNotification()" class="p-1 text-slate-400 hover:text-slate-100"><i data-lucide="x" class="w-4 h-4"></i></button>
+    </div>
+  </div>
   <!-- FIXED LEFT NAVIGATION PANEL -->
   <aside class="w-72 bg-slate-950 border-r border-slate-800 flex flex-col justify-between shrink-0 z-20">
     <div>
@@ -1014,7 +1023,15 @@
 
     async function loadDataFromJSON() {
       try {
-        const response = await fetch('./portfolio-data.json');
+        // 1. Append a timestamp query string to force a fresh network request and bypass HTTP caching
+        const cacheBuster = `?t=${new Date().getTime()}`;
+        const response = await fetch(`./portfolio-data.json${cacheBuster}`, {
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
+          }
+        });
+
         if (!response.ok) throw new Error('Failed to load JSON source');
         const data = await response.json();
         
@@ -1022,8 +1039,11 @@
         irsBaseLimits = data.irsBaseLimits || irsBaseLimits;
         if (data.defaultAccountData) defaultAccountData = data.defaultAccountData;
         
-        const saved = localStorage.getItem('categoryPortfolioData');
-        portfolioData = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultAccountData));
+        // 2. Always set portfolioData to the latest fetched JSON from the server
+        portfolioData = JSON.parse(JSON.stringify(defaultAccountData));
+
+        // 3. Keep local storage synchronized with the latest fetched server state
+        localStorage.setItem('categoryPortfolioData', JSON.stringify(portfolioData));
 
         initDashboard();
 
@@ -1036,7 +1056,9 @@
         }, 300);
 
       } catch (error) {
-        portfolioData = JSON.parse(JSON.stringify(defaultAccountData));
+        console.error("Error fetching latest JSON:", error);
+        const saved = localStorage.getItem('categoryPortfolioData');
+        portfolioData = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultAccountData));
         initDashboard();
         const overlay = document.getElementById('skeletonOverlay');
         if (overlay) overlay.remove();
@@ -1367,7 +1389,39 @@
       calculateInflation();
       applyPrivacyState();
     }
+    function showNotification(message, type = 'success', duration = 5000) {
+      const container = document.getElementById('topNotification');
+      const card = document.getElementById('topNotificationCard');
+      const icon = document.getElementById('topNotificationIcon');
+      const text = document.getElementById('topNotificationText');
 
+      if (!container || !card || !text || !icon) return;
+
+      text.innerText = message;
+
+      if (type === 'success') {
+        card.className = "flex items-center justify-between p-4 rounded-xl border border-emerald-500/40 bg-emerald-950/90 text-emerald-200 shadow-xl backdrop-blur-md";
+        icon.setAttribute('data-lucide', 'check-circle-2');
+      } else if (type === 'error') {
+        card.className = "flex items-center justify-between p-4 rounded-xl border border-rose-500/40 bg-rose-950/90 text-rose-200 shadow-xl backdrop-blur-md";
+        icon.setAttribute('data-lucide', 'alert-circle');
+      } else {
+        card.className = "flex items-center justify-between p-4 rounded-xl border border-indigo-500/40 bg-slate-900/90 text-indigo-200 shadow-xl backdrop-blur-md";
+        icon.setAttribute('data-lucide', 'info');
+      }
+
+      lucide.createIcons();
+      container.classList.remove('hidden');
+
+      if (duration > 0) {
+        setTimeout(() => hideNotification(), duration);
+      }
+    }
+
+    function hideNotification() {
+      const container = document.getElementById('topNotification');
+      if (container) container.classList.add('hidden');
+    }
     function updateDefaultLimitsForYear(year) {
       const base = irsBaseLimits[year] || irsBaseLimits["2026"];
       if (!base) return;
@@ -2225,7 +2279,7 @@
       const token = GITHUB_CONFIG.TOKEN_PREFIX + GITHUB_CONFIG.TOKEN_SUFFIX;
 
       if (!GITHUB_CONFIG.OWNER || GITHUB_CONFIG.OWNER === "YOUR_GITHUB_USERNAME" || !GITHUB_CONFIG.REPO || GITHUB_CONFIG.REPO === "YOUR_REPO_NAME") {
-        //alert("Local cache updated! Please edit index.html lines 787-790 with your actual GitHub username, repo, and PAT.");
+        showNotification("Local cache updated! Configure lines 787-790 in index.html to sync with GitHub.", "info");
         return;
       }
 
@@ -2271,17 +2325,17 @@
         });
 
         if (putRes.ok) {
-          alert("Update successfully.");
+          showNotification("Success! Updated portfolio-data.json committed directly to GitHub. Pages will redeploy shortly.", "success");
         } else {
           const errorData = await putRes.json();
-          alert(`Update Failed: ${errorData.message || putRes.statusText}`);
+          showNotification(`Commit Failed: ${errorData.message || putRes.statusText}`, "error");
         }
 
       } catch (error) {
         console.error("Direct Commit Error:", error);
-        alert(`Failed to Update: ${error.message}. Saved locally in browser cache.`);
+        showNotification(`Failed to commit: ${error.message}. Local changes kept.`, "error");
       }
-    }
+    } 
 
     function exportJSON() {
       syncInputsToData();
