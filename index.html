@@ -30,6 +30,48 @@
     .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
 
+    /* Light mode scrollbar overrides */
+    html:not(.dark) .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+    html:not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; }
+
+    /* Light Mode Custom Styling Adjustments & Contrast Enhancements */
+    html:not(.dark) body { background-color: #f8fafc; color: #0f172a; }
+    html:not(.dark) aside { background-color: #ffffff; border-color: #e2e8f0; }
+    html:not(.dark) header { background-color: #ffffff; border-color: #e2e8f0; }
+    html:not(.dark) main { background-color: #f8fafc; }
+    
+    /* Container & Card Backgrounds */
+    html:not(.dark) .bg-slate-850 { background-color: #ffffff; border-color: #e2e8f0 !important; }
+    html:not(.dark) .bg-slate-900 { background-color: #f8fafc; border-color: #e2e8f0 !important; }
+    html:not(.dark) .bg-slate-900\/60 { background-color: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+    html:not(.dark) .bg-slate-900\/80 { background-color: #f1f5f9 !important; border-color: #cbd5e1 !important; }
+    html:not(.dark) .bg-slate-900\/40 { background-color: #ffffff !important; border-color: #cbd5e1 !important; }
+    html:not(.dark) .bg-slate-950 { background-color: #ffffff; border-color: #e2e8f0 !important; }
+    
+    /* Text Color Adjustments for High Contrast */
+    html:not(.dark) .text-slate-100 { color: #0f172a !important; }
+    html:not(.dark) .text-slate-200 { color: #1e293b !important; }
+    html:not(.dark) .text-slate-300 { color: #334155 !important; }
+    html:not(.dark) .text-slate-400 { color: #475569 !important; }
+    html:not(.dark) .border-slate-800 { border-color: #e2e8f0 !important; }
+    html:not(.dark) .border-slate-700 { border-color: #cbd5e1 !important; }
+    
+    /* Input & Select Box High Contrast in Light Mode */
+    html:not(.dark) input[type="number"], 
+    html:not(.dark) input[type="text"], 
+    html:not(.dark) select { background-color: #ffffff !important; color: #0f172a !important; border-color: #cbd5e1 !important; }
+
+    /* Header & Navigation Button Enhancements for Light Mode */
+    html:not(.dark) header button,
+    html:not(.dark) header label { background-color: #ffffff !important; border-color: #cbd5e1 !important; color: #1e293b !important; }
+    html:not(.dark) header button:hover,
+    html:not(.dark) header label:hover { background-color: #f1f5f9 !important; color: #0f172a !important; }
+    
+    html:not(.dark) .nav-btn { color: #475569 !important; }
+    html:not(.dark) .nav-btn:hover { background-color: #f1f5f9 !important; color: #0f172a !important; }
+    html:not(.dark) .nav-btn.active { background-color: #e0e7ff !important; color: #4338ca !important; }
+
+    /* Strategic Hub Sub-Tab Navigation in Light Mode */
     .hub-tab-btn {
       padding: 0.5rem 1rem;
       font-size: 0.75rem;
@@ -44,7 +86,11 @@
     .hub-tab-btn:hover { color: #f8fafc; background-color: #334155; }
     .hub-tab-btn.active { background-color: #6366f1; color: #ffffff; border-color: #6366f1; }
 
-    /* COLLAPSIBLE ACCORDION/SUBTAB STYLES FOR ZERO-SCROLL PAYSTUB TOOL */
+    html:not(.dark) .hub-tab-btn { background-color: #f1f5f9; color: #475569; border-color: #cbd5e1; }
+    html:not(.dark) .hub-tab-btn:hover { background-color: #e2e8f0; color: #0f172a; }
+    html:not(.dark) .hub-tab-btn.active { background-color: #4338ca; color: #ffffff; border-color: #4338ca; }
+
+    /* Paystub Sub-Section Button Adjustments for Light Mode */
     .paystub-subtab-btn {
       padding: 0.375rem 0.75rem;
       font-size: 0.7rem;
@@ -59,11 +105,28 @@
     .paystub-subtab-btn:hover { color: #f8fafc; background-color: #1e293b; }
     .paystub-subtab-btn.active { background-color: #334155; color: #f8fafc; border-color: #6366f1; }
 
-    @keyframes staggeredSlideUp {
-      0% { opacity: 0; transform: translateY(12px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    .animate-stagger-item { animation: staggeredSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    html:not(.dark) .paystub-subtab-btn { background-color: #ffffff; color: #475569; border-color: #cbd5e1; }
+    html:not(.dark) .paystub-subtab-btn:hover { background-color: #f1f5f9; color: #0f172a; }
+    html:not(.dark) .paystub-subtab-btn.active { background-color: #4338ca; color: #ffffff; border-color: #4338ca; }
+
+    /* Manage Portfolio Ledger Drawer & Paystub Table Light Mode Specifics */
+    html:not(.dark) #ledgerDrawer { background-color: #ffffff !important; border-color: #cbd5e1 !important; box-shadow: 0 -10px 25px -5px rgba(0,0,0,0.1); }
+    html:not(.dark) #ledgerDrawer .p-4.bg-slate-900 { background-color: #f8fafc !important; border-color: #e2e8f0 !important; }
+    html:not(.dark) #ledgerDrawer .bg-slate-900\/50 { background-color: #f1f5f9 !important; border-color: #e2e8f0 !important; }
+    html:not(.dark) #ledgerDrawer table input[type="number"] { background-color: #ffffff !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
+    html:not(.dark) #ledgerDrawer table input[type="number"]:focus { border-color: #4338ca !important; }
+    html:not(.dark) #ledgerDrawer .drawer-tab-btn { color: #64748b; }
+    html:not(.dark) #ledgerDrawer .drawer-tab-btn.text-indigo-400 { color: #4338ca !important; border-color: #4338ca !important; }
+    html:not(.dark) tr.hover\:bg-slate-800\/40:hover,
+    html:not(.dark) tr.hover\:bg-slate-900\/60:hover { background-color: #f1f5f9 !important; }
+    
+    /* Paystub Receipt Table Light Mode Overrides */
+    html:not(.dark) #paystubReceiptBody tr.bg-slate-900\/80 { background-color: #e2e8f0 !important; }
+    html:not(.dark) #paystubReceiptBody tr.bg-emerald-500\/10 { background-color: #d1fae5 !important; border-color: #059669 !important; }
+    html:not(.dark) #paystubReceiptBody .text-emerald-400 { color: #047857 !important; }
+    html:not(.dark) #paystubReceiptBody .text-indigo-300 { color: #4338ca !important; }
+    html:not(.dark) #paystubReceiptBody .text-rose-400 { color: #dc2626 !important; }
+    html:not(.dark) #paystubReceiptBody .text-pink-300 { color: #be185d !important; }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans h-full antialiased flex overflow-hidden">
@@ -132,11 +195,16 @@
         </select>
       </div>
 
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-3">
         <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-300 bg-slate-800/80 hover:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 transition-all">
           <input type="checkbox" id="taxHaircutToggle" onchange="updateDashboard()" class="rounded bg-slate-900 border-slate-700 text-indigo-600 focus:ring-0">
-          <span>Apply Embedded Tax Haircuts</span>
+          <span>Apply Tax Haircuts</span>
         </label>
+
+        <!-- Theme Mode Toggle -->
+        <button id="themeToggleBtn" onclick="toggleThemeMode()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-700 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all">
+          <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-400"></i> Light Mode
+        </button>
 
         <button id="masterPrivacyBtn" onclick="toggleMasterPrivacy()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-700 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all">
           <i data-lucide="eye-off" class="w-3.5 h-3.5"></i> Hide Values
@@ -239,19 +307,6 @@
           <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4">
             <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Current Asset Mix</h3>
             <div class="h-56 flex justify-center"><canvas id="categoryChart"></canvas></div>
-            
-            <div id="esppRiskGaugeContainer" class="p-4 bg-slate-900 rounded-xl border border-slate-800 space-y-2">
-              <div class="flex items-center justify-between text-xs">
-                <span class="font-bold text-slate-300 flex items-center gap-1.5">
-                  <i data-lucide="shield-alert" class="w-4 h-4 text-pink-400"></i> ESPP Concentration Weight
-                </span>
-                <span id="esppWeightVal" class="font-bold text-pink-400">0.0%</span>
-              </div>
-              <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex">
-                <div id="esppWeightBar" class="h-full bg-[#ec4899] transition-all duration-300" style="width: 0%;"></div>
-              </div>
-              <p id="esppActionMessage" class="text-[11px] text-slate-400 leading-normal"></p>
-            </div>
           </div>
 
           <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
@@ -260,6 +315,7 @@
           </div>
         </div>
 
+        <!-- REBALANCING PLANNER -->
         <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-6">
           <div class="flex flex-wrap items-start justify-between gap-4 border-b border-slate-800/80 pb-4">
             <div class="space-y-1 max-w-xl">
@@ -267,12 +323,16 @@
                 <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Portfolio Asset Rebalancing Planner</h3>
                 <i data-lucide="info" class="w-4 h-4 text-indigo-400 cursor-help" title="Module Overview: Calculates distribution deltas and generates trade execution plans to restore target allocation."></i>
               </div>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                <strong class="text-slate-300">Section Overview:</strong> Compares real-time holdings (<code class="text-indigo-300">Current %</code>) against target weightings (<code class="text-indigo-300">Target %</code>). Generates precise cross-account trades when drift tolerance is breached.
+              </p>
             </div>
 
             <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl space-y-1.5 w-full sm:w-auto">
               <div class="flex items-center justify-between gap-3">
                 <label for="driftTolerance" class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                   <i data-lucide="sliders" class="w-3.5 h-3.5 text-indigo-400"></i> Drift Tolerance:
+                  <i data-lucide="help-circle" class="w-3.5 h-3.5 text-slate-400 cursor-help" title="Variance percentage limit (|Current % - Target %|) before triggering an OVER DRIFT badge."></i>
                 </label>
                 <span id="driftToleranceVal" class="text-xs font-bold text-indigo-400">5.0%</span>
               </div>
@@ -284,8 +344,7 @@
             <table class="w-full text-left text-xs border-collapse">
               <thead>
                 <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold">
-                  <th class="py-3 px-4 w-32">Asset Class</th>
-                  <th class="py-3 px-4 min-w-[220px]">Allocation Progress Track</th>
+                  <th class="py-3 px-4">Asset Class</th>
                   <th class="py-3 px-4">Current Value</th>
                   <th class="py-3 px-4">Current %</th>
                   <th class="py-3 px-4">Target %</th>
@@ -299,6 +358,7 @@
             </table>
           </div>
 
+          <!-- Plain-Text Action Plan Summary -->
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-400">
@@ -306,75 +366,119 @@
                 <span>Action Plan Summary</span>
               </div>
             </div>
-            <div id="actionPlanContainer" class="space-y-2 bg-slate-950 p-4 rounded-lg border border-slate-800/80 min-h-[80px]"></div>
+            <pre id="actionPlanSummaryText" class="text-xs font-mono text-slate-300 whitespace-pre-wrap leading-relaxed bg-slate-950 p-4 rounded-lg border border-slate-800/80 custom-scrollbar max-h-48 overflow-y-auto">Calculating actions...</pre>
           </div>
+
+          <!-- Performance & Fee Drag Metrics -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
+                <i data-lucide="calculator" class="w-4 h-4 text-indigo-400"></i>
+                <span>Performance Fee Drag & Liquidity Metrics</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="text-xs text-slate-400 font-semibold block mb-1">Expense Ratio (%)</label>
+                <input type="number" step="0.01" id="rebalExpenseRatio" value="0.15" oninput="renderRebalancer()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-lg px-3 py-1.5 text-xs">
+              </div>
+              <div>
+                <label class="text-xs text-slate-400 font-semibold block mb-1">Idle Cash ($)</label>
+                <input type="number" id="rebalIdleCash" value="5000" oninput="renderRebalancer()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-lg px-3 py-1.5 text-xs">
+              </div>
+              <div class="bg-slate-950 p-3 rounded-lg border border-slate-800/80 flex flex-col justify-center">
+                <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Annual Performance Fee Drag</span>
+                <div id="annualFeeDragVal" class="privacy-target text-base font-bold text-rose-400 mt-0.5">$0.00 / yr</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mini Chart Breakdown Cards -->
+        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Account Trajectory & Performance Basis</h3>
+          <div class="mini-charts-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
         </div>
       </div>
 
       <!-- TAB 3: TAX & CONTRIBUTION TRACKER -->
       <div id="tab-tax" class="main-tab-content space-y-6 hidden">
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-              <i data-lucide="sliders-horizontal" class="w-4 h-4 text-indigo-400"></i>
-              Tax Profile Config & Phase-Out Engine
-            </h3>
-            <span id="taxPhaseBadge" class="hidden text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">
-              ⚠️ Phase-Out Active
-            </span>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
             <div>
-              <label for="filingStatus" class="text-xs text-slate-400 font-semibold block mb-1">Filing Status</label>
-              <select id="filingStatus" onchange="renderIRSProgress(); calculatePaystub();" class="w-full bg-slate-900 border border-slate-800 text-slate-100 text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500">
-                <option value="Single">Single</option>
-                <option value="MFJ" selected>Married Filing Jointly (MFJ)</option>
+              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Prorated IRS Goal Tracker (<span id="limitYearText">2026</span>)</h3>
+              <p class="text-xs text-slate-400">Prorated target evaluates expected pacing based on elapsed months.</p>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-semibold bg-slate-900 border border-slate-800 p-2 rounded-lg">
+              <label class="flex items-center gap-2 cursor-pointer text-slate-300">
+                <input type="checkbox" id="catchUpCheck" onchange="renderIRSProgress()" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0"> Catch-up (50+)
+              </label>
+              <select id="hsaTypeSelect" onchange="renderIRSProgress()" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-slate-200">
+                <option value="family">HSA: Family</option>
+                <option value="self">HSA: Self-Only</option>
+              </select>
+              <select id="donor529Select" onchange="renderIRSProgress()" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-slate-200">
+                <option value="single">529: Single ($19k)</option>
+                <option value="joint">529: Joint ($38k)</option>
               </select>
             </div>
-            <div>
-              <label for="estimatedMAGI" class="text-xs text-slate-400 font-semibold block mb-1">Estimated MAGI ($)</label>
-              <input type="text" id="estimatedMAGI" value="240000" oninput="renderIRSProgress()" placeholder="e.g. 240000" class="w-full bg-slate-900 border border-slate-800 text-slate-100 text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500">
-            </div>
           </div>
-        </div>
 
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-xs font-bold text-slate-300">401(k) Personal</span>
                 <span id="badge401k" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
               </div>
+              <div class="flex justify-between text-xs text-slate-400 mb-2">
+                <span>Annual Limit ($):</span>
+                <input type="number" id="limit401k" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
+              </div>
               <div id="label401kVal" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
               <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
                 <div id="bar401k" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
               </div>
             </div>
+
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-xs font-bold text-slate-300">Roth / Trad IRA</span>
                 <span id="badgeIra" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
+              </div>
+              <div class="flex justify-between text-xs text-slate-400 mb-2">
+                <span>Annual Limit ($):</span>
+                <input type="number" id="limitIra" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
               </div>
               <div id="labelIraVal" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
               <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
                 <div id="barIra" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
               </div>
             </div>
+
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-xs font-bold text-slate-300">HSA Goal</span>
                 <span id="badgeHsa" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
+              </div>
+              <div class="flex justify-between text-xs text-slate-400 mb-2">
+                <span>Annual Limit ($):</span>
+                <input type="number" id="limitHsa" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
               </div>
               <div id="labelHsaVal" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
               <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
                 <div id="barHsa" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
               </div>
             </div>
+
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-xs font-bold text-slate-300">Mysha 529</span>
                 <span id="badge529" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
+              </div>
+              <div class="flex justify-between text-xs text-slate-400 mb-2">
+                <span>Annual Limit ($):</span>
+                <input type="number" id="limit529" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
               </div>
               <div id="label529Val" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
               <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
@@ -383,12 +487,16 @@
             </div>
           </div>
         </div>
+
+        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Tax Wrapper Location Bucket Breakdown</h3>
+          <div id="taxBucketContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+        </div>
       </div>
 
       <!-- STRATEGIC HUB & INSTANT PAYSTUB TOOL TAB -->
       <div id="tab-hub" class="main-tab-content space-y-6 hidden">
         <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-6">
-          
           <div class="flex items-center gap-2 border-b border-slate-800 pb-4">
             <button id="btnSubTabOptimizer" onclick="switchHubSubTab('subtab-optimizer')" class="hub-tab-btn active">
               📈 Texas Market Optimizer
@@ -398,21 +506,18 @@
             </button>
           </div>
 
-          <!-- SUB-TAB A: TEXAS & MACRO MARKET INVESTMENT OPTIMIZER -->
+          <!-- SUB-TAB A: TEXAS OPTIMIZER -->
           <div id="subtab-optimizer" class="hub-sub-content space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
-              <div>
-                <h3 class="text-base font-bold uppercase tracking-wider text-slate-100 flex items-center gap-2">
-                  <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
-                  ✨ Texas & Macro Market Investment Optimizer
-                </h3>
-              </div>
+              <h3 class="text-base font-bold uppercase tracking-wider text-slate-100 flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
+                ✨ Texas & Macro Market Investment Optimizer
+              </h3>
               <span class="text-[10px] font-mono px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-bold uppercase">
                 Active Focus Year: <span id="hubYearLabel">2026</span>
               </span>
             </div>
 
-            <!-- SUBMODULE A1: Texas Savings Runway Accelerator -->
             <div class="space-y-4">
               <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-2">
                 <i data-lucide="map-pin" class="w-4 h-4"></i>
@@ -421,46 +526,32 @@
               <div id="texasAcceleratorContainer"></div>
             </div>
 
-            <!-- SUBMODULE A2: Macro Allocation Strategy Matrix -->
             <div class="space-y-4 pt-4 border-t border-slate-800">
               <div id="macroMatrixContainer"></div>
             </div>
           </div>
 
-          <!-- SUB-TAB B: ZERO-SCROLL COLLAPSIBLE PAYSTUB CALCULATOR -->
+          <!-- SUB-TAB B: PAYSTUB TOOL -->
           <div id="subtab-paystub" class="hub-sub-content space-y-4 hidden">
             <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
-              <div>
-                <h3 class="text-base font-bold uppercase tracking-wider text-slate-100 flex items-center gap-2">
-                  <i data-lucide="receipt" class="w-5 h-5 text-emerald-400"></i>
-                  📋 Minimal-Input Instant Paystub Calculator
-                </h3>
-                <p class="text-xs text-slate-400 mt-0.5">Edit salary directly to project future earnings, or toggle section mini-tabs to configure drivers.</p>
-              </div>
+              <h3 class="text-base font-bold uppercase tracking-wider text-slate-100 flex items-center gap-2">
+                <i data-lucide="receipt" class="w-5 h-5 text-emerald-400"></i>
+                📋 Minimal-Input Instant Paystub Calculator
+              </h3>
             </div>
 
-            <!-- PAYSTUB INNER MINI-NAV BAR (COMPACT SECTION SWITCHER) -->
             <div class="flex flex-wrap items-center gap-2 bg-slate-900 p-2 rounded-lg border border-slate-800">
-              <button id="btnPaySectionBase" onclick="switchPaySection('pay-sec-base')" class="paystub-subtab-btn active">
-                ⚙️ Base Salary & Taxes
-              </button>
-              <button id="btnPaySectionPre" onclick="switchPaySection('pay-sec-pre')" class="paystub-subtab-btn">
-                🛡️ Pre-Tax Setup
-              </button>
-              <button id="btnPaySectionPost" onclick="switchPaySection('pay-sec-post')" class="paystub-subtab-btn">
-                💎 Post-Tax Setup
-              </button>
-              <button id="btnPaySectionWithhold" onclick="switchPaySection('pay-sec-withhold')" class="paystub-subtab-btn">
-                ➕ Extra Withholdings
-              </button>
+              <button id="btnPaySectionBase" onclick="switchPaySection('pay-sec-base')" class="paystub-subtab-btn active">⚙️ Base Salary & Taxes</button>
+              <button id="btnPaySectionPre" onclick="switchPaySection('pay-sec-pre')" class="paystub-subtab-btn">🛡️ Pre-Tax Setup</button>
+              <button id="btnPaySectionPost" onclick="switchPaySection('pay-sec-post')" class="paystub-subtab-btn">💎 Post-Tax Setup</button>
+              <button id="btnPaySectionWithhold" onclick="switchPaySection('pay-sec-withhold')" class="paystub-subtab-btn">➕ Extra Withholdings</button>
             </div>
 
-            <!-- SECTION 1: BASE SALARY, FREQUENCY & TAX CONTROLS -->
             <div id="pay-sec-base" class="paystub-section-panel bg-slate-900 p-4 rounded-xl border border-slate-800">
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div>
                   <label for="payCustomSalary" class="text-xs text-emerald-400 font-bold block mb-1">Annual Gross Salary ($)</label>
-                  <input type="number" id="payCustomSalary" value="185000" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs font-bold rounded-lg px-3 py-1.5 focus:outline-none focus:border-indigo-500" placeholder="e.g. 185000">
+                  <input type="number" id="payCustomSalary" value="185000" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs font-bold rounded-lg px-3 py-1.5">
                 </div>
                 <div>
                   <label for="payFrequency" class="text-xs text-slate-300 font-semibold block mb-1">Pay Frequency</label>
@@ -488,35 +579,15 @@
               </div>
             </div>
 
-            <!-- SECTION 2: DYNAMIC PRE-TAX DEDUCTIONS CONTAINER -->
             <div id="pay-sec-pre" class="paystub-section-panel hidden bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
-              <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-                <span class="text-xs font-bold uppercase text-indigo-400">Pre-Tax Deductions Setup</span>
-                <span class="text-[10px] text-slate-400">Reduces Taxable Federal Gross Income</span>
-              </div>
-              <div id="preTaxDeductionsList" class="space-y-2">
-                <!-- Dynamically Rendered Rows for Pre-Tax Deductions -->
-              </div>
+              <div id="preTaxDeductionsList" class="space-y-2"></div>
             </div>
 
-            <!-- SECTION 3: DYNAMIC POST-TAX DEDUCTIONS CONTAINER -->
             <div id="pay-sec-post" class="paystub-section-panel hidden bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
-              <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-                <span class="text-xs font-bold uppercase text-pink-400">Post-Tax Deductions Setup</span>
-                <button onclick="addPostTaxRow()" class="text-xs text-indigo-400 hover:text-indigo-300 font-bold flex items-center gap-1">
-                  + Add another post-tax deduction
-                </button>
-              </div>
-              <div id="postTaxDeductionsList" class="space-y-2">
-                <!-- Dynamically Rendered Custom Post-Tax Rows -->
-              </div>
+              <div id="postTaxDeductionsList" class="space-y-2"></div>
             </div>
 
-            <!-- SECTION 4: MANUAL ADDITIONAL WITHHOLDINGS CONTAINER -->
             <div id="pay-sec-withhold" class="paystub-section-panel hidden bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
-              <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-                <span class="text-xs font-bold uppercase text-amber-400">Additional Withholdings (Fixed $/paycheck)</span>
-              </div>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <label class="text-[11px] text-slate-400 block mb-1">Additional Federal ($/paycheck)</label>
@@ -533,7 +604,6 @@
               </div>
             </div>
 
-            <!-- TABULAR PAYROLL RECEIPT MATRIX OUTPUT -->
             <div class="overflow-x-auto">
               <table class="w-full text-left text-xs border-collapse">
                 <thead>
@@ -543,17 +613,14 @@
                     <th class="py-3 px-4">Per Pay Period ($)</th>
                   </tr>
                 </thead>
-                <tbody id="paystubReceiptBody" class="divide-y divide-slate-800/60 font-medium text-slate-200">
-                  <!-- Dynamically populated payload receipt rows -->
-                </tbody>
+                <tbody id="paystubReceiptBody" class="divide-y divide-slate-800/60 font-medium text-slate-200"></tbody>
               </table>
             </div>
-            <p id="medicareAlertNote" class="text-[11px] text-slate-400 italic mt-2"></p>
           </div>
         </div>
       </div>
 
-      <!-- TAB 4: ADVANCED PROJECTIONS -->
+      <!-- TAB 4: ADVANCED PROJECTIONS & UNIFIED CALCULATORS -->
       <div id="tab-projections" class="main-tab-content space-y-6 hidden">
         <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
           <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Compound Wealth Growth Projection Engine</h3>
@@ -572,6 +639,92 @@
             </div>
           </div>
           <div class="h-64"><canvas id="projectionChart"></canvas></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- FIRE TARGET MODULE -->
+          <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-2">FIRE Target</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="text-xs text-slate-400 block">Annual Expenses ($)</label>
+                <input type="number" id="fireAnnualExpenses" value="60000" oninput="propagateUnifiedDataStore()" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-slate-100 mt-1">
+              </div>
+              <div>
+                <label class="text-xs text-slate-400 block">Safe Withdrawal Rate (%)</label>
+                <input type="number" step="0.1" id="fireWithdrawalRate" value="4.0" oninput="propagateUnifiedDataStore()" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-slate-100 mt-1">
+              </div>
+              <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-2">
+                <div>
+                  <span class="text-[10px] text-indigo-400 font-bold uppercase">Required Target Corpus</span>
+                  <div id="fireTargetVal" class="privacy-target text-lg font-bold text-slate-100">$0</div>
+                </div>
+                
+                <div class="space-y-1">
+                  <div class="flex justify-between text-[10px] font-semibold">
+                    <span class="text-slate-400">Target Progress</span>
+                    <span id="fireGaugePct" class="text-indigo-400">0%</span>
+                  </div>
+                  <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div id="fireGaugeBar" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
+                  </div>
+                </div>
+
+                <div id="fireCoastTimeText" class="text-[10px] text-indigo-300 font-medium">--</div>
+                <p id="fireProgressText" class="privacy-target text-[11px] text-slate-400 mt-1"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- EMERGENCY LIQUIDITY MODULE -->
+          <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-2">Emergency Liquidity</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="text-xs text-slate-400 block">Monthly Expenses ($)</label>
+                <input type="number" id="efMonthlyExp" value="5000" oninput="propagateUnifiedDataStore()" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-slate-100 mt-1">
+              </div>
+              <div>
+                <label class="text-xs text-slate-400 block">Runway Target</label>
+                <select id="efTargetMonths" onchange="propagateUnifiedDataStore()" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-slate-100 mt-1">
+                  <option value="3">3 Months</option>
+                  <option value="6" selected>6 Months</option>
+                  <option value="12">12 Months</option>
+                </select>
+              </div>
+              <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg space-y-1.5">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <span class="text-[10px] text-indigo-400 font-bold uppercase">Cash Target Required</span>
+                    <div id="efTargetVal" class="privacy-target text-lg font-bold text-slate-100">$0</div>
+                  </div>
+                  <span id="efAllocationBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
+                </div>
+                <div id="efActualCashText" class="text-[10px] text-slate-300 font-medium">Actual Ledger Cash: $0</div>
+                <p id="efRunwayText" class="privacy-target text-[11px] text-slate-400 mt-1"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- INFLATION SIMULATOR MODULE -->
+          <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-2">Inflation Simulator</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="text-xs text-slate-400 block">Est. Inflation (%)</label>
+                <input type="number" step="0.1" id="infInflationRate" value="2.5" oninput="propagateUnifiedDataStore()" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-slate-100 mt-1">
+              </div>
+              <div>
+                <label class="text-xs text-slate-400 block">Horizon (Years)</label>
+                <input type="number" id="infTimeHorizon" value="10" oninput="propagateUnifiedDataStore()" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-slate-100 mt-1">
+              </div>
+              <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg">
+                <span class="text-[10px] text-indigo-400 font-bold uppercase">Real Value Purchasing Power</span>
+                <div id="infRealValue" class="privacy-target text-lg font-bold text-slate-100">$0</div>
+                <p id="infSummaryText" class="privacy-target text-[11px] text-slate-400 mt-1"></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -626,60 +779,58 @@
   </div>
 
   <script>
-    let categoriesConfig = [];
-    let irsBaseLimits = {};
+    let categoriesConfig = [
+      { key: "k401", label: "401(k)", color: "#6366f1", type: "deferred" },
+      { key: "roth", label: "Roth IRA", color: "#10b981", type: "exempt" },
+      { key: "tradIra", label: "Trad IRA", color: "#f59e0b", type: "deferred" },
+      { key: "hsa", label: "HSA", color: "#8b5cf6", type: "special" },
+      { key: "espp", label: "ESPP", color: "#ec4899", type: "taxable" },
+      { key: "cd", label: "CD / Cash", color: "#64748b", type: "taxable" },
+      { key: "c529", label: "Mysha 529", color: "#06b6d4", type: "special" }
+    ];
+
+    let irsBaseLimits = {
+      "2023": { k401: 22500, ira: 6500, hsaSelf: 3850, hsaFamily: 7750, c529Single: 17000, c529Joint: 34000, k401Catch: 7500, iraCatch: 1000, hsaCatch: 1000 },
+      "2024": { k401: 23000, ira: 7000, hsaSelf: 4150, hsaFamily: 8300, c529Single: 18000, c529Joint: 36000, k401Catch: 7500, iraCatch: 1000, hsaCatch: 1000 },
+      "2025": { k401: 23500, ira: 7000, hsaSelf: 4300, hsaFamily: 8300, c529Single: 19000, c529Joint: 38000, k401Catch: 7500, iraCatch: 1000, hsaCatch: 1000 },
+      "2026": { k401: 24500, ira: 7500, hsaSelf: 4400, hsaFamily: 8750, c529Single: 19000, c529Joint: 38000, k401Catch: 8000, iraCatch: 1100, hsaCatch: 1000 }
+    };
 
     let defaultAccountData = [
       {
-        "year": "2023",
-        "salary": 160000,
-        "balances": { "k401": 50574, "roth": 15568, "tradIra": 0, "hsa": 0, "espp": 0, "cd": 0, "c529": 0 },
-        "invested": { "k401": 39148.43, "roth": 13000, "tradIra": 0, "hsa": 0, "espp": 0, "cd": 0, "c529": 0 },
-        "contri": { "employer": 5935.98, "user": 5935, "rollover": 27277.45, "cd": 0, "roth": 6500, "tradIra": 0, "hsa": 0, "espp": 0, "c529": 0 }
+        year: "2023", salary: 160000,
+        balances: { k401: 50574, roth: 15568, tradIra: 0, hsa: 0, espp: 0, cd: 0, c529: 0 },
+        invested: { k401: 39148, roth: 13000, tradIra: 0, hsa: 0, espp: 0, cd: 0, c529: 0 },
+        contri: { employer: 5935, user: 5935, rollover: 27277, cd: 0, roth: 6500, tradIra: 0, hsa: 0, espp: 0, c529: 0 }
       },
       {
-        "year": "2024",
-        "salary": 170000,
-        "balances": { "k401": 77834, "roth": 12392, "tradIra": 0, "hsa": 1100, "espp": 5831, "cd": 0, "c529": 0 },
-        "invested": { "k401": 52039.83, "roth": 20000, "tradIra": 0, "hsa": 1000, "espp": 5069, "cd": 0, "c529": 0 },
-        "contri": { "employer": 6186.06, "user": 6705.34, "rollover": 0, "cd": 0, "roth": 7000, "tradIra": 0, "hsa": 0, "espp": 5069, "c529": 0 }
+        year: "2024", salary: 170000,
+        balances: { k401: 77834, roth: 12392, tradIra: 0, hsa: 1100, espp: 5831, cd: 0, c529: 0 },
+        invested: { k401: 52039, roth: 20000, tradIra: 0, hsa: 1000, espp: 5069, cd: 0, c529: 0 },
+        contri: { employer: 6186, user: 6705, rollover: 0, cd: 0, roth: 7000, tradIra: 0, hsa: 0, espp: 5069, c529: 0 }
       },
       {
-        "year": "2025",
-        "salary": 178000,
-        "balances": { "k401": 108046, "roth": 14017, "tradIra": 9374, "hsa": 8722, "espp": 17080, "cd": 17492, "c529": 0 },
-        "invested": { "k401": 65409.83, "roth": 20000, "tradIra": 7000, "hsa": 9329, "espp": 11998, "cd": 17000, "c529": 0 },
-        "contri": { "employer": 6060, "user": 7310, "rollover": 0, "cd": 17000, "roth": 0, "tradIra": 7000, "hsa": 9329, "espp": 6929, "c529": 0 }
+        year: "2025", salary: 178000,
+        balances: { k401: 108046, roth: 14017, tradIra: 9374, hsa: 8722, espp: 17080, cd: 17492, c529: 0 },
+        invested: { k401: 65409, roth: 20000, tradIra: 7000, hsa: 9329, espp: 11998, cd: 17000, c529: 0 },
+        contri: { employer: 6060, user: 7310, rollover: 0, cd: 17000, roth: 0, tradIra: 7000, hsa: 9329, espp: 6929, c529: 0 }
       },
       {
-        "year": "2026",
-        "salary": 185000,
-        "balances": { "k401": 136638, "roth": 14152, "tradIra": 0, "hsa": 6126, "espp": 29467, "cd": 6216, "c529": 2887 },
-        "invested": { "k401": 74015.83, "roth": 20000, "tradIra": 0, "hsa": 6565, "espp": 25819, "cd": 6000, "c529": 2700 },
-        "contri": { "employer": 4303, "user": 4303, "rollover": 0, "cd": -11000, "roth": 0, "tradIra": 0, "hsa": 6565, "espp": 13821, "c529": 2700 }
+        year: "2026", salary: 185000,
+        balances: { k401: 136638, roth: 14152, tradIra: 0, hsa: 6126, espp: 29467, cd: 6216, c529: 2887 },
+        invested: { k401: 74015, roth: 20000, tradIra: 0, hsa: 6565, espp: 25819, cd: 6000, c529: 2700 },
+        contri: { employer: 4303, user: 4303, rollover: 0, cd: -11000, roth: 0, tradIra: 0, hsa: 6565, espp: 13821, c529: 2700 }
       }
     ];
 
     const TaxBrackets = {
       2025: {
-        single: [
-          { limit: 11925, rate: 0.10 }, { limit: 48475, rate: 0.12 }, { limit: 103350, rate: 0.22 },
-          { limit: 197300, rate: 0.24 }, { limit: 250525, rate: 0.32 }, { limit: 626350, rate: 0.35 }, { limit: Infinity, rate: 0.37 }
-        ],
-        mfj: [
-          { limit: 23850, rate: 0.10 }, { limit: 96950, rate: 0.12 }, { limit: 206700, rate: 0.22 },
-          { limit: 394600, rate: 0.24 }, { limit: 501050, rate: 0.32 }, { limit: 751600, rate: 0.35 }, { limit: Infinity, rate: 0.37 }
-        ]
+        single: [{ limit: 11925, rate: 0.10 }, { limit: 48475, rate: 0.12 }, { limit: 103350, rate: 0.22 }, { limit: 197300, rate: 0.24 }, { limit: Infinity, rate: 0.32 }],
+        mfj: [{ limit: 23850, rate: 0.10 }, { limit: 96950, rate: 0.12 }, { limit: 206700, rate: 0.22 }, { limit: 394600, rate: 0.24 }, { limit: Infinity, rate: 0.32 }]
       },
       2026: {
-        single: [
-          { limit: 12400, rate: 0.10 }, { limit: 50400, rate: 0.12 }, { limit: 105700, rate: 0.22 },
-          { limit: 201775, rate: 0.24 }, { limit: 256225, rate: 0.32 }, { limit: 640600, rate: 0.35 }, { limit: Infinity, rate: 0.37 }
-        ],
-        mfj: [
-          { limit: 24800, rate: 0.10 }, { limit: 100800, rate: 0.12 }, { limit: 211400, rate: 0.22 },
-          { limit: 403550, rate: 0.24 }, { limit: 512450, rate: 0.32 }, { limit: 768700, rate: 0.35 }, { limit: Infinity, rate: 0.37 }
-        ]
+        single: [{ limit: 12400, rate: 0.10 }, { limit: 50400, rate: 0.12 }, { limit: 105700, rate: 0.22 }, { limit: 201775, rate: 0.24 }, { limit: Infinity, rate: 0.32 }],
+        mfj: [{ limit: 24800, rate: 0.10 }, { limit: 100800, rate: 0.12 }, { limit: 211400, rate: 0.22 }, { limit: 403550, rate: 0.24 }, { limit: Infinity, rate: 0.32 }]
       }
     };
 
@@ -688,8 +839,7 @@
       { id: 'pre_den', label: 'Dental Coverage' },
       { id: 'pre_vis', label: 'Vision Insurance' },
       { id: 'pre_401k', label: '401(k) Contribution' },
-      { id: 'pre_hsa', label: 'HSA Contribution' },
-      { id: 'pre_fsa', label: 'FSA Contribution' }
+      { id: 'pre_hsa', label: 'HSA Contribution' }
     ];
 
     let customPostTaxDeductions = [
@@ -704,13 +854,10 @@
     let miniCharts = {};
     let lastSelectedYear = "";
 
-    let rebalanceAnimationFrameId = null;
-    let activeStaggerTimeouts = [];
+    // STRICT FILE-LEVEL DEFAULT PRIVACY: Always true on every page load
+    let isMasterHidden = true;
 
-    let isMasterHidden = localStorage.getItem('dashboardMasterPrivacy') !== null 
-      ? localStorage.getItem('dashboardMasterPrivacy') === 'true' 
-      : false;
-
+    // UNIFIED DATA-STORE CONTEXT
     let unifiedStore = {
       startingBal: 0,
       monthlyContri: 2000,
@@ -720,6 +867,13 @@
 
     Chart.defaults.color = '#94a3b8';
     Chart.defaults.scale.grid.color = '#131f35';
+    Chart.defaults.plugins.tooltip.callbacks.label = function(context) {
+      let label = context.dataset.label || context.label || '';
+      if (label) label += ': ';
+      if (isMasterHidden) return label + '****';
+      if (context.parsed.y !== undefined) return label + '$' + context.parsed.y.toLocaleString();
+      return label + '$' + context.raw.toLocaleString();
+    };
 
     async function loadDataFromJSON() {
       try {
@@ -727,8 +881,8 @@
         if (!response.ok) throw new Error('Failed to load JSON source');
         const data = await response.json();
         
-        categoriesConfig = data.categories || [];
-        irsBaseLimits = data.irsBaseLimits || {};
+        categoriesConfig = data.categories || categoriesConfig;
+        irsBaseLimits = data.irsBaseLimits || irsBaseLimits;
         if (data.defaultAccountData) defaultAccountData = data.defaultAccountData;
         
         const saved = localStorage.getItem('categoryPortfolioData');
@@ -745,7 +899,6 @@
         }, 300);
 
       } catch (error) {
-        console.error('Error fetching JSON source:', error);
         portfolioData = JSON.parse(JSON.stringify(defaultAccountData));
         initDashboard();
         const overlay = document.getElementById('skeletonOverlay');
@@ -761,6 +914,26 @@
       renderPostTaxInputs();
       renderTables();
       renderComparisonTable();
+      updateDashboard();
+    }
+
+    function toggleThemeMode() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      const themeBtn = document.getElementById('themeToggleBtn');
+
+      if (isDark) {
+        html.classList.remove('dark');
+        themeBtn.innerHTML = `<i data-lucide="moon" class="w-3.5 h-3.5 text-indigo-400"></i> Dark Mode`;
+        Chart.defaults.color = '#475569';
+        Chart.defaults.scale.grid.color = '#e2e8f0';
+      } else {
+        html.classList.add('dark');
+        themeBtn.innerHTML = `<i data-lucide="sun" class="w-3.5 h-3.5 text-amber-400"></i> Light Mode`;
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.scale.grid.color = '#131f35';
+      }
+      lucide.createIcons();
       updateDashboard();
     }
 
@@ -794,7 +967,7 @@
 
       customPostTaxDeductions.forEach((item, index) => {
         container.innerHTML += `
-          <div class="grid grid-cols-1 md:grid-cols-5 gap-2 items-center bg-slate-900/40 p-2 rounded border border-slate-800">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-2 items-center bg-slate-900/40 p-2 rounded border border-slate-800">
             <input type="text" value="${item.label}" oninput="customPostTaxDeductions[${index}].label = this.value; calculatePaystub();" class="bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded px-2 py-1">
             <select onchange="customPostTaxDeductions[${index}].type = this.value; calculatePaystub();" class="bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded px-2 py-1">
               <option value="per_paycheck" ${item.type === 'per_paycheck' ? 'selected' : ''}>Per Paycheck</option>
@@ -803,31 +976,11 @@
             <select onchange="customPostTaxDeductions[${index}].method = this.value; calculatePaystub();" class="bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded px-2 py-1">
               <option value="fixed" ${item.method === 'fixed' ? 'selected' : ''}>$ Fixed Amount</option>
               <option value="gross_pct" ${item.method === 'gross_pct' ? 'selected' : ''}>% of Gross Pay</option>
-              <option value="net_pct" ${item.method === 'net_pct' ? 'selected' : ''}>% of Net Pay</option>
             </select>
             <input type="number" value="${item.amount}" oninput="customPostTaxDeductions[${index}].amount = parseFloat(this.value)||0; calculatePaystub();" class="bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded px-2 py-1">
-            <button onclick="removePostTaxRow(${index})" class="text-rose-400 hover:text-rose-300 text-xs font-bold text-right">✕ Remove</button>
           </div>
         `;
       });
-    }
-
-    function addPostTaxRow() {
-      customPostTaxDeductions.push({
-        id: `post_custom_${Date.now()}`,
-        label: 'Custom Deduction',
-        method: 'fixed',
-        type: 'per_paycheck',
-        amount: 0
-      });
-      renderPostTaxInputs();
-      calculatePaystub();
-    }
-
-    function removePostTaxRow(index) {
-      customPostTaxDeductions.splice(index, 1);
-      renderPostTaxInputs();
-      calculatePaystub();
     }
 
     function switchMainTab(event, tabId) {
@@ -871,7 +1024,6 @@
       }
     }
 
-    /* PAYSTUB INNER SECTION SWITCHER (COMPACT ZERO-SCROLL CONTROL) */
     function switchPaySection(secId) {
       document.querySelectorAll('.paystub-section-panel').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.paystub-subtab-btn').forEach(el => el.classList.remove('active'));
@@ -906,7 +1058,6 @@
 
     function toggleMasterPrivacy() {
       isMasterHidden = !isMasterHidden;
-      localStorage.setItem('dashboardMasterPrivacy', isMasterHidden);
       applyPrivacyState();
     }
 
@@ -950,15 +1101,15 @@
       balHtml += `<th class="py-3 px-4">Total Balance</th><th class="py-3 px-4">Total Invested</th><th class="py-3 px-4">Gain ($)</th><th class="py-3 px-4">Gain (%)</th>`;
       invHtml += `<th class="py-3 px-4">Total Invested</th>`;
 
-      balHead.innerHTML = balHtml;
-      invHead.innerHTML = invHtml;
+      if (balHead) balHead.innerHTML = balHtml;
+      if (invHead) invHead.innerHTML = invHtml;
 
       let contriHtml = `<th class="py-3 px-4">Year</th><th class="py-3 px-4">Employer</th><th class="py-3 px-4">User</th><th class="py-3 px-4">Rollover</th>`;
       categoriesConfig.forEach(cat => {
         contriHtml += `<th class="py-3 px-4">${cat.label}</th>`;
       });
       contriHtml += `<th class="py-3 px-4">Return ($)</th><th class="py-3 px-4">Return (%)</th>`;
-      contriHead.innerHTML = contriHtml;
+      if (contriHead) contriHead.innerHTML = contriHtml;
     }
 
     function buildDynamicMiniCards() {
@@ -973,9 +1124,19 @@
               <span class="text-xs font-bold text-slate-200">${cat.label}</span>
               <span id="latest_${cat.key}" class="privacy-target text-xs font-bold" style="color:${cat.color};">$0</span>
             </div>
-            <div class="flex justify-between text-[10px] text-slate-400 mb-2">
-              <span>Basis: <b id="invested_${cat.key}" class="privacy-target text-slate-300">$0</b></span>
-              <span>Gain: <b id="gain_${cat.key}" class="privacy-target">$0 (0%)</b></span>
+            <div class="space-y-1 text-[10px] text-slate-400 mb-2">
+              <div class="flex justify-between">
+                <span>Invested Basis:</span>
+                <b id="invested_${cat.key}" class="privacy-target text-slate-300">$0</b>
+              </div>
+              <div class="flex justify-between">
+                <span>Overall Growth:</span>
+                <b id="gain_${cat.key}" class="privacy-target">$0 (0%)</b>
+              </div>
+              <div class="flex justify-between border-t border-slate-800/80 pt-1">
+                <span>Yearly Gain:</span>
+                <b id="yearly_gain_${cat.key}" class="privacy-target">$0 (0%)</b>
+              </div>
             </div>
             <div class="h-20"><canvas id="chartMini_${cat.key}"></canvas></div>
           </div>
@@ -998,11 +1159,8 @@
       return Object.entries(data.balances).reduce((sum, [key, val]) => {
         let numericVal = Number(val) || 0;
         if (applyHaircuts) {
-          if (key === 'k401' || key === 'tradIra') {
-            numericVal *= 0.76; 
-          } else if (key === 'espp') {
-            numericVal *= 0.85; 
-          }
+          if (key === 'k401' || key === 'tradIra') numericVal *= 0.76; 
+          else if (key === 'espp') numericVal *= 0.85; 
         }
         return sum + numericVal;
       }, 0); 
@@ -1022,7 +1180,6 @@
         if (lastSelectedYear !== selectedYear) {
           updateDefaultLimitsForYear(selectedYear);
           lastSelectedYear = selectedYear;
-          // Synchronize Paystub Custom Salary Input to selected Focus Year's baseline
           const paySalaryEl = document.getElementById('payCustomSalary');
           if (paySalaryEl) paySalaryEl.value = yearData.salary || 185000;
         }
@@ -1035,8 +1192,8 @@
           const totalUserContri = yearData.contri ? (yearData.contri.user || 0) : 0;
           unifiedStore.monthlyContri = Math.round(totalUserContri / 12) || 2000;
           
-          document.getElementById('projStartingBal').value = unifiedStore.startingBal;
-          document.getElementById('projMonthlyContri').value = unifiedStore.monthlyContri;
+          if (document.getElementById('projStartingBal')) document.getElementById('projStartingBal').value = unifiedStore.startingBal;
+          if (document.getElementById('projMonthlyContri')) document.getElementById('projMonthlyContri').value = unifiedStore.monthlyContri;
         }
 
         propagateUnifiedDataStore();
@@ -1080,10 +1237,10 @@
       const currentYear = currentDate.getFullYear().toString();
       let activeMonth = selectedYear === currentYear ? currentDate.getMonth() + 1 : (parseInt(selectedYear) < parseInt(currentYear) ? 12 : 1);
 
-      const user401k = data.contri.user || 0;
-      const userIra = (data.contri.roth || 0) + (data.contri.tradIra || 0);
-      const userHsa = data.contri.hsa || 0;
-      const user529 = data.contri.c529 || 0;
+      const user401k = data.contri ? (data.contri.user || 0) : 0;
+      const userIra = data.contri ? ((data.contri.roth || 0) + (data.contri.tradIra || 0)) : 0;
+      const userHsa = data.contri ? (data.contri.hsa || 0) : 0;
+      const user529 = data.contri ? (data.contri.c529 || 0) : 0;
 
       const annualLimit401k = parseFloat(document.getElementById('limit401k')?.value) || 1;
       const annualLimitIra = parseFloat(document.getElementById('limitIra')?.value) || 1;
@@ -1248,6 +1405,40 @@
       if (document.getElementById('fireTargetVal')) document.getElementById('fireTargetVal').innerText = `$${Math.round(targetFIRE).toLocaleString()}`;
       if (document.getElementById('fireGaugePct')) document.getElementById('fireGaugePct').innerText = `${pctComplete.toFixed(1)}%`;
       if (document.getElementById('fireGaugeBar')) document.getElementById('fireGaugeBar').style.width = `${pctComplete.toFixed(1)}%`;
+
+      const monthlyRate = (unifiedStore.annualReturn / 100) / 12;
+      const monthlyContri = unifiedStore.monthlyContri;
+
+      const coastTimeEl = document.getElementById('fireCoastTimeText');
+      const progressTextEl = document.getElementById('fireProgressText');
+
+      if (currentTotal >= targetFIRE) {
+        if (coastTimeEl) {
+          coastTimeEl.innerText = "✓ FIRE Target Met!";
+          coastTimeEl.className = "text-[10px] text-emerald-400 font-bold";
+        }
+        if (progressTextEl) progressTextEl.innerText = `Active portfolio fully covers 100% of target corpus.`;
+      } else {
+        let coastMonths = 0;
+        let fullMonths = 0;
+        
+        if (monthlyRate > 0) coastMonths = Math.log(targetFIRE / currentTotal) / Math.log(1 + monthlyRate);
+
+        let tempBal = currentTotal;
+        while (tempBal < targetFIRE && fullMonths < 1200) {
+          tempBal = (tempBal + monthlyContri) * (1 + monthlyRate);
+          fullMonths++;
+        }
+
+        const coastYrs = (coastMonths / 12).toFixed(1);
+        const fullYrs = (fullMonths / 12).toFixed(1);
+
+        if (coastTimeEl) {
+          coastTimeEl.innerText = `Coast FIRE: ${coastYrs} yrs | Full FIRE: ${fullYrs} yrs`;
+          coastTimeEl.className = "text-[10px] text-indigo-300 font-medium";
+        }
+        if (progressTextEl) progressTextEl.innerText = `Portfolio covers ${pctComplete.toFixed(1)}% of target ($${Math.round(currentTotal).toLocaleString()} / $${Math.round(targetFIRE).toLocaleString()}).`;
+      }
     }
 
     function calculateEmergencyFund() {
@@ -1261,6 +1452,25 @@
 
       if (document.getElementById('efTargetVal')) document.getElementById('efTargetVal').innerText = `$${requiredFund.toLocaleString()}`;
       if (document.getElementById('efActualCashText')) document.getElementById('efActualCashText').innerText = `Actual Ledger Cash: $${actualCash.toLocaleString()}`;
+
+      const badge = document.getElementById('efAllocationBadge');
+      const diff = actualCash - requiredFund;
+
+      if (badge) {
+        if (diff > 500) {
+          badge.innerText = "Over-allocated (Cash Drag)";
+          badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30";
+        } else if (diff < -500) {
+          badge.innerText = "Under-allocated (Liquidity Risk)";
+          badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30";
+        } else {
+          badge.innerText = "Optimal Liquidity";
+          badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+        }
+      }
+
+      const runwayMonths = (actualCash / (exp || 1)).toFixed(1);
+      if (document.getElementById('efRunwayText')) document.getElementById('efRunwayText').innerText = `Current liquid cash provides ${runwayMonths} months of emergency runway.`;
     }
 
     function calculateInflation() {
@@ -1271,6 +1481,7 @@
       const discountedValue = currentBal / Math.pow(1 + (infRate / 100), years);
       
       if (document.getElementById('infRealValue')) document.getElementById('infRealValue').innerText = `$${Math.round(discountedValue).toLocaleString()}`;
+      if (document.getElementById('infSummaryText')) document.getElementById('infSummaryText').innerText = `In ${years} yrs, portfolio ($${Math.round(currentBal).toLocaleString()}) has the purchasing power of $${Math.round(discountedValue).toLocaleString()} today.`;
     }
 
     function renderTaxBuckets() {
@@ -1322,7 +1533,6 @@
       const totalPortfolio = getTotalBal(activeData);
       const estimatedStateTaxSavings = Math.round(salary * 0.05);
 
-      const c529Bal = activeData ? (activeData.balances.c529 || 0) : 0;
       const esppBal = activeData ? (activeData.balances.espp || 0) : 0;
       const cashBal = activeData ? (activeData.balances.cd || 0) : 0;
 
@@ -1369,7 +1579,7 @@
                 <tr class="hover:bg-slate-800/40 transition-all">
                   <td class="py-3.5 px-4 font-bold text-slate-100">2. ESPP Concentration Reduction</td>
                   <td class="py-3.5 px-4">$${esppBal.toLocaleString()} ESPP (${totalPortfolio > 0 ? ((esppBal/totalPortfolio)*100).toFixed(1) : 0}%)</td>
-                  <td class="py-3.5 px-4 text-slate-400">Concentration breaches 10% safety thresholds.</td>
+                  <td class="py-3.5 px-4 text-slate-400">Concentration breaches safety thresholds.</td>
                   <td class="py-3.5 px-4 text-emerald-400 font-semibold">Stagger-sell ESPP surplus into 401(k)/Roth.</td>
                 </tr>
               </tbody>
@@ -1380,7 +1590,6 @@
       lucide.createIcons();
     }
 
-    /* FULL DYNAMIC PAYSTUB ENGINE WITH MANUALLY EDITABLE BASE SALARY OVERRIDE */
     function calculatePaystub() {
       const selectedYear = document.getElementById('yearFilter').value;
       const data = portfolioData.find(d => d.year === selectedYear) || portfolioData[portfolioData.length - 1];
@@ -1388,12 +1597,10 @@
       const frequencyCount = parseInt(document.getElementById('payFrequency')?.value) || 26;
       const filingStatus = document.getElementById('paystubFilingStatus')?.value || 'single';
 
-      // Reads custom manual salary override if present, else defaults to JSON node
       const manualSalaryInput = parseFloat(document.getElementById('payCustomSalary')?.value);
       const annualSalary = !isNaN(manualSalaryInput) ? manualSalaryInput : (data.salary || 185000);
       const grossPeriod = annualSalary / frequencyCount;
 
-      // 1. CALCULATE PRE-TAX DEDUCTIONS
       let totalPreTaxPeriod = 0;
       let preTaxReceiptItems = [];
 
@@ -1404,30 +1611,27 @@
         
         let periodAmt = 0;
         if (method === 'fixed') {
-          if (type === 'per_paycheck') {
-            periodAmt = val;
-          } else if (type === 'onetime') {
-            periodAmt = val / frequencyCount;
-          }
+          periodAmt = type === 'per_paycheck' ? val : (val / frequencyCount);
         } else if (method === 'gross_pct') {
           periodAmt = grossPeriod * (val / 100);
         }
 
-        totalPreTaxPeriod += periodAmt;
-        if (periodAmt > 0) {
+        const remainingGross = Math.max(0, grossPeriod - totalPreTaxPeriod);
+        let actualPeriodAmt = Math.min(periodAmt, remainingGross);
+
+        totalPreTaxPeriod += actualPeriodAmt;
+        if (actualPeriodAmt > 0) {
           preTaxReceiptItems.push({
             label: `[-] Pre-Tax ${item.label}`,
-            periodAmt: periodAmt,
-            annualAmt: periodAmt * frequencyCount
+            periodAmt: actualPeriodAmt,
+            annualAmt: actualPeriodAmt * frequencyCount
           });
         }
       });
 
-      // 2. TAXABLE GROSS INCOME
       const taxableGrossPeriod = Math.max(0, grossPeriod - totalPreTaxPeriod);
       const taxableGrossAnnual = taxableGrossPeriod * frequencyCount;
 
-      // 3. FICA TAXES
       const ssWageCap = selectedYear === "2025" ? 176100 : 184500;
       const cappedSSAnnual = Math.min(annualSalary, ssWageCap);
       const ssTaxAnnual = cappedSSAnnual * 0.062;
@@ -1436,12 +1640,10 @@
       const medTaxAnnual = annualSalary * 0.0145;
       const medTaxPeriod = medTaxAnnual / frequencyCount;
 
-      // 4. MANUAL ADDITIONAL WITHHOLDINGS
       const addFed = parseFloat(document.getElementById('addWithholdFed')?.value) || 0;
       const addState = parseFloat(document.getElementById('addWithholdState')?.value) || 0;
       const addLocal = parseFloat(document.getElementById('addWithholdLocal')?.value) || 0;
 
-      // 5. FEDERAL INCOME TAX
       const yearBrackets = TaxBrackets[selectedYear] || TaxBrackets["2026"];
       const bracketList = yearBrackets[filingStatus] || yearBrackets.single;
 
@@ -1460,50 +1662,42 @@
       }
       const fedTaxPeriod = (fedTaxAnnual / frequencyCount) + addFed;
 
-      // 6. STATE & LOCAL TAX
       const stateTaxRate = parseFloat(document.getElementById('manualStateTaxRate')?.value) || 0.0;
       const localTaxRate = parseFloat(document.getElementById('manualLocalTaxRate')?.value) || 0.0;
 
       const stateTaxPeriod = (taxableGrossPeriod * (stateTaxRate / 100)) + addState;
       const localTaxPeriod = (taxableGrossPeriod * (localTaxRate / 100)) + addLocal;
 
-      // 7. PRELIMINARY NET PAY FOR POST-TAX NET % DEDUCTIONS
       const totalTaxesPeriod = fedTaxPeriod + stateTaxPeriod + localTaxPeriod + ssTaxPeriod + medTaxPeriod;
       const preliminaryNetPeriod = Math.max(0, taxableGrossPeriod - totalTaxesPeriod);
 
-      // 8. CALCULATE POST-TAX DEDUCTIONS
       let totalPostTaxPeriod = 0;
       let postTaxReceiptItems = [];
 
       customPostTaxDeductions.forEach(item => {
         let periodAmt = 0;
         if (item.method === 'fixed') {
-          if (item.type === 'per_paycheck') {
-            periodAmt = item.amount;
-          } else if (item.type === 'onetime') {
-            periodAmt = item.amount / frequencyCount;
-          }
+          periodAmt = item.type === 'per_paycheck' ? item.amount : (item.amount / frequencyCount);
         } else if (item.method === 'gross_pct') {
           periodAmt = grossPeriod * (item.amount / 100);
-        } else if (item.method === 'net_pct') {
-          periodAmt = preliminaryNetPeriod * (item.amount / 100);
         }
 
-        totalPostTaxPeriod += periodAmt;
-        if (periodAmt > 0) {
+        const remainingNet = Math.max(0, preliminaryNetPeriod - totalPostTaxPeriod);
+        let actualPeriodAmt = Math.min(periodAmt, remainingNet);
+
+        totalPostTaxPeriod += actualPeriodAmt;
+        if (actualPeriodAmt > 0) {
           postTaxReceiptItems.push({
             label: `[-] Post-Tax ${item.label}`,
-            periodAmt: periodAmt,
-            annualAmt: periodAmt * frequencyCount
+            periodAmt: actualPeriodAmt,
+            annualAmt: actualPeriodAmt * frequencyCount
           });
         }
       });
 
-      // FINAL NET TAKE HOME PAY
-      const netTakeHomePeriod = preliminaryNetPeriod - totalPostTaxPeriod;
+      const netTakeHomePeriod = Math.max(0, preliminaryNetPeriod - totalPostTaxPeriod);
       const netTakeHomeAnnual = netTakeHomePeriod * frequencyCount;
 
-      // RENDER RECEIPT TABLE
       const receiptBody = document.getElementById('paystubReceiptBody');
       if (receiptBody) {
         let html = `
@@ -1536,19 +1730,9 @@
             <td class="py-2.5 px-4 privacy-target">$${fedTaxPeriod.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
           </tr>
           <tr class="hover:bg-slate-800/40">
-            <td class="py-2.5 px-4">[-] State Income Tax (${stateTaxRate}%)</td>
-            <td class="py-2.5 px-4 privacy-target">$${(stateTaxPeriod * frequencyCount).toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-            <td class="py-2.5 px-4 privacy-target">$${stateTaxPeriod.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-          </tr>
-          <tr class="hover:bg-slate-800/40">
-            <td class="py-2.5 px-4">[-] FICA Social Security Tax (6.2%)</td>
-            <td class="py-2.5 px-4 privacy-target">$${(ssTaxPeriod * frequencyCount).toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-            <td class="py-2.5 px-4 privacy-target">$${ssTaxPeriod.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-          </tr>
-          <tr class="hover:bg-slate-800/40">
-            <td class="py-2.5 px-4">[-] FICA Medicare Tax (1.45%)</td>
-            <td class="py-2.5 px-4 privacy-target">$${(medTaxPeriod * frequencyCount).toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-            <td class="py-2.5 px-4 privacy-target">$${medTaxPeriod.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+            <td class="py-2.5 px-4">[-] FICA Taxes (SS + Medicare)</td>
+            <td class="py-2.5 px-4 privacy-target">$${((ssTaxPeriod + medTaxPeriod) * frequencyCount).toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+            <td class="py-2.5 px-4 privacy-target">$${(ssTaxPeriod + medTaxPeriod).toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
           </tr>
         `;
 
@@ -1574,14 +1758,14 @@
       }
     }
 
+    function handleTargetInput(catKey, val) {
+      customTargets[catKey] = parseFloat(val) || 0;
+      renderRebalancer();
+    }
+
     function renderRebalancer() {
       const tbody = document.getElementById('rebalanceTableBody');
       if (!tbody) return;
-
-      if (rebalanceAnimationFrameId) {
-        cancelAnimationFrame(rebalanceAnimationFrameId);
-        rebalanceAnimationFrameId = null;
-      }
 
       const activeYear = document.getElementById('yearFilter').value;
       const activeData = portfolioData.find(d => d.year === activeYear) || portfolioData[portfolioData.length - 1];
@@ -1597,7 +1781,7 @@
       let overDriftCount = 0;
 
       categoriesConfig.forEach(cat => {
-        const val = activeData.balances[cat.key] || 0;
+        const val = activeData.balances ? (activeData.balances[cat.key] || 0) : 0;
         const currentPct = total > 0 ? (val / total) * 100 : 0;
         
         const targetPct = customTargets[cat.key] !== undefined ? customTargets[cat.key] : defaultEqualPct;
@@ -1609,38 +1793,59 @@
         const targetVal = total * (targetPct / 100);
         const diff = val - targetVal;
 
-        if (diff > 0.01) sells.push({ label: cat.label, amount: diff, color: cat.color });
-        else if (diff < -0.01) buys.push({ label: cat.label, amount: Math.abs(diff), color: cat.color });
+        if (diff > 0.01) sells.push({ label: cat.label, amount: diff });
+        else if (diff < -0.01) buys.push({ label: cat.label, amount: Math.abs(diff) });
+
+        const badgeHtml = isOverDrift
+          ? `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-400 border border-rose-500/30 cursor-help" title="WARNING: Drift (${absDeltaPct.toFixed(1)}%) breaches ${driftTolerance.toFixed(1)}% threshold."><i data-lucide="alert-triangle" class="w-3 h-3"></i> OVER DRIFT</span>`
+          : `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-help" title="OPTIMAL: Within acceptable ${driftTolerance.toFixed(1)}% drift boundaries."><i data-lucide="check-circle-2" class="w-3 h-3"></i> BALANCED</span>`;
 
         tbody.innerHTML += `
           <tr class="hover:bg-slate-800/40 transition-all ${isOverDrift ? 'bg-rose-500/5' : ''}">
             <td class="py-3 px-4 font-bold text-slate-200">${cat.label}</td>
-            <td class="py-3 px-4"><div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden"><div class="h-full" style="width: ${Math.min(100, currentPct)}%; background:${cat.color};"></div></div></td>
             <td class="py-3 px-4">$${val.toLocaleString()}</td>
             <td class="py-3 px-4 font-semibold">${currentPct.toFixed(1)}%</td>
             <td class="py-3 px-4"><input type="number" step="0.1" class="w-16 bg-slate-900 border border-slate-700 text-slate-100 rounded px-1.5 py-0.5" value="${targetPct}" oninput="handleTargetInput('${cat.key}', this.value)">%</td>
             <td class="py-3 px-4">$${Math.round(targetVal).toLocaleString()}</td>
             <td class="py-3 px-4 font-bold ${isOverDrift ? 'text-rose-400' : 'text-slate-300'}">${absDeltaPct.toFixed(1)}%</td>
             <td class="py-3 px-4 font-bold ${diff >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${diff >= 0 ? '+' : ''}$${Math.round(diff).toLocaleString()}</td>
-            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${isOverDrift ? 'bg-rose-500/20 text-rose-400' : 'bg-emerald-500/20 text-emerald-400'}">${isOverDrift ? 'OVER DRIFT' : 'BALANCED'}</span></td>
+            <td class="py-3 px-4">${badgeHtml}</td>
           </tr>
         `;
       });
 
-      renderStaggeredActionPlan(overDriftCount, driftTolerance, sells, buys);
-      lucide.createIcons();
-    }
+      // Plain-Text Action Plan Summary
+      const summaryTextEl = document.getElementById('actionPlanSummaryText');
+      if (summaryTextEl) {
+        if (overDriftCount === 0) {
+          summaryTextEl.innerText = `[✓] Portfolio is fully balanced within your specified ${driftTolerance.toFixed(1)}% drift tolerance threshold.\nNo cross-account trade execution is necessary at this time.`;
+        } else {
+          let summaryLines = [];
+          summaryLines.push(`[!] REBALANCING ALERT: ${overDriftCount} asset layer(s) breach your ${driftTolerance.toFixed(1)}% drift tolerance threshold.\n`);
+          summaryLines.push(`EXECUTION STEPS TO RESTORE TARGETS:`);
 
-    function renderStaggeredActionPlan(overDriftCount, driftTolerance, sells, buys) {
-      const container = document.getElementById('actionPlanContainer');
-      if (!container) return;
-      container.innerHTML = "";
+          const minPairs = Math.min(sells.length, buys.length);
+          for (let i = 0; i < minPairs; i++) {
+            const amount = Math.min(sells[i].amount, buys[i].amount);
+            summaryLines.push(`• Sell $${Math.round(amount).toLocaleString()} of [${sells[i].label}] and buy $${Math.round(amount).toLocaleString()} of [${buys[i].label}] to restore target balance.`);
+          }
 
-      if (overDriftCount === 0) {
-        container.innerHTML = `<div class="text-xs font-mono text-emerald-400">[✓] Portfolio is fully balanced within your specified ${driftTolerance.toFixed(1)}% drift tolerance threshold.</div>`;
-      } else {
-        container.innerHTML = `<div class="text-xs font-mono text-rose-300 font-bold">[!] REBALANCING ALERT: ${overDriftCount} asset layer(s) breach drift tolerance threshold.</div>`;
+          summaryTextEl.innerText = summaryLines.join('\n');
+        }
       }
+
+      const expRatio = parseFloat(document.getElementById('rebalExpenseRatio')?.value || 0);
+      const idleCash = parseFloat(document.getElementById('rebalIdleCash')?.value || 0);
+      
+      const investedPortfolio = Math.max(0, total - idleCash);
+      const annualFeeDrag = (investedPortfolio * (expRatio / 100));
+
+      const feeDragEl = document.getElementById('annualFeeDragVal');
+      if (feeDragEl) {
+        feeDragEl.innerText = `$${Math.round(annualFeeDrag).toLocaleString()} / yr (${expRatio.toFixed(2)}% on $${Math.round(investedPortfolio).toLocaleString()})`;
+      }
+
+      lucide.createIcons();
     }
 
     function renderComparisonTable() {
@@ -1694,29 +1899,149 @@
           type: 'doughnut',
           data: {
             labels: categoriesConfig.map(c => c.label),
-            datasets: [{ data: categoriesConfig.map(c => selectedData.balances[c.key] || 0), backgroundColor: categoriesConfig.map(c => c.color), borderWidth: 0 }]
+            datasets: [{ data: categoriesConfig.map(c => selectedData.balances ? (selectedData.balances[c.key] || 0) : 0), backgroundColor: categoriesConfig.map(c => c.color), borderWidth: 0 }]
           },
           options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
         });
       }
+
+      const historyCanvas = document.getElementById('historyChart');
+      if (historyCanvas) {
+        const historyDatasets = categoriesConfig.map(cat => ({
+          label: cat.label,
+          data: portfolioData.map(d => d.balances ? (d.balances[cat.key] || 0) : 0),
+          backgroundColor: cat.color
+        }));
+
+        historyChart = new Chart(historyCanvas, {
+          type: 'bar',
+          data: { labels: years, datasets: historyDatasets },
+          options: { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true } }, plugins: { legend: { position: 'bottom' } } }
+        });
+      }
     }
 
-    function renderMiniCharts() {}
+    function renderMiniCharts() {
+      const selectedYear = document.getElementById('yearFilter').value;
+      const selectedYearIdx = portfolioData.findIndex(d => d.year === selectedYear);
+      const activeData = portfolioData[selectedYearIdx] || portfolioData[portfolioData.length - 1];
+      const prevData = selectedYearIdx > 0 ? portfolioData[selectedYearIdx - 1] : null;
+      const years = portfolioData.map(d => d.year);
+
+      categoriesConfig.forEach(cat => {
+        const dataValues = portfolioData.map(d => d.balances ? (d.balances[cat.key] || 0) : 0);
+        const latestVal = activeData.balances ? (activeData.balances[cat.key] || 0) : 0;
+        const investedVal = (activeData.invested && activeData.invested[cat.key]) ? activeData.invested[cat.key] : 0;
+        
+        // Cumulative Overall Growth Calculations
+        const gainLossVal = latestVal - investedVal;
+        const gainLossPct = investedVal > 0 ? ((gainLossVal / investedVal) * 100).toFixed(2) : "0.00";
+
+        // Year-Over-Year Gain Calculations
+        const prevVal = prevData && prevData.balances ? (prevData.balances[cat.key] || 0) : 0;
+        const userContri = activeData.contri ? (activeData.contri[cat.key] || 0) : 0;
+        const yearlyGainVal = latestVal - (prevVal + userContri);
+        const yearlyBasis = prevVal + userContri;
+        const yearlyGainPct = yearlyBasis > 0 ? ((yearlyGainVal / yearlyBasis) * 100).toFixed(2) : "0.00";
+
+        const labelEl = document.getElementById(`latest_${cat.key}`);
+        const investedEl = document.getElementById(`invested_${cat.key}`);
+        const gainEl = document.getElementById(`gain_${cat.key}`);
+        const yearlyGainEl = document.getElementById(`yearly_gain_${cat.key}`);
+
+        if (labelEl) labelEl.innerText = `$${latestVal.toLocaleString()}`;
+        if (investedEl) investedEl.innerText = `$${investedVal.toLocaleString()}`;
+        
+        if (gainEl) {
+          const sign = gainLossVal >= 0 ? '+' : '';
+          gainEl.innerText = `${sign}$${Math.round(gainLossVal).toLocaleString()} (${sign}${gainLossPct}%)`;
+          gainEl.className = `privacy-target ${gainLossVal >= 0 ? 'text-emerald-400' : 'text-rose-400'}`;
+        }
+
+        if (yearlyGainEl) {
+          if (!prevData) {
+            yearlyGainEl.innerText = "Base Year";
+            yearlyGainEl.className = "privacy-target text-slate-400";
+          } else {
+            const sign = yearlyGainVal >= 0 ? '+' : '';
+            yearlyGainEl.innerText = `${sign}$${Math.round(yearlyGainVal).toLocaleString()} (${sign}${yearlyGainPct}%)`;
+            yearlyGainEl.className = `privacy-target ${yearlyGainVal >= 0 ? 'text-emerald-400' : 'text-rose-400'}`;
+          }
+        }
+
+        const canvas = document.getElementById(`chartMini_${cat.key}`);
+        if (canvas) {
+          if (miniCharts[cat.key]) miniCharts[cat.key].destroy();
+          miniCharts[cat.key] = new Chart(canvas, {
+            type: 'line',
+            data: {
+              labels: years,
+              datasets: [{ data: dataValues, borderColor: cat.color, backgroundColor: cat.color + '1A', fill: true, tension: 0.2, borderWidth: 2 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
+          });
+        }
+      });
+    }
 
     function renderTables() {
       const balBody = document.querySelector("#balancesTable tbody");
-      if (!balBody) return;
-      balBody.innerHTML = "";
+      const invBody = document.querySelector("#investedTable tbody");
+      const contriBody = document.querySelector("#contributionsTable tbody");
+
+      if (balBody) balBody.innerHTML = "";
+      if (invBody) invBody.innerHTML = "";
+      if (contriBody) contriBody.innerHTML = "";
 
       portfolioData.forEach((row, i) => {
+        if (!row.balances) row.balances = {};
+        if (!row.invested) row.invested = {};
+        if (!row.contri) row.contri = {};
+
+        const totalBal = getTotalBal(row);
+        const totalInv = getTotalInvested(row);
+        const totalGainVal = totalBal - totalInv;
+        const totalGainPct = totalInv > 0 ? ((totalGainVal / totalInv) * 100).toFixed(2) : "0.00";
+        const sign = totalGainVal >= 0 ? '+' : '';
+
         let balCells = `<td class="py-3 px-4 font-bold text-slate-100">${row.year}</td>
                         <td class="py-3 px-4"><input type="number" class="w-24 bg-slate-900 border border-slate-800 text-slate-100 rounded px-2 py-1" value="${row.salary || 0}" id="sal-${i}" oninput="syncInputsToData()"></td>`;
+        let invCells = `<td class="py-3 px-4 font-bold text-slate-100">${row.year}</td>`;
 
         categoriesConfig.forEach(cat => {
           balCells += `<td class="py-3 px-4"><input type="number" class="w-24 bg-slate-900 border border-slate-800 text-slate-100 rounded px-2 py-1" value="${row.balances[cat.key] || 0}" id="${cat.key}-${i}" oninput="syncInputsToData()"></td>`;
+          invCells += `<td class="py-3 px-4"><input type="number" class="w-24 bg-slate-900 border border-slate-800 text-slate-100 rounded px-2 py-1" value="${row.invested[cat.key] || 0}" id="inv_${cat.key}-${i}" oninput="syncInputsToData()"></td>`;
         });
 
-        balBody.innerHTML += `<tr class="hover:bg-slate-900/60 transition-all">${balCells}</tr>`;
+        balCells += `
+          <td class="py-3 px-4 font-bold">$${totalBal.toLocaleString()}</td>
+          <td class="py-3 px-4 font-bold">$${totalInv.toLocaleString()}</td>
+          <td class="py-3 px-4 font-bold ${totalGainVal >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${sign}$${Math.round(totalGainVal).toLocaleString()}</td>
+          <td class="py-3 px-4 font-bold ${totalGainVal >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${sign}${totalGainPct}%</td>
+        `;
+        invCells += `<td class="py-3 px-4 font-bold">$${totalInv.toLocaleString()}</td>`;
+
+        if (balBody) balBody.innerHTML += `<tr class="hover:bg-slate-900/60 transition-all">${balCells}</tr>`;
+        if (invBody) invBody.innerHTML += `<tr class="hover:bg-slate-900/60 transition-all">${invCells}</tr>`;
+
+        let contriCells = `
+          <td class="py-3 px-4 font-bold text-slate-100">${row.year}</td>
+          <td class="py-3 px-4"><input type="number" class="w-20 bg-slate-900 border border-slate-800 text-slate-100 rounded px-2 py-1" value="${row.contri.employer || 0}" id="emp-${i}" oninput="syncInputsToData()"></td>
+          <td class="py-3 px-4"><input type="number" class="w-20 bg-slate-900 border border-slate-800 text-slate-100 rounded px-2 py-1" value="${row.contri.user || 0}" id="user-${i}" oninput="syncInputsToData()"></td>
+          <td class="py-3 px-4"><input type="number" class="w-20 bg-slate-900 border border-slate-800 text-slate-100 rounded px-2 py-1" value="${row.contri.rollover || 0}" id="roll-${i}" oninput="syncInputsToData()"></td>
+        `;
+
+        categoriesConfig.forEach(cat => {
+          contriCells += `<td class="py-3 px-4"><input type="number" class="w-20 bg-slate-900 border border-slate-800 text-slate-100 rounded px-2 py-1" value="${row.contri[cat.key] || 0}" id="c_${cat.key}-${i}" oninput="syncInputsToData()"></td>`;
+        });
+
+        const returns = getDynamicReturns(i);
+        contriCells += `
+          <td class="py-3 px-4 font-bold ${returns.amount >= 0 ? 'text-emerald-400' : 'text-rose-400'}">$${returns.amount.toLocaleString()}</td>
+          <td class="py-3 px-4 font-bold ${returns.pct >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${returns.pct}%</td>
+        `;
+
+        if (contriBody) contriBody.innerHTML += `<tr class="hover:bg-slate-900/60 transition-all">${contriCells}</tr>`;
       });
     }
 
@@ -1725,7 +2050,12 @@
         row.salary = parseFloat(document.getElementById(`sal-${i}`)?.value) || 0;
         categoriesConfig.forEach(cat => {
           if (document.getElementById(`${cat.key}-${i}`)) row.balances[cat.key] = parseFloat(document.getElementById(`${cat.key}-${i}`).value) || 0;
+          if (document.getElementById(`inv_${cat.key}-${i}`)) row.invested[cat.key] = parseFloat(document.getElementById(`inv_${cat.key}-${i}`).value) || 0;
+          if (document.getElementById(`c_${cat.key}-${i}`)) row.contri[cat.key] = parseFloat(document.getElementById(`c_${cat.key}-${i}`).value) || 0;
         });
+        if (document.getElementById(`emp-${i}`)) row.contri.employer = parseFloat(document.getElementById(`emp-${i}`).value) || 0;
+        if (document.getElementById(`user-${i}`)) row.contri.user = parseFloat(document.getElementById(`user-${i}`).value) || 0;
+        if (document.getElementById(`roll-${i}`)) row.contri.rollover = parseFloat(document.getElementById(`roll-${i}`).value) || 0;
       });
       updateDashboard();
     }
@@ -1733,7 +2063,7 @@
     function saveData() { syncInputsToData(); localStorage.setItem('categoryPortfolioData', JSON.stringify(portfolioData)); alert('Saved successfully!'); }
     function exportJSON() {}
     function importJSON(event) {}
-    function resetDefaults() { localStorage.removeItem('categoryPortfolioData'); portfolioData = JSON.parse(JSON.stringify(defaultAccountData)); initDashboard(); }
+    function resetDefaults() { localStorage.removeItem('categoryPortfolioData'); portfolioData = JSON.parse(JSON.stringify(defaultAccountData)); unifiedStore.isUserOverridden = false; initDashboard(); }
 
     window.onload = function() { loadDataFromJSON(); };
   </script>
