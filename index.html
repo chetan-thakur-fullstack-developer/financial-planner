@@ -127,6 +127,9 @@
     html:not(.dark) #paystubReceiptBody .text-indigo-300 { color: #4338ca !important; }
     html:not(.dark) #paystubReceiptBody .text-rose-400 { color: #dc2626 !important; }
     html:not(.dark) #paystubReceiptBody .text-pink-300 { color: #be185d !important; }
+
+    /* Disclaimer Card Styling */
+    html:not(.dark) .disclaimer-card { background-color: #f1f5f9 !important; border-color: #cbd5e1 !important; }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans h-full antialiased flex overflow-hidden">
@@ -725,6 +728,15 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- FOOTER DISCLAIMER CARD -->
+      <div class="disclaimer-card bg-slate-850 border border-slate-800/80 rounded-xl p-4 shadow-sm text-xs text-slate-400 leading-relaxed flex items-start gap-3">
+        <i data-lucide="shield-alert" class="w-5 h-5 text-indigo-400 shrink-0 mt-0.5"></i>
+        <div>
+          <span class="font-bold text-slate-300 block mb-0.5">Educational Disclaimer & Scope of Platform:</span>
+          All information presented on this site is for knowledge and educational purposes only. The platform owner is not a licensed financial advisor. Nothing on this platform constitutes a recommendation to buy or sell any security or financial instrument. Readers should perform their own research or consult a qualified professional regarding their specific financial situation.
         </div>
       </div>
 
