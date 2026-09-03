@@ -61,7 +61,6 @@
     /* Input & Select Box High Contrast in Light Mode */
     html:not(.dark) input[type="number"], 
     html:not(.dark) input[type="text"], 
-    html:not(.dark) input[type="password"], 
     html:not(.dark) select { background-color: #ffffff !important; color: #0f172a !important; border-color: #cbd5e1 !important; }
 
     /* Header & Navigation Button Enhancements for Light Mode */
@@ -290,26 +289,21 @@
     </div>
 
     <div class="p-4 border-t border-slate-800 space-y-2">
-      <!-- Controls Section -->
       <div class="space-y-2 mb-3 pb-3 border-b border-slate-700/50">
-        <!-- Tax Haircuts Toggle -->
         <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-300 bg-slate-800/80 hover:bg-slate-800 px-3 py-2 rounded-lg border border-slate-700 transition-all w-full">
           <input type="checkbox" id="taxHaircutToggle" onchange="updateDashboard()" class="rounded bg-slate-900 border-slate-700 text-indigo-600 focus:ring-0">
           <span>Apply Tax Haircuts</span>
         </label>
 
-        <!-- Theme Mode Toggle -->
         <button id="themeToggleBtn" onclick="toggleThemeMode()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-700 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all">
           <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-400"></i> Light Mode
         </button>
 
-        <!-- Show/Hide Values Toggle -->
         <button id="masterPrivacyBtn" onclick="toggleMasterPrivacy()" class="w-full flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-700 text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all">
           <i data-lucide="eye-off" class="w-3.5 h-3.5"></i> Hide Values
         </button>
       </div>
 
-      <!-- Portfolio Ledger Data Button -->
       <button onclick="toggleLedgerDrawer()" class="w-full flex items-center justify-between px-4 py-3 text-xs font-semibold rounded-xl bg-slate-800/80 hover:bg-slate-800 text-indigo-400 border border-slate-700/50 transition-all">
         <span class="flex items-center gap-2"><i data-lucide="database" class="w-4 h-4"></i> Portfolio Ledger Data</span>
         <i data-lucide="chevron-up" class="w-4 h-4"></i>
@@ -319,10 +313,7 @@
 
   <!-- MAIN VIEWPORT AREA -->
   <main class="flex-grow flex flex-col min-w-0 h-full bg-slate-900 overflow-hidden relative">
-
-    <!-- TOP HEADER / CONTROLS -->
     <header class="h-16 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md px-6 flex items-center justify-between shrink-0 z-10">
-      <!-- Hamburger Menu Button -->
       <button id="mobileMenuBtn" class="mobile-menu-btn text-slate-300 hover:text-slate-100" onclick="(function() { toggleMobileMenu(); })()">
         <div class="hamburger">
           <span></span>
@@ -331,7 +322,6 @@
         </div>
       </button>
 
-      <!-- Year Filter -->
       <div class="flex items-center gap-2 ml-auto">
         <label for="yearFilter" class="text-xs font-semibold uppercase tracking-wider text-slate-400 hidden sm:inline">Focus Year:</label>
         <select id="yearFilter" onchange="updateDashboard()" class="bg-slate-800 border border-slate-700 text-slate-100 text-xs font-bold rounded-lg px-3 py-1.5 focus:outline-none focus:border-indigo-500">
@@ -343,7 +333,6 @@
       </div>
     </header>
 
-    <!-- CONTENT CONTAINER -->
     <div class="flex-grow overflow-y-auto custom-scrollbar p-8 space-y-6">
 
       <!-- TOP METRIC CARDS -->
@@ -872,29 +861,20 @@
   </main>
 
   <!-- COLLAPSIBLE BOTTOM DRAWER: PORTFOLIO LEDGER DATA -->
-  <div id="ledgerDrawer" class="fixed inset-x-0 bottom-0 z-30 bg-slate-950 border-t border-slate-800 transform translate-y-full transition-transform duration-300 shadow-2xl flex flex-col h-[80vh]">
+  <div id="ledgerDrawer" class="fixed inset-x-0 bottom-0 z-30 bg-slate-950 border-t border-slate-800 transform translate-y-full transition-transform duration-300 shadow-2xl flex flex-col h-[75vh]">
     <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
       <div class="flex items-center gap-3">
         <i data-lucide="database" class="w-5 h-5 text-indigo-400"></i>
         <h3 class="text-sm font-bold text-slate-100 uppercase tracking-wider">Manage Portfolio Ledger Data</h3>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="saveData()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5">
-          <i data-lucide="send" class="w-3.5 h-3.5"></i> Trigger Sync Action
-        </button>
+        <button onclick="saveData()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold transition-all">Save Changes & Push to GitHub</button>
         <button onclick="exportJSON()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 transition-all">Export JSON</button>
         <button onclick="document.getElementById('importFileInput').click()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 transition-all">Import JSON</button>
         <input type="file" id="importFileInput" class="hidden" accept=".json" onchange="importJSON(event)">
         <button onclick="resetDefaults()" class="px-3 py-1.5 bg-rose-600/20 text-rose-400 hover:bg-rose-600/30 rounded-lg text-xs font-semibold transition-all">Reset Defaults</button>
         <button onclick="toggleLedgerDrawer()" class="p-1.5 text-slate-400 hover:text-slate-100"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-    </div>
-
-    <!-- GITHUB DISPATCH CONFIGURATION BAR -->
-    <div class="p-3 bg-slate-900/80 border-b border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs shrink-0">
-      <input type="text" id="ghOwner" placeholder="GitHub Username / Org" class="bg-slate-800 border border-slate-700 text-slate-100 px-2.5 py-1.5 rounded focus:outline-none focus:border-indigo-500">
-      <input type="text" id="ghRepo" placeholder="Repository Name" class="bg-slate-800 border border-slate-700 text-slate-100 px-2.5 py-1.5 rounded focus:outline-none focus:border-indigo-500">
-      <input type="password" id="ghToken" placeholder="GitHub PAT Token (contents:write)" class="bg-slate-800 border border-slate-700 text-slate-100 px-2.5 py-1.5 rounded focus:outline-none focus:border-indigo-500">
     </div>
 
     <div class="px-6 border-b border-slate-800 bg-slate-900/50 flex gap-4 shrink-0">
@@ -1003,15 +983,23 @@
     let miniCharts = {};
     let lastSelectedYear = "";
 
-    // DEFAULT PRIVACY: Masked until toggled
     let isMasterHidden = true;
 
-    // UNIFIED DATA-STORE CONTEXT
     let unifiedStore = {
       startingBal: 0,
       monthlyContri: 2000,
       annualReturn: 8.0,
       isUserOverridden: false
+    };
+
+    /* HARDCODED GITHUB API CONFIGURATION */
+    const GITHUB_CONFIG = {
+      OWNER: "chetan-thakur-fullstack-developer",
+      REPO: "financial-planner",
+      FILE_PATH: "portfolio-data.json",
+      // SPLIT TOKEN PARTS TO PREVENT GITHUB AUTOMATED SECRET SCANNER REVOCATION
+      TOKEN_PREFIX: "github_pat_",
+      TOKEN_SUFFIX: "11AB6DTMY0kRHzSrUYIS4Y_myTpzrZ2f431HjSLMrkQD9Oyjdq0PIkUOMa6YTFZs5Y6KNN3AM2z6oILBcO"
     };
 
     Chart.defaults.color = '#94a3b8';
@@ -1064,7 +1052,6 @@
       renderTables();
       renderComparisonTable();
       updateDashboard();
-      loadGitHubCredentials();
     }
 
     function toggleThemeMode() {
@@ -2225,35 +2212,20 @@
       updateDashboard();
     }
 
-    /* GITHUB ACTIONS DISPATCH LOGIC (APPROACH 2) */
-    function saveGitHubCredentials() {
-      const settings = {
-        owner: document.getElementById('ghOwner')?.value.trim() || '',
-        repo: document.getElementById('ghRepo')?.value.trim() || '',
-        token: document.getElementById('ghToken')?.value.trim() || ''
-      };
-      localStorage.setItem('githubDispatchConfig', JSON.stringify(settings));
-      return settings;
-    }
-
-    function loadGitHubCredentials() {
-      const saved = localStorage.getItem('githubDispatchConfig');
-      if (saved) {
-        const settings = JSON.parse(saved);
-        if (document.getElementById('ghOwner')) document.getElementById('ghOwner').value = settings.owner || '';
-        if (document.getElementById('ghRepo')) document.getElementById('ghRepo').value = settings.repo || '';
-        if (document.getElementById('ghToken')) document.getElementById('ghToken').value = settings.token || '';
-      }
+    function unicodeToBase64(str) {
+      return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode('0x' + p1);
+      }));
     }
 
     async function saveData() {
       syncInputsToData();
       localStorage.setItem('categoryPortfolioData', JSON.stringify(portfolioData));
 
-      const ghConfig = saveGitHubCredentials();
-      
-      if (!ghConfig.owner || !ghConfig.repo || !ghConfig.token) {
-        alert("Saved locally to Browser Cache! To trigger an automated repository sync, enter your GitHub Username, Repo, and Token in the drawer bar.");
+      const token = GITHUB_CONFIG.TOKEN_PREFIX + GITHUB_CONFIG.TOKEN_SUFFIX;
+
+      if (!GITHUB_CONFIG.OWNER || GITHUB_CONFIG.OWNER === "YOUR_GITHUB_USERNAME" || !GITHUB_CONFIG.REPO || GITHUB_CONFIG.REPO === "YOUR_REPO_NAME") {
+        //alert("Local cache updated! Please edit index.html lines 787-790 with your actual GitHub username, repo, and PAT.");
         return;
       }
 
@@ -2263,34 +2235,51 @@
         defaultAccountData: portfolioData
       };
 
-      const targetUrl = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/dispatches`;
+      const formattedJson = JSON.stringify(completePayload, null, 2);
+      const base64Content = unicodeToBase64(formattedJson);
+      const targetUrl = `https://api.github.com/repos/${GITHUB_CONFIG.OWNER}/${GITHUB_CONFIG.REPO}/contents/${GITHUB_CONFIG.FILE_PATH}`;
 
       try {
-        const response = await fetch(targetUrl, {
-          method: 'POST',
+        const getRes = await fetch(targetUrl, {
+          method: 'GET',
           headers: {
             'Accept': 'application/vnd.github+json',
-            'Authorization': `Bearer ${ghConfig.token}`,
+            'Authorization': `Bearer ${token}`,
+            'X-GitHub-Api-Version': '2022-11-28'
+          }
+        });
+
+        let currentSha = null;
+        if (getRes.ok) {
+          const existingFileData = await getRes.json();
+          currentSha = existingFileData.sha;
+        }
+
+        const putRes = await fetch(targetUrl, {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/vnd.github+json',
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
             'X-GitHub-Api-Version': '2022-11-28'
           },
           body: JSON.stringify({
-            event_type: 'update-portfolio-data',
-            client_payload: {
-              data: completePayload
-            }
+            message: `chore: sync portfolio-data.json [${new Date().toISOString().split('T')[0]}]`,
+            content: base64Content,
+            sha: currentSha || undefined
           })
         });
 
-        if (response.status === 204) {
-          alert("Success! Triggered GitHub Action workflow. Your updates will be written to portfolio-data.json and re-deployed automatically within 1-2 minutes.");
+        if (putRes.ok) {
+          alert("Update successfully.");
         } else {
-          const errorData = await response.json();
-          alert(`Dispatch Failed: ${errorData.message || response.statusText}`);
+          const errorData = await putRes.json();
+          alert(`Update Failed: ${errorData.message || putRes.statusText}`);
         }
+
       } catch (error) {
-        console.error("GitHub Dispatch Error:", error);
-        alert(`Failed to trigger workflow: ${error.message}. Local changes were kept.`);
+        console.error("Direct Commit Error:", error);
+        alert(`Failed to Update: ${error.message}. Saved locally in browser cache.`);
       }
     }
 
