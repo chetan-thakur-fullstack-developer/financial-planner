@@ -20,7 +20,6 @@
       --control-bg: #f1f5f9;
     }
 
-    /* Dark Theme Palette Override */
     [data-theme="dark"] {
       --bg-color: #0f172a;
       --card-bg: #1e293b;
@@ -55,7 +54,6 @@
 
     h1 { margin: 0; font-size: 1.75rem; color: var(--text-main); }
     
-    /* Navigation Tabs */
     .main-nav {
       display: flex;
       gap: 6px;
@@ -117,7 +115,6 @@
       font-size: 14px;
     }
 
-    /* Privacy Blur / Masking Styles */
     .privacy-masked,
     input.privacy-masked {
       filter: blur(5px) !important;
@@ -136,7 +133,6 @@
     }
     .eye-icon-btn:hover { opacity: 1; }
 
-    /* KPI Grid Layout */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -162,10 +158,9 @@
     .kpi-card .label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
     .kpi-card .value { font-size: 1.35rem; font-weight: 700; margin-top: 6px; display: inline-block; }
     .kpi-card .sub { font-size: 0.80rem; margin-top: 4px; font-weight: 600; }
-    .sub.positive { color: var(--success); }
-    .sub.negative { color: var(--danger); }
+    .sub.positive, .pos-gain { color: var(--success); }
+    .sub.negative, .neg-gain { color: var(--danger); }
 
-    /* Contribution Goal Trackers */
     .tracker-header {
       display: flex;
       justify-content: space-between;
@@ -235,7 +230,6 @@
     .progress-bar-fill.maxed { background: #0284c7; }
     .progress-bar-fill.over { background: var(--danger); }
 
-    /* Layout Grids */
     .dashboard-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
@@ -257,7 +251,7 @@
 
     .mini-charts-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 16px;
       margin-top: 12px;
     }
@@ -273,14 +267,25 @@
       font-weight: 600;
       margin-bottom: 8px;
       display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mini-chart-header-row {
+      display: flex;
       justify-content: space-between;
+      align-items: center;
+    }
+    .mini-chart-sub-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
     }
 
     @media (max-width: 900px) {
       .col-6, .col-4 { grid-column: span 12; }
     }
 
-    /* Financial Planning Tool Controls */
     .calc-controls {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -293,7 +298,6 @@
     .calc-group { display: flex; flex-direction: column; gap: 6px; }
     .calc-group label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
 
-    /* Tables */
     .table-responsive { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; margin-top: 12px; }
     th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; white-space: nowrap; }
@@ -303,7 +307,6 @@
     .badge-pos { background: #d1fae5; color: #047857; }
     .badge-neg { background: #fee2e2; color: #b91c1c; }
 
-    /* Sub Tabs & Buttons */
     .tab-buttons { display: flex; gap: 8px; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
     .tab-btn { padding: 8px 16px; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; font-weight: 600; color: var(--text-muted); }
     .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
@@ -351,7 +354,6 @@
   <header>
     <h1>Investment & Financial Planning Dashboard</h1>
     <div class="header-actions">
-      <!-- Master Hide / Show Toggle Button -->
       <button class="btn btn-secondary" id="masterPrivacyBtn" onclick="toggleMasterPrivacy()">🔒 Hide All Values</button>
       <button class="btn btn-secondary" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
       <div class="filter-group">
@@ -366,15 +368,13 @@
     </div>
   </header>
 
-  <!-- Top Navigation Tabs -->
   <nav class="main-nav">
-    <button class="main-nav-btn active" onclick="switchMainTab('tab-overview')">1. Overview</button>
-    <button class="main-nav-btn" onclick="switchMainTab('tab-portfolio')">2. Accounts & Breakdown</button>
-    <button class="main-nav-btn" onclick="switchMainTab('tab-trackers')">3. Contribution Goals</button>
-    <button class="main-nav-btn" onclick="switchMainTab('tab-tools')">4. Financial Planning Tools</button>
+    <button class="main-nav-btn active" onclick="switchMainTab(event, 'tab-overview')">1. Overview</button>
+    <button class="main-nav-btn" onclick="switchMainTab(event, 'tab-portfolio')">2. Accounts & Breakdown</button>
+    <button class="main-nav-btn" onclick="switchMainTab(event, 'tab-trackers')">3. Contribution Goals</button>
+    <button class="main-nav-btn" onclick="switchMainTab(event, 'tab-tools')">4. Financial Planning Tools</button>
   </nav>
 
-  <!-- KPI Cards Summary with Individual Eye Toggle Icons -->
   <div class="kpi-grid">
     <div class="kpi-card">
       <div class="kpi-card-head">
@@ -462,7 +462,7 @@
     <div class="dashboard-grid">
       <div class="card col-6">
         <h3>Active Year Asset Allocation</h3>
-        <canvas id="categoryChart" height="180"></canvas>
+        <canvas id="categoryChart" height="150"></canvas>
       </div>
       <div class="card col-6">
         <h3>Historical Asset Allocation (Stacked)</h3>
@@ -470,40 +470,11 @@
       </div>
 
       <div class="card col-12">
-        <h3>Category Growth Trajectories (Individual Account Breakdown)</h3>
-        <div class="mini-charts-grid">
-          <div class="mini-chart-card">
-            <div class="mini-chart-title"><span>401K Growth</span> <span id="latestK401" class="privacy-target" style="color:#2563eb;">$0</span></div>
-            <canvas id="chartMiniK401" height="110"></canvas>
-          </div>
-          <div class="mini-chart-card">
-            <div class="mini-chart-title"><span>Roth IRA Growth</span> <span id="latestRoth" class="privacy-target" style="color:#10b981;">$0</span></div>
-            <canvas id="chartMiniRoth" height="110"></canvas>
-          </div>
-          <div class="mini-chart-card">
-            <div class="mini-chart-title"><span>Traditional IRA Growth</span> <span id="latestTrad" class="privacy-target" style="color:#f59e0b;">$0</span></div>
-            <canvas id="chartMiniTrad" height="110"></canvas>
-          </div>
-          <div class="mini-chart-card">
-            <div class="mini-chart-title"><span>HSA Growth</span> <span id="latestHsa" class="privacy-target" style="color:#8b5cf6;">$0</span></div>
-            <canvas id="chartMiniHsa" height="110"></canvas>
-          </div>
-          <div class="mini-chart-card">
-            <div class="mini-chart-title"><span>ESPP Growth</span> <span id="latestEspp" class="privacy-target" style="color:#ec4899;">$0</span></div>
-            <canvas id="chartMiniEspp" height="110"></canvas>
-          </div>
-          <div class="mini-chart-card">
-            <div class="mini-chart-title"><span>CD Growth</span> <span id="latestCd" class="privacy-target" style="color:#64748b;">$0</span></div>
-            <canvas id="chartMiniCd" height="110"></canvas>
-          </div>
-          <div class="mini-chart-card">
-            <div class="mini-chart-title"><span>Mysha 529 Growth</span> <span id="latest529" class="privacy-target" style="color:#06b6d4;">$0</span></div>
-            <canvas id="chartMini529" height="110"></canvas>
-          </div>
-        </div>
+        <h3>Category Growth & Gain/Loss (Individual Account Breakdown)</h3>
+        <div class="mini-charts-grid"></div>
       </div>
 
-      <!-- Historical Data & Inputs Ledger -->
+      <!-- Ledger Inputs & Tables -->
       <div class="card col-12">
         <div class="flex-between" style="flex-wrap: wrap; gap: 12px;">
           <h3>Manage Portfolio Ledger Data</h3>
@@ -517,47 +488,28 @@
         </div>
 
         <div class="tab-buttons" style="margin-top: 16px;">
-          <button class="tab-btn active" onclick="switchDataTab('balances')">Balances by Account</button>
-          <button class="tab-btn" onclick="switchDataTab('contributions')">Contributions & Performance</button>
+          <button class="tab-btn active" onclick="switchDataTab(event, 'balances')">Balances by Account</button>
+          <button class="tab-btn" onclick="switchDataTab(event, 'invested')">Invested Principal Basis</button>
+          <button class="tab-btn" onclick="switchDataTab(event, 'contributions')">Contributions & Performance</button>
         </div>
 
         <div id="balancesTab" class="table-responsive">
           <table id="balancesTable">
-            <thead>
-              <tr>
-                <th>Year</th>
-                <th>401K</th>
-                <th>Roth IRA</th>
-                <th>Trad IRA</th>
-                <th>HSA</th>
-                <th>ESPP</th>
-                <th>CD</th>
-                <th>Mysha 529</th>
-                <th>Total Balance</th>
-              </tr>
-            </thead>
+            <thead><tr></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div id="investedTab" class="table-responsive" style="display: none;">
+          <table id="investedTable">
+            <thead><tr></tr></thead>
             <tbody></tbody>
           </table>
         </div>
 
         <div id="contributionsTab" class="table-responsive" style="display: none;">
           <table id="contributionsTable">
-            <thead>
-              <tr>
-                <th>Year</th>
-                <th>Employer Match</th>
-                <th>User Contri</th>
-                <th>Rollover</th>
-                <th>CD</th>
-                <th>Roth IRA</th>
-                <th>Trad IRA</th>
-                <th>HSA</th>
-                <th>ESPP</th>
-                <th>529</th>
-                <th>Return ($)</th>
-                <th>Return (%)</th>
-              </tr>
-            </thead>
+            <thead><tr></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -591,7 +543,6 @@
       </div>
 
       <div class="tracker-grid">
-        <!-- 401(k) -->
         <div class="tracker-card">
           <div class="tracker-card-head">
             <span class="tracker-title">401(k) Personal Contribution</span>
@@ -609,7 +560,6 @@
           </div>
         </div>
 
-        <!-- IRA -->
         <div class="tracker-card">
           <div class="tracker-card-head">
             <span class="tracker-title">Roth / Traditional IRA</span>
@@ -627,7 +577,6 @@
           </div>
         </div>
 
-        <!-- HSA -->
         <div class="tracker-card">
           <div class="tracker-card-head">
             <span class="tracker-title">HSA Contribution</span>
@@ -645,7 +594,6 @@
           </div>
         </div>
 
-        <!-- 529 Plan -->
         <div class="tracker-card">
           <div class="tracker-card-head">
             <span class="tracker-title">Mysha 529 College Savings</span>
@@ -669,8 +617,6 @@
   <!-- TAB 4: FINANCIAL PLANNING TOOLS -->
   <div id="tab-tools" class="main-tab-content">
     <div class="dashboard-grid">
-      
-      <!-- TOOL 1: Compound Growth Projections -->
       <div class="card col-12">
         <h3>1. Compound Wealth Growth Projection</h3>
         <div class="calc-controls">
@@ -690,7 +636,6 @@
         <canvas id="projectionChart" height="90"></canvas>
       </div>
 
-      <!-- TOOL 2: FIRE Calculator -->
       <div class="card col-6">
         <h3>2. FIRE (Financial Independence) Target</h3>
         <div class="calc-controls" style="grid-template-columns: 1fr 1fr;">
@@ -710,7 +655,6 @@
         </div>
       </div>
 
-      <!-- TOOL 3: Emergency Fund & Runway -->
       <div class="card col-6">
         <h3>3. Emergency Liquidity & Runway Calculator</h3>
         <div class="calc-controls" style="grid-template-columns: 1fr 1fr;">
@@ -734,7 +678,6 @@
         </div>
       </div>
 
-      <!-- TOOL 4: Inflation Adjusted Real Growth -->
       <div class="card col-6">
         <h3>4. Inflation & Real Value Simulator</h3>
         <div class="calc-controls" style="grid-template-columns: 1fr 1fr;">
@@ -754,13 +697,11 @@
         </div>
       </div>
 
-      <!-- TOOL 5: Tax Location Bucket Breakdown -->
       <div class="card col-6">
-        <h3>5. Tax Location Efficiency Breakdown</h3>
+        <h3>5. Tax Location Bucket Breakdown</h3>
         <div id="taxBucketContainer"></div>
       </div>
 
-      <!-- TOOL 6: Rebalancing Tool -->
       <div class="card col-12">
         <h3>6. Portfolio Asset Rebalancing Planner</h3>
         <p style="font-size: 12px; color: var(--text-muted); margin-top: -6px;">Adjust target percentages to see buying/selling adjustments needed for optimal balance.</p>
@@ -786,67 +727,82 @@
 </div>
 
 <script>
-// Base IRS Limits
-const irsBaseLimits = {
-  "2023": { k401: 22500, ira: 6500, hsaSelf: 3850, hsaFamily: 7750, c529Single: 17000, c529Joint: 34000, k401Catch: 7500, iraCatch: 1000, hsaCatch: 1000 },
-  "2024": { k401: 23000, ira: 7000, hsaSelf: 4150, hsaFamily: 8300, c529Single: 18000, c529Joint: 36000, k401Catch: 7500, iraCatch: 1000, hsaCatch: 1000 },
-  "2025": { k401: 23500, ira: 7000, hsaSelf: 4300, hsaFamily: 8300, c529Single: 19000, c529Joint: 38000, k401Catch: 7500, iraCatch: 1000, hsaCatch: 1000 },
-  "2026": { k401: 23500, ira: 7000, hsaSelf: 4300, hsaFamily: 8550, c529Single: 19000, c529Joint: 38000, k401Catch: 7500, iraCatch: 1000, hsaCatch: 1000 }
-};
+let categoriesConfig = [];
+let irsBaseLimits = {};
+let defaultAccountData = [];
+let portfolioData = [];
 
-const defaultAccountData = [
-  {
-    year: "2023",
-    balances: { k401: 50574, roth: 15568, tradIra: 0, hsa: 0, espp: 0, cd: 0, c529: 0 },
-    contri: { employer: 5935.98, user: 5935, rollover: 27277.45, cd: 0, roth: 6500, tradIra: 0, hsa: 0, espp: 0, c529: 0 },
-    returns: { amount: 11064.07, pct: 20.09 }
-  },
-  {
-    year: "2024",
-    balances: { k401: 77834, roth: 12392, tradIra: 0, hsa: 1100, espp: 5831, cd: 0, c529: 0 },
-    contri: { employer: 6186.06, user: 6705.34, rollover: 0, cd: 0, roth: 7000, tradIra: 0, hsa: 0, espp: 5069, c529: 0 },
-    returns: { amount: 6054.60, pct: 6.65 }
-  },
-  {
-    year: "2025",
-    balances: { k401: 108046, roth: 14017, tradIra: 9374, hsa: 8722, espp: 17080, cd: 17492, c529: 0 },
-    contri: { employer: 6060, user: 7310, rollover: 0, cd: 17000, roth: 0, tradIra: 7000, hsa: 9329, espp: 6929, c529: 0 },
-    returns: { amount: 23946, pct: 15.88 }
-  },
-  {
-    year: "2026",
-    balances: { k401: 136638, roth: 14152, tradIra: 0, hsa: 6126, espp: 29467, cd: 6216, c529: 2887 },
-    contri: { employer: 4303, user: 4303, rollover: 0, cd: -11000, roth: 0, tradIra: 0, hsa: 6565, espp: 13821, c529: 2700 },
-    returns: { amount: 63, pct: 0.03 }
-  }
-];
-
-let portfolioData = JSON.parse(localStorage.getItem('categoryPortfolioData')) || defaultAccountData;
 let growthChart, categoryChart, historyChart, projectionChart;
 let miniCharts = {};
 let lastSelectedYear = "";
 
-// Privacy Default State Set to True (Hidden on Load)
 let isMasterHidden = localStorage.getItem('dashboardMasterPrivacy') !== null 
   ? localStorage.getItem('dashboardMasterPrivacy') === 'true' 
   : true;
 
-// Configure Chart.js Tooltips globally to redact when hidden
 Chart.defaults.plugins.tooltip.callbacks.label = function(context) {
   let label = context.dataset.label || context.label || '';
-  if (label) {
-    label += ': ';
-  }
-  if (isMasterHidden) {
-    return label + '****';
-  }
-  if (context.parsed.y !== undefined) {
-    return label + '$' + context.parsed.y.toLocaleString();
-  }
+  if (label) label += ': ';
+  if (isMasterHidden) return label + '****';
+  if (context.parsed.y !== undefined) return label + '$' + context.parsed.y.toLocaleString();
   return label + '$' + context.raw.toLocaleString();
 };
 
-// PRIVACY & BLUR TOGGLE FUNCTIONS
+async function loadDataFromJSON() {
+  try {
+    const response = await fetch('./portfolio-data.json');
+    if (!response.ok) throw new Error('Failed to load JSON data');
+    const data = await response.json();
+    
+    categoriesConfig = data.categories || [];
+    irsBaseLimits = data.irsBaseLimits || {};
+    defaultAccountData = data.defaultAccountData || [];
+    
+    const saved = localStorage.getItem('categoryPortfolioData');
+    portfolioData = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultAccountData));
+
+    const savedTheme = localStorage.getItem('dashboardTheme') || 'dark';
+    applyTheme(savedTheme);
+    initDashboard();
+  } catch (error) {
+    console.error('Error fetching JSON source:', error);
+    alert('Failed to load data source file (portfolio-data.json). Please run via a local server.');
+  }
+}
+
+function switchMainTab(event, tabId) {
+  document.querySelectorAll('.main-tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.main-nav-btn').forEach(el => el.classList.remove('active'));
+  
+  document.getElementById(tabId).classList.add('active');
+  if (event && event.currentTarget) {
+    event.currentTarget.classList.add('active');
+  }
+  
+  if (tabId === 'tab-tools') {
+    updateProjections();
+    calculateFIRE();
+    calculateEmergencyFund();
+    calculateInflation();
+    renderTaxBuckets();
+    renderRebalancer();
+  }
+  applyPrivacyState();
+}
+
+function switchDataTab(event, tabName) {
+  document.getElementById('balancesTab').style.display = tabName === 'balances' ? 'block' : 'none';
+  document.getElementById('investedTab').style.display = tabName === 'invested' ? 'block' : 'none';
+  document.getElementById('contributionsTab').style.display = tabName === 'contributions' ? 'block' : 'none';
+  
+  const buttons = document.querySelectorAll('#tab-portfolio .tab-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  if (event && event.currentTarget) {
+    event.currentTarget.classList.add('active');
+  }
+  applyPrivacyState();
+}
+
 function toggleMasterPrivacy() {
   isMasterHidden = !isMasterHidden;
   localStorage.setItem('dashboardMasterPrivacy', isMasterHidden);
@@ -855,9 +811,7 @@ function toggleMasterPrivacy() {
 
 function toggleCardPrivacy(elementId) {
   const el = document.getElementById(elementId);
-  if (el) {
-    el.classList.toggle('privacy-masked');
-  }
+  if (el) el.classList.toggle('privacy-masked');
 }
 
 function applyPrivacyState() {
@@ -883,41 +837,74 @@ function toggleTheme() {
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   const btn = document.getElementById('themeToggleBtn');
-  if (btn) {
-    btn.innerText = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-  }
+  if (btn) btn.innerText = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
 
   const isDark = theme === 'dark';
   Chart.defaults.color = isDark ? '#94a3b8' : '#64748b';
   Chart.defaults.scale.grid.color = isDark ? '#334155' : '#e2e8f0';
 
-  if (typeof updateDashboard === 'function') {
+  if (typeof updateDashboard === 'function' && portfolioData.length > 0) {
     updateDashboard();
   }
 }
 
 function initDashboard() {
+  buildDynamicTableHeaders();
+  buildDynamicMiniCards();
   renderTables();
   renderComparisonTable();
   updateDashboard();
 }
 
-function switchMainTab(tabId) {
-  document.querySelectorAll('.main-tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.main-nav-btn').forEach(el => el.classList.remove('active'));
+function buildDynamicTableHeaders() {
+  const balHead = document.querySelector("#balancesTable thead tr");
+  const invHead = document.querySelector("#investedTable thead tr");
+  const contriHead = document.querySelector("#contributionsTable thead tr");
+
+  let balHtml = `<th>Year</th>`;
+  let invHtml = `<th>Year</th>`;
   
-  document.getElementById(tabId).classList.add('active');
-  event.currentTarget.classList.add('active');
-  
-  if (tabId === 'tab-tools') {
-    updateProjections();
-    calculateFIRE();
-    calculateEmergencyFund();
-    calculateInflation();
-    renderTaxBuckets();
-    renderRebalancer();
-  }
-  applyPrivacyState();
+  categoriesConfig.forEach(cat => {
+    balHtml += `<th>${cat.label}</th>`;
+    invHtml += `<th>${cat.label} Invested</th>`;
+  });
+
+  balHtml += `<th>Total Balance</th><th>Total Invested</th><th>Total Gain / Loss ($)</th><th>Total Gain / Loss (%)</th>`;
+  invHtml += `<th>Total Invested</th>`;
+
+  balHead.innerHTML = balHtml;
+  invHead.innerHTML = invHtml;
+
+  let contriHtml = `<th>Year</th><th>Employer Match</th><th>User Contri</th><th>Rollover</th>`;
+  categoriesConfig.forEach(cat => {
+    contriHtml += `<th>${cat.label}</th>`;
+  });
+  contriHtml += `<th>Dynamic Return ($)</th><th>Dynamic Return (%)</th>`;
+  contriHead.innerHTML = contriHtml;
+}
+
+function buildDynamicMiniCards() {
+  const container = document.querySelector(".mini-charts-grid");
+  if (!container) return;
+
+  container.innerHTML = "";
+  categoriesConfig.forEach(cat => {
+    container.innerHTML += `
+      <div class="mini-chart-card">
+        <div class="mini-chart-title">
+          <div class="mini-chart-header-row">
+            <span>${cat.label}</span>
+            <span id="latest_${cat.key}" class="privacy-target" style="color:${cat.color};">$0</span>
+          </div>
+          <div class="mini-chart-sub-row">
+            <span>Invested: <b id="invested_${cat.key}" class="privacy-target">$0</b></span>
+            <span>Gain/Loss: <b id="gain_${cat.key}" class="privacy-target">$0 (0%)</b></span>
+          </div>
+        </div>
+        <canvas id="chartMini_${cat.key}" height="110"></canvas>
+      </div>
+    `;
+  });
 }
 
 function updateDashboard() {
@@ -947,6 +934,7 @@ function updateDashboard() {
 
 function updateDefaultLimitsForYear(year) {
   const base = irsBaseLimits[year] || irsBaseLimits["2026"];
+  if (!base) return;
   const catchUp = document.getElementById('catchUpCheck').checked;
   const hsaType = document.getElementById('hsaTypeSelect').value;
   const donor529 = document.getElementById('donor529Select').value;
@@ -966,15 +954,7 @@ function renderIRSProgress() {
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear().toString();
-  let activeMonth = 12;
-
-  if (selectedYear === currentYear) {
-    activeMonth = currentDate.getMonth() + 1;
-  } else if (parseInt(selectedYear) < parseInt(currentYear)) {
-    activeMonth = 12;
-  } else {
-    activeMonth = 1;
-  }
+  let activeMonth = selectedYear === currentYear ? currentDate.getMonth() + 1 : (parseInt(selectedYear) < parseInt(currentYear) ? 12 : 1);
 
   const user401k = data.contri.user || 0;
   const userIra = (data.contri.roth || 0) + (data.contri.tradIra || 0);
@@ -1005,48 +985,63 @@ function updateCardTracker(barId, badgeId, labelId, currentVal, annualLimit, act
   bar.style.width = `${Math.min(100, totalPct)}%`;
 
   if (currentVal >= annualLimit) {
-    badge.innerText = "Goal Met";
-    badge.className = "status-badge maxed";
-    bar.className = "progress-bar-fill maxed";
+    badge.innerText = "Goal Met"; badge.className = "status-badge maxed"; bar.className = "progress-bar-fill maxed";
   } else if (currentVal >= proratedTarget) {
-    badge.innerText = currentVal > proratedTarget ? "Ahead" : "On Track";
-    badge.className = "status-badge on-track";
-    bar.className = "progress-bar-fill";
+    badge.innerText = currentVal > proratedTarget ? "Ahead" : "On Track"; badge.className = "status-badge on-track"; bar.className = "progress-bar-fill";
   } else if (currentVal >= proratedTarget * 0.85) {
-    badge.innerText = "Near Track";
-    badge.className = "status-badge near-limit";
-    bar.className = "progress-bar-fill";
+    badge.innerText = "Near Track"; badge.className = "status-badge near-limit"; bar.className = "progress-bar-fill";
   } else {
-    badge.innerText = "Behind";
-    badge.className = "status-badge over-limit";
-    bar.className = "progress-bar-fill over";
+    badge.innerText = "Behind"; badge.className = "status-badge over-limit"; bar.className = "progress-bar-fill over";
   }
 }
 
-function getTotalBal(data) { return Object.values(data.balances).reduce((a, b) => a + b, 0); }
-function getTotalContri(data) { return Object.values(data.contri).reduce((a, b) => a + b, 0); }
+function getTotalBal(data) { return Object.values(data.balances || {}).reduce((a, b) => a + Number(b), 0); }
+function getTotalInvested(data) { return Object.values(data.invested || {}).reduce((a, b) => a + Number(b), 0); }
+function getTotalContri(data) { return Object.values(data.contri || {}).reduce((a, b) => a + Number(b), 0); }
+
+function getDynamicReturns(yearIndex) {
+  const currentData = portfolioData[yearIndex];
+  if (!currentData) return { amount: 0, pct: 0 };
+
+  const endBalance = getTotalBal(currentData);
+  const beginningBalance = yearIndex > 0 ? getTotalBal(portfolioData[yearIndex - 1]) : 0;
+  const netContributions = getTotalContri(currentData);
+
+  const gainAmount = endBalance - (beginningBalance + netContributions);
+  const basis = beginningBalance + netContributions;
+  const gainPct = basis > 0 ? ((gainAmount / basis) * 100) : 0;
+
+  return {
+    amount: Math.round(gainAmount * 100) / 100,
+    pct: parseFloat(gainPct.toFixed(2))
+  };
+}
 
 function renderKPIs(data, prevData) {
+  const selectedYearIdx = portfolioData.findIndex(d => d.year === data.year);
+  const currentReturns = getDynamicReturns(selectedYearIdx);
+
   const totalBal = getTotalBal(data);
   const totalContri = getTotalContri(data);
 
   document.getElementById('kpiBalance').innerText = `$${totalBal.toLocaleString()}`;
   document.getElementById('kpiContri').innerText = `$${totalContri.toLocaleString()}`;
-  document.getElementById('kpiGain').innerText = `$${data.returns.amount.toLocaleString()}`;
-  document.getElementById('kpiReturnPct').innerText = `${data.returns.pct}%`;
+  document.getElementById('kpiGain').innerText = `$${currentReturns.amount.toLocaleString()}`;
+  document.getElementById('kpiReturnPct').innerText = `${currentReturns.pct}%`;
 
   if (prevData) {
+    const prevReturns = getDynamicReturns(selectedYearIdx - 1);
     const prevBal = getTotalBal(prevData);
-    const balGrowthPct = (((totalBal - prevBal) / prevBal) * 100).toFixed(2);
+    const balGrowthPct = prevBal > 0 ? (((totalBal - prevBal) / prevBal) * 100).toFixed(2) : "0.00";
     setYoYElement('kpiBalanceYoY', balGrowthPct, `vs ${prevData.year}`);
 
     const prevContri = getTotalContri(prevData);
     const contriGrowthPct = prevContri > 0 ? (((totalContri - prevContri) / prevContri) * 100).toFixed(2) : 0;
     setYoYElement('kpiContriYoY', contriGrowthPct, `vs ${prevData.year}`);
 
-    const returnDiff = (data.returns.pct - prevData.returns.pct).toFixed(2);
+    const returnDiff = (currentReturns.pct - prevReturns.pct).toFixed(2);
     setYoYElement('kpiReturnYoY', returnDiff, `% pts vs ${prevData.year}`);
-    document.getElementById('kpiGainYoY').innerText = `Prior Year: $${prevData.returns.amount.toLocaleString()}`;
+    document.getElementById('kpiGainYoY').innerText = `Prior Year: $${prevReturns.amount.toLocaleString()}`;
   } else {
     document.getElementById('kpiBalanceYoY').innerText = 'Base Year';
     document.getElementById('kpiContriYoY').innerText = 'Base Year';
@@ -1054,14 +1049,14 @@ function renderKPIs(data, prevData) {
     document.getElementById('kpiReturnYoY').innerText = 'Base Year';
   }
 
-  const selectedYearIdx = portfolioData.findIndex(d => d.year === data.year);
   let totalCumulativeGain = 0;
   let totalPctSum = 0;
   const yearsCount = selectedYearIdx + 1;
 
   for (let i = 0; i <= selectedYearIdx; i++) {
-    totalCumulativeGain += portfolioData[i].returns.amount;
-    totalPctSum += portfolioData[i].returns.pct;
+    const ret = getDynamicReturns(i);
+    totalCumulativeGain += ret.amount;
+    totalPctSum += ret.pct;
   }
 
   const avgPctReturn = (totalPctSum / yearsCount).toFixed(2);
@@ -1164,27 +1159,32 @@ function renderTaxBuckets() {
   const data = portfolioData.find(d => d.year === activeYear) || portfolioData[portfolioData.length - 1];
   const total = getTotalBal(data);
 
-  const taxExempt = data.balances.roth;
-  const taxDeferred = data.balances.k401 + data.balances.tradIra;
-  const taxable = data.balances.espp + data.balances.cd;
-  const specialTax = data.balances.hsa + data.balances.c529;
+  let taxExempt = 0, taxDeferred = 0, taxable = 0, specialTax = 0;
+
+  categoriesConfig.forEach(cat => {
+    const val = data.balances[cat.key] || 0;
+    if (cat.type === 'exempt') taxExempt += val;
+    else if (cat.type === 'deferred') taxDeferred += val;
+    else if (cat.type === 'special') specialTax += val;
+    else taxable += val;
+  });
 
   const container = document.getElementById('taxBucketContainer');
   container.innerHTML = `
     <div class="tax-bucket">
-      <div class="tax-bucket-title"><span>Tax-Exempt (Roth)</span> <span class="privacy-target">$${taxExempt.toLocaleString()} (${((taxExempt/total)*100).toFixed(1)}%)</span></div>
+      <div class="tax-bucket-title"><span>Tax-Exempt (Roth)</span> <span class="privacy-target">$${taxExempt.toLocaleString()} (${((taxExempt/(total||1))*100).toFixed(1)}%)</span></div>
       <span style="font-size: 11px; color: var(--text-muted);">Tax-free growth & withdrawals in retirement</span>
     </div>
     <div class="tax-bucket">
-      <div class="tax-bucket-title"><span>Tax-Deferred (Traditional 401k/IRA)</span> <span class="privacy-target">$${taxDeferred.toLocaleString()} (${((taxDeferred/total)*100).toFixed(1)}%)</span></div>
+      <div class="tax-bucket-title"><span>Tax-Deferred (Traditional 401k/IRA)</span> <span class="privacy-target">$${taxDeferred.toLocaleString()} (${((taxDeferred/(total||1))*100).toFixed(1)}%)</span></div>
       <span style="font-size: 11px; color: var(--text-muted);">Pre-tax contributions, taxable upon withdrawal</span>
     </div>
     <div class="tax-bucket">
-      <div class="tax-bucket-title"><span>Taxable (CD, ESPP, Brokerage)</span> <span class="privacy-target">$${taxable.toLocaleString()} (${((taxable/total)*100).toFixed(1)}%)</span></div>
+      <div class="tax-bucket-title"><span>Taxable (CD, ESPP, Brokerage)</span> <span class="privacy-target">$${taxable.toLocaleString()} (${((taxable/(total||1))*100).toFixed(1)}%)</span></div>
       <span style="font-size: 11px; color: var(--text-muted);">Subject to capital gains and interest taxes</span>
     </div>
     <div class="tax-bucket">
-      <div class="tax-bucket-title"><span>Special Purpose Tax Advantage (HSA / 529)</span> <span class="privacy-target">$${specialTax.toLocaleString()} (${((specialTax/total)*100).toFixed(1)}%)</span></div>
+      <div class="tax-bucket-title"><span>Special Purpose Tax Advantage (HSA / 529)</span> <span class="privacy-target">$${specialTax.toLocaleString()} (${((specialTax/(total||1))*100).toFixed(1)}%)</span></div>
       <span style="font-size: 11px; color: var(--text-muted);">Triple-tax advantaged for Healthcare & Education</span>
     </div>
   `;
@@ -1198,23 +1198,13 @@ function renderRebalancer() {
   const activeData = portfolioData.find(d => d.year === activeYear) || portfolioData[portfolioData.length - 1];
   const total = getTotalBal(activeData);
 
-  const categories = [
-    { key: 'k401', label: '401(k)' },
-    { key: 'roth', label: 'Roth IRA' },
-    { key: 'tradIra', label: 'Trad IRA' },
-    { key: 'hsa', label: 'HSA' },
-    { key: 'espp', label: 'ESPP' },
-    { key: 'cd', label: 'CD' },
-    { key: 'c529', label: 'Mysha 529' }
-  ];
-
-  const defaultTargets = { k401: 50, roth: 15, tradIra: 5, hsa: 5, espp: 15, cd: 5, c529: 5 };
-
   tbody.innerHTML = "";
-  categories.forEach(cat => {
+  const defaultEqualPct = Math.round(100 / (categoriesConfig.length || 1));
+
+  categoriesConfig.forEach(cat => {
     const val = activeData.balances[cat.key] || 0;
     const currentPct = total > 0 ? ((val / total) * 100).toFixed(1) : 0;
-    const targetPct = defaultTargets[cat.key] || 0;
+    const targetPct = defaultEqualPct;
     const targetVal = total * (targetPct / 100);
     const diff = val - targetVal;
 
@@ -1241,13 +1231,14 @@ function renderComparisonTable() {
     const endBal = getTotalBal(row);
     const contri = getTotalContri(row);
     const begBal = i > 0 ? getTotalBal(portfolioData[i-1]) : 0;
+    const returns = getDynamicReturns(i);
     
     let balYoYBadge = "--";
     let contriYoYBadge = "--";
 
     if (i > 0) {
       const prevBal = getTotalBal(portfolioData[i-1]);
-      const balPct = (((endBal - prevBal) / prevBal) * 100).toFixed(2);
+      const balPct = prevBal > 0 ? (((endBal - prevBal) / prevBal) * 100).toFixed(2) : "0.00";
       balYoYBadge = `<span class="badge ${balPct >= 0 ? 'badge-pos' : 'badge-neg'}">${balPct >= 0 ? '+' : ''}${balPct}%</span>`;
 
       const prevContri = getTotalContri(portfolioData[i-1]);
@@ -1263,8 +1254,8 @@ function renderComparisonTable() {
         <td>${balYoYBadge}</td>
         <td>$${contri.toLocaleString()}</td>
         <td>${contriYoYBadge}</td>
-        <td>$${row.returns.amount.toLocaleString()}</td>
-        <td>${row.returns.pct}%</td>
+        <td style="color: ${returns.amount >= 0 ? '#10b981' : '#ef4444'}; font-weight: 600;">$${returns.amount.toLocaleString()}</td>
+        <td style="color: ${returns.pct >= 0 ? '#10b981' : '#ef4444'}; font-weight: 600;">${returns.pct}%</td>
       </tr>`;
   });
 }
@@ -1294,16 +1285,9 @@ function renderCharts(selectedData) {
     options: { responsive: true, plugins: { legend: { display: false } } }
   });
 
-  const labels = ['401K', 'Roth IRA', 'Trad IRA', 'HSA', 'ESPP', 'CD', 'Mysha 529'];
-  const activeBalances = [
-    selectedData.balances.k401,
-    selectedData.balances.roth,
-    selectedData.balances.tradIra,
-    selectedData.balances.hsa,
-    selectedData.balances.espp,
-    selectedData.balances.cd,
-    selectedData.balances.c529
-  ];
+  const labels = categoriesConfig.map(c => c.label);
+  const activeBalances = categoriesConfig.map(c => selectedData.balances[c.key] || 0);
+  const colors = categoriesConfig.map(c => c.color);
 
   categoryChart = new Chart(document.getElementById('categoryChart'), {
     type: 'doughnut',
@@ -1311,25 +1295,23 @@ function renderCharts(selectedData) {
       labels: labels,
       datasets: [{
         data: activeBalances,
-        backgroundColor: ['#2563eb', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#64748b', '#06b6d4']
+        backgroundColor: colors
       }]
     },
     options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
   });
 
+  const historyDatasets = categoriesConfig.map(cat => ({
+    label: cat.label,
+    data: portfolioData.map(d => d.balances[cat.key] || 0),
+    backgroundColor: cat.color
+  }));
+
   historyChart = new Chart(document.getElementById('historyChart'), {
     type: 'bar',
     data: {
       labels: years,
-      datasets: [
-        { label: '401K', data: portfolioData.map(d => d.balances.k401), backgroundColor: '#2563eb' },
-        { label: 'Roth IRA', data: portfolioData.map(d => d.balances.roth), backgroundColor: '#10b981' },
-        { label: 'Trad IRA', data: portfolioData.map(d => d.balances.tradIra), backgroundColor: '#f59e0b' },
-        { label: 'HSA', data: portfolioData.map(d => d.balances.hsa), backgroundColor: '#8b5cf6' },
-        { label: 'ESPP', data: portfolioData.map(d => d.balances.espp), backgroundColor: '#ec4899' },
-        { label: 'CD', data: portfolioData.map(d => d.balances.cd), backgroundColor: '#64748b' },
-        { label: 'Mysha 529', data: portfolioData.map(d => d.balances.c529), backgroundColor: '#06b6d4' }
-      ]
+      datasets: historyDatasets
     },
     options: {
       responsive: true,
@@ -1340,134 +1322,152 @@ function renderCharts(selectedData) {
 }
 
 function renderMiniCharts() {
+  const selectedYear = document.getElementById('yearFilter').value;
+  const activeData = portfolioData.find(d => d.year === selectedYear) || portfolioData[portfolioData.length - 1];
   const years = portfolioData.map(d => d.year);
-  const categories = [
-    { key: 'k401', canvasId: 'chartMiniK401', labelId: 'latestK401', color: '#2563eb' },
-    { key: 'roth', canvasId: 'chartMiniRoth', labelId: 'latestRoth', color: '#10b981' },
-    { key: 'tradIra', canvasId: 'chartMiniTrad', labelId: 'latestTrad', color: '#f59e0b' },
-    { key: 'hsa', canvasId: 'chartMiniHsa', labelId: 'latestHsa', color: '#8b5cf6' },
-    { key: 'espp', canvasId: 'chartMiniEspp', labelId: 'latestEspp', color: '#ec4899' },
-    { key: 'cd', canvasId: 'chartMiniCd', labelId: 'latestCd', color: '#64748b' },
-    { key: 'c529', canvasId: 'chartMini529', labelId: 'latest529', color: '#06b6d4' }
-  ];
 
-  categories.forEach(cat => {
-    const dataValues = portfolioData.map(d => d.balances[cat.key]);
-    const latestVal = dataValues[dataValues.length - 1];
+  categoriesConfig.forEach(cat => {
+    const dataValues = portfolioData.map(d => d.balances[cat.key] || 0);
+    const latestVal = activeData.balances[cat.key] || 0;
+    const investedVal = (activeData.invested && activeData.invested[cat.key]) ? activeData.invested[cat.key] : 0;
     
-    document.getElementById(cat.labelId).innerText = `$${latestVal.toLocaleString()}`;
+    const gainLossVal = latestVal - investedVal;
+    const gainLossPct = investedVal > 0 ? ((gainLossVal / investedVal) * 100).toFixed(2) : "0.00";
 
-    if (miniCharts[cat.key]) miniCharts[cat.key].destroy();
+    const labelEl = document.getElementById(`latest_${cat.key}`);
+    const investedEl = document.getElementById(`invested_${cat.key}`);
+    const gainEl = document.getElementById(`gain_${cat.key}`);
 
-    miniCharts[cat.key] = new Chart(document.getElementById(cat.canvasId), {
-      type: 'line',
-      data: {
-        labels: years,
-        datasets: [{
-          data: dataValues,
-          borderColor: cat.color,
-          backgroundColor: cat.color + '1A',
-          fill: true,
-          tension: 0.2,
-          borderWidth: 2
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { display: true },
-          y: { display: true, ticks: { maxTicksLimit: 4 } }
+    if (labelEl) labelEl.innerText = `$${latestVal.toLocaleString()}`;
+    if (investedEl) investedEl.innerText = `$${investedVal.toLocaleString()}`;
+    
+    if (gainEl) {
+      const sign = gainLossVal >= 0 ? '+' : '';
+      gainEl.innerText = `${sign}$${Math.round(gainLossVal).toLocaleString()} (${sign}${gainLossPct}%)`;
+      gainEl.className = `privacy-target ${gainLossVal >= 0 ? 'pos-gain' : 'neg-gain'}`;
+    }
+
+    const canvas = document.getElementById(`chartMini_${cat.key}`);
+    if (canvas) {
+      if (miniCharts[cat.key]) miniCharts[cat.key].destroy();
+      miniCharts[cat.key] = new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: years,
+          datasets: [{
+            data: dataValues,
+            borderColor: cat.color,
+            backgroundColor: cat.color + '1A',
+            fill: true,
+            tension: 0.2,
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { display: true },
+            y: { display: true, ticks: { maxTicksLimit: 4 } }
+          }
         }
-      }
-    });
+      });
+    }
   });
 }
 
 function renderTables() {
   const balBody = document.querySelector("#balancesTable tbody");
+  const invBody = document.querySelector("#investedTable tbody");
   const contriBody = document.querySelector("#contributionsTable tbody");
+  
   balBody.innerHTML = "";
+  invBody.innerHTML = "";
   contriBody.innerHTML = "";
 
   portfolioData.forEach((row, i) => {
+    if (!row.balances) row.balances = {};
+    if (!row.invested) row.invested = {};
+    if (!row.contri) row.contri = {};
+
     const totalBal = getTotalBal(row);
+    const totalInv = getTotalInvested(row);
+    const totalGainVal = totalBal - totalInv;
+    const totalGainPct = totalInv > 0 ? ((totalGainVal / totalInv) * 100).toFixed(2) : "0.00";
+    const sign = totalGainVal >= 0 ? '+' : '';
 
-    balBody.innerHTML += `
-      <tr>
-        <td><b>${row.year}</b></td>
-        <td><input type="number" value="${row.balances.k401}" id="k401-${i}"></td>
-        <td><input type="number" value="${row.balances.roth}" id="roth-${i}"></td>
-        <td><input type="number" value="${row.balances.tradIra}" id="tradIra-${i}"></td>
-        <td><input type="number" value="${row.balances.hsa}" id="hsa-${i}"></td>
-        <td><input type="number" value="${row.balances.espp}" id="espp-${i}"></td>
-        <td><input type="number" value="${row.balances.cd}" id="cd-${i}"></td>
-        <td><input type="number" value="${row.balances.c529}" id="c529-${i}"></td>
-        <td><b>$${totalBal.toLocaleString()}</b></td>
-      </tr>`;
+    let balCells = `<td><b>${row.year}</b></td>`;
+    let invCells = `<td><b>${row.year}</b></td>`;
 
-    contriBody.innerHTML += `
-      <tr>
-        <td><b>${row.year}</b></td>
-        <td><input type="number" value="${row.contri.employer}" id="emp-${i}"></td>
-        <td><input type="number" value="${row.contri.user}" id="user-${i}"></td>
-        <td><input type="number" value="${row.contri.rollover}" id="roll-${i}"></td>
-        <td><input type="number" value="${row.contri.cd}" id="c_cd-${i}"></td>
-        <td><input type="number" value="${row.contri.roth}" id="c_roth-${i}"></td>
-        <td><input type="number" value="${row.contri.tradIra}" id="c_trad-${i}"></td>
-        <td><input type="number" value="${row.contri.hsa}" id="c_hsa-${i}"></td>
-        <td><input type="number" value="${row.contri.espp}" id="c_espp-${i}"></td>
-        <td><input type="number" value="${row.contri.c529}" id="c_529-${i}"></td>
-        <td><input type="number" value="${row.returns.amount}" id="retAmt-${i}"></td>
-        <td><input type="number" step="0.01" value="${row.returns.pct}" id="retPct-${i}"></td>
-      </tr>`;
+    categoriesConfig.forEach(cat => {
+      balCells += `<td><input type="number" value="${row.balances[cat.key] || 0}" id="${cat.key}-${i}" oninput="syncInputsToData()"></td>`;
+      invCells += `<td><input type="number" value="${row.invested[cat.key] || 0}" id="inv_${cat.key}-${i}" oninput="syncInputsToData()"></td>`;
+    });
+
+    balCells += `
+      <td><b>$${totalBal.toLocaleString()}</b></td>
+      <td><b>$${totalInv.toLocaleString()}</b></td>
+      <td class="${totalGainVal >= 0 ? 'pos-gain' : 'neg-gain'}"><b>${sign}$${Math.round(totalGainVal).toLocaleString()}</b></td>
+      <td class="${totalGainVal >= 0 ? 'pos-gain' : 'neg-gain'}"><b>${sign}${totalGainPct}%</b></td>
+    `;
+    invCells += `<td><b>$${totalInv.toLocaleString()}</b></td>`;
+
+    balBody.innerHTML += `<tr>${balCells}</tr>`;
+    invBody.innerHTML += `<tr>${invCells}</tr>`;
+
+    let contriCells = `
+      <td><b>${row.year}</b></td>
+      <td><input type="number" value="${row.contri.employer || 0}" id="emp-${i}" oninput="syncInputsToData()"></td>
+      <td><input type="number" value="${row.contri.user || 0}" id="user-${i}" oninput="syncInputsToData()"></td>
+      <td><input type="number" value="${row.contri.rollover || 0}" id="roll-${i}" oninput="syncInputsToData()"></td>
+    `;
+
+    categoriesConfig.forEach(cat => {
+      contriCells += `<td><input type="number" value="${row.contri[cat.key] || 0}" id="c_${cat.key}-${i}" oninput="syncInputsToData()"></td>`;
+    });
+
+    const returns = getDynamicReturns(i);
+    contriCells += `
+      <td style="font-weight: 600; color: ${returns.amount >= 0 ? '#10b981' : '#ef4444'};">$${returns.amount.toLocaleString()}</td>
+      <td style="font-weight: 600; color: ${returns.pct >= 0 ? '#10b981' : '#ef4444'};">${returns.pct}%</td>
+    `;
+
+    contriBody.innerHTML += `<tr>${contriCells}</tr>`;
   });
 }
 
-function switchDataTab(tabName) {
-  document.getElementById('balancesTab').style.display = tabName === 'balances' ? 'block' : 'none';
-  document.getElementById('contributionsTab').style.display = tabName === 'contributions' ? 'block' : 'none';
-  
-  const buttons = document.querySelectorAll('#tab-portfolio .tab-btn');
-  buttons[0].classList.toggle('active', tabName === 'balances');
-  buttons[1].classList.toggle('active', tabName === 'contributions');
-  applyPrivacyState();
-}
-
-function saveData() {
+function syncInputsToData() {
   portfolioData.forEach((row, i) => {
-    row.balances.k401 = parseFloat(document.getElementById(`k401-${i}`).value) || 0;
-    row.balances.roth = parseFloat(document.getElementById(`roth-${i}`).value) || 0;
-    row.balances.tradIra = parseFloat(document.getElementById(`tradIra-${i}`).value) || 0;
-    row.balances.hsa = parseFloat(document.getElementById(`hsa-${i}`).value) || 0;
-    row.balances.espp = parseFloat(document.getElementById(`espp-${i}`).value) || 0;
-    row.balances.cd = parseFloat(document.getElementById(`cd-${i}`).value) || 0;
-    row.balances.c529 = parseFloat(document.getElementById(`c529-${i}`).value) || 0;
+    categoriesConfig.forEach(cat => {
+      row.balances[cat.key] = parseFloat(document.getElementById(`${cat.key}-${i}`).value) || 0;
+      row.invested[cat.key] = parseFloat(document.getElementById(`inv_${cat.key}-${i}`).value) || 0;
+      row.contri[cat.key] = parseFloat(document.getElementById(`c_${cat.key}-${i}`).value) || 0;
+    });
 
     row.contri.employer = parseFloat(document.getElementById(`emp-${i}`).value) || 0;
     row.contri.user = parseFloat(document.getElementById(`user-${i}`).value) || 0;
     row.contri.rollover = parseFloat(document.getElementById(`roll-${i}`).value) || 0;
-    row.contri.cd = parseFloat(document.getElementById(`c_cd-${i}`).value) || 0;
-    row.contri.roth = parseFloat(document.getElementById(`c_roth-${i}`).value) || 0;
-    row.contri.tradIra = parseFloat(document.getElementById(`c_trad-${i}`).value) || 0;
-    row.contri.hsa = parseFloat(document.getElementById(`c_hsa-${i}`).value) || 0;
-    row.contri.espp = parseFloat(document.getElementById(`c_espp-${i}`).value) || 0;
-    row.contri.c529 = parseFloat(document.getElementById(`c_529-${i}`).value) || 0;
-
-    row.returns.amount = parseFloat(document.getElementById(`retAmt-${i}`).value) || 0;
-    row.returns.pct = parseFloat(document.getElementById(`retPct-${i}`).value) || 0;
   });
 
-  localStorage.setItem('categoryPortfolioData', JSON.stringify(portfolioData));
-  renderTables();
   renderComparisonTable();
   updateDashboard();
+}
+
+function saveData() {
+  syncInputsToData();
+  localStorage.setItem('categoryPortfolioData', JSON.stringify(portfolioData));
+  renderTables();
   alert('Portfolio data updated successfully!');
 }
 
 function exportJSON() {
-  saveData();
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(portfolioData, null, 2));
+  syncInputsToData();
+  const fullBackup = {
+    categories: categoriesConfig,
+    irsBaseLimits: irsBaseLimits,
+    defaultAccountData: portfolioData
+  };
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fullBackup, null, 2));
   const downloadAnchor = document.createElement('a');
   downloadAnchor.setAttribute("href", dataStr);
   downloadAnchor.setAttribute("download", `portfolio_backup_${new Date().toISOString().slice(0,10)}.json`);
@@ -1483,14 +1483,17 @@ function importJSON(event) {
       const importedData = JSON.parse(e.target.result);
       if (Array.isArray(importedData)) {
         portfolioData = importedData;
-        localStorage.setItem('categoryPortfolioData', JSON.stringify(portfolioData));
-        renderTables();
-        renderComparisonTable();
-        updateDashboard();
-        alert('Portfolio data imported successfully!');
+      } else if (importedData.defaultAccountData) {
+        portfolioData = importedData.defaultAccountData;
+        if (importedData.categories) categoriesConfig = importedData.categories;
+        if (importedData.irsBaseLimits) irsBaseLimits = importedData.irsBaseLimits;
       } else {
         alert('Invalid JSON file format.');
+        return;
       }
+      localStorage.setItem('categoryPortfolioData', JSON.stringify(portfolioData));
+      initDashboard();
+      alert('Portfolio data imported successfully!');
     } catch (err) {
       alert('Error parsing JSON file.');
     }
@@ -1501,15 +1504,11 @@ function importJSON(event) {
 function resetDefaults() {
   localStorage.removeItem('categoryPortfolioData');
   portfolioData = JSON.parse(JSON.stringify(defaultAccountData));
-  renderTables();
-  renderComparisonTable();
-  updateDashboard();
+  initDashboard();
 }
 
 window.onload = function() {
-  const savedTheme = localStorage.getItem('dashboardTheme') || 'dark';
-  applyTheme(savedTheme);
-  initDashboard();
+  loadDataFromJSON();
 };
 </script>
 </body>
