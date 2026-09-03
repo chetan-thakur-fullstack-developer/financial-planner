@@ -61,6 +61,7 @@
     /* Input & Select Box High Contrast in Light Mode */
     html:not(.dark) input[type="number"], 
     html:not(.dark) input[type="text"], 
+    html:not(.dark) input[type="password"], 
     html:not(.dark) select { background-color: #ffffff !important; color: #0f172a !important; border-color: #cbd5e1 !important; }
 
     /* Header & Navigation Button Enhancements for Light Mode */
@@ -145,13 +146,8 @@
       z-index: 1050;
     }
     
-    .mobile-menu-btn:hover {
-      opacity: 0.8;
-    }
-    
-    .mobile-menu-btn:active {
-      opacity: 0.6;
-    }
+    .mobile-menu-btn:hover { opacity: 0.8; }
+    .mobile-menu-btn:active { opacity: 0.6; }
     
     /* Mobile Menu Overlay Base Styling */
     .mobile-menu-overlay {
@@ -175,10 +171,7 @@
     }
 
     @media (max-width: 1024px) {
-      body { 
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
+      body { overflow-x: hidden; overflow-y: auto; }
       aside { 
         position: fixed; 
         left: -100%; 
@@ -190,9 +183,7 @@
         overflow-y: auto;
         overflow-x: hidden;
       }
-      aside.mobile-open { 
-        left: 0;
-      }
+      aside.mobile-open { left: 0; }
       .mobile-menu-btn { 
         display: flex !important;
         flex-direction: column;
@@ -245,28 +236,11 @@
     }
 
     /* Hamburger Menu Animation */
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 4px;
-    }
-    .hamburger span {
-      width: 24px;
-      height: 2px;
-      background: currentColor;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .hamburger.open span:nth-child(1) {
-      transform: rotate(45deg) translate(8px, 8px);
-    }
-    .hamburger.open span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.open span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -7px);
-    }
+    .hamburger { display: flex; flex-direction: column; cursor: pointer; gap: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: currentColor; border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans h-full antialiased flex overflow-hidden">
@@ -349,7 +323,7 @@
     <!-- TOP HEADER / CONTROLS -->
     <header class="h-16 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md px-6 flex items-center justify-between shrink-0 z-10">
       <!-- Hamburger Menu Button -->
-      <button id="mobileMenuBtn" class="mobile-menu-btn text-slate-300 hover:text-slate-100" onclick="(function() { toggleMobileMenu(); console.log('onclick fired'); })()">
+      <button id="mobileMenuBtn" class="mobile-menu-btn text-slate-300 hover:text-slate-100" onclick="(function() { toggleMobileMenu(); })()">
         <div class="hamburger">
           <span></span>
           <span></span>
@@ -357,7 +331,7 @@
         </div>
       </button>
 
-      <!-- Year Filter - Centered/Right aligned on mobile -->
+      <!-- Year Filter -->
       <div class="flex items-center gap-2 ml-auto">
         <label for="yearFilter" class="text-xs font-semibold uppercase tracking-wider text-slate-400 hidden sm:inline">Focus Year:</label>
         <select id="yearFilter" onchange="updateDashboard()" class="bg-slate-800 border border-slate-700 text-slate-100 text-xs font-bold rounded-lg px-3 py-1.5 focus:outline-none focus:border-indigo-500">
@@ -515,7 +489,7 @@
             </table>
           </div>
 
-          <!-- Plain-Text Action Plan Summary -->
+          <!-- Action Plan Summary -->
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-400">
@@ -898,20 +872,29 @@
   </main>
 
   <!-- COLLAPSIBLE BOTTOM DRAWER: PORTFOLIO LEDGER DATA -->
-  <div id="ledgerDrawer" class="fixed inset-x-0 bottom-0 z-30 bg-slate-950 border-t border-slate-800 transform translate-y-full transition-transform duration-300 shadow-2xl flex flex-col h-[75vh]">
+  <div id="ledgerDrawer" class="fixed inset-x-0 bottom-0 z-30 bg-slate-950 border-t border-slate-800 transform translate-y-full transition-transform duration-300 shadow-2xl flex flex-col h-[80vh]">
     <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
       <div class="flex items-center gap-3">
         <i data-lucide="database" class="w-5 h-5 text-indigo-400"></i>
         <h3 class="text-sm font-bold text-slate-100 uppercase tracking-wider">Manage Portfolio Ledger Data</h3>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="saveData()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold transition-all">Save Changes</button>
+        <button onclick="saveData()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5">
+          <i data-lucide="send" class="w-3.5 h-3.5"></i> Trigger Sync Action
+        </button>
         <button onclick="exportJSON()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 transition-all">Export JSON</button>
         <button onclick="document.getElementById('importFileInput').click()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold border border-slate-700 transition-all">Import JSON</button>
         <input type="file" id="importFileInput" class="hidden" accept=".json" onchange="importJSON(event)">
         <button onclick="resetDefaults()" class="px-3 py-1.5 bg-rose-600/20 text-rose-400 hover:bg-rose-600/30 rounded-lg text-xs font-semibold transition-all">Reset Defaults</button>
         <button onclick="toggleLedgerDrawer()" class="p-1.5 text-slate-400 hover:text-slate-100"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
+    </div>
+
+    <!-- GITHUB DISPATCH CONFIGURATION BAR -->
+    <div class="p-3 bg-slate-900/80 border-b border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs shrink-0">
+      <input type="text" id="ghOwner" placeholder="GitHub Username / Org" class="bg-slate-800 border border-slate-700 text-slate-100 px-2.5 py-1.5 rounded focus:outline-none focus:border-indigo-500">
+      <input type="text" id="ghRepo" placeholder="Repository Name" class="bg-slate-800 border border-slate-700 text-slate-100 px-2.5 py-1.5 rounded focus:outline-none focus:border-indigo-500">
+      <input type="password" id="ghToken" placeholder="GitHub PAT Token (contents:write)" class="bg-slate-800 border border-slate-700 text-slate-100 px-2.5 py-1.5 rounded focus:outline-none focus:border-indigo-500">
     </div>
 
     <div class="px-6 border-b border-slate-800 bg-slate-900/50 flex gap-4 shrink-0">
@@ -1020,7 +1003,7 @@
     let miniCharts = {};
     let lastSelectedYear = "";
 
-    // STRICT FILE-LEVEL DEFAULT PRIVACY: Always true on every page load
+    // DEFAULT PRIVACY: Masked until toggled
     let isMasterHidden = true;
 
     // UNIFIED DATA-STORE CONTEXT
@@ -1081,6 +1064,7 @@
       renderTables();
       renderComparisonTable();
       updateDashboard();
+      loadGitHubCredentials();
     }
 
     function toggleThemeMode() {
@@ -1154,76 +1138,43 @@
       const overlay = document.getElementById('mobileMenuOverlay');
       const btn = document.getElementById('mobileMenuBtn');
       
-      if (aside) {
-        aside.classList.toggle('mobile-open');
-      }
+      if (aside) aside.classList.toggle('mobile-open');
       if (overlay) {
         overlay.classList.toggle('show');
-        // Directly set display style to ensure it works
         overlay.style.display = overlay.classList.contains('show') ? 'block' : 'none';
       }
-      if (btn) {
-        btn.querySelector('.hamburger')?.classList.toggle('open');
-      }
+      if (btn) btn.querySelector('.hamburger')?.classList.toggle('open');
     }
 
     function switchMainTab(event, tabId) {
-      // Close mobile menu when tab is clicked
       const aside = document.querySelector('aside');
-      if (aside && aside.classList.contains('mobile-open')) {
-        toggleMobileMenu();
-      }
+      if (aside && aside.classList.contains('mobile-open')) toggleMobileMenu();
 
-      // Hide all tabs
       document.querySelectorAll('.main-tab-content').forEach(el => el.classList.add('hidden'));
-      
-      // Reset all buttons
       document.querySelectorAll('.nav-btn').forEach(el => {
         el.classList.remove('bg-indigo-600/10', 'text-indigo-400', 'active');
         el.classList.add('text-slate-400');
       });
       
-      // Show the selected tab
       const targetTab = document.getElementById(tabId);
       if (targetTab) {
         targetTab.classList.remove('hidden');
-        
-        // Trigger resize for Chart.js charts in this tab
         setTimeout(() => {
           const charts = [window.growthChart, window.categoryChart, window.historyChart, window.projectionChart];
-          charts.forEach(chart => {
-            if (chart && chart.resize) {
-              chart.resize();
-            }
-          });
-          // Resize mini charts
-          if (window.miniCharts) {
-            Object.values(window.miniCharts).forEach(chart => {
-              if (chart && chart.resize) {
-                chart.resize();
-              }
-            });
-          }
+          charts.forEach(chart => { if (chart && chart.resize) chart.resize(); });
+          if (window.miniCharts) Object.values(window.miniCharts).forEach(chart => { if (chart && chart.resize) chart.resize(); });
         }, 10);
       }
       
-      // Highlight the clicked button
       if (event && event.currentTarget) {
         event.currentTarget.classList.add('bg-indigo-600/10', 'text-indigo-400', 'active');
         event.currentTarget.classList.remove('text-slate-400');
       }
 
-      if (tabId === 'tab-projections') {
-        propagateUnifiedDataStore();
-      } else if (tabId === 'tab-tax') {
-        renderIRSProgress();
-        renderTaxBuckets();
-      } else if (tabId === 'tab-allocation') {
-        renderRebalancer();
-      } else if (tabId === 'tab-hub') {
-        renderStrategicHub();
-        calculatePaystub();
-      }
+      if (tabId === 'tab-projections') propagateUnifiedDataStore();
+      else if (tabId === 'tab-tax') { renderIRSProgress(); renderTaxBuckets(); }
+      else if (tabId === 'tab-allocation') renderRebalancer();
+      else if (tabId === 'tab-hub') { renderStrategicHub(); calculatePaystub(); }
       applyPrivacyState();
     }
 
@@ -2031,7 +1982,6 @@
         `;
       });
 
-      // Plain-Text Action Plan Summary
       const summaryTextEl = document.getElementById('actionPlanSummaryText');
       if (summaryTextEl) {
         if (overDriftCount === 0) {
@@ -2150,11 +2100,9 @@
         const latestVal = activeData.balances ? (activeData.balances[cat.key] || 0) : 0;
         const investedVal = (activeData.invested && activeData.invested[cat.key]) ? activeData.invested[cat.key] : 0;
         
-        // Cumulative Overall Growth Calculations
         const gainLossVal = latestVal - investedVal;
         const gainLossPct = investedVal > 0 ? ((gainLossVal / investedVal) * 100).toFixed(2) : "0.00";
 
-        // Year-Over-Year Gain Calculations
         const prevVal = prevData && prevData.balances ? (prevData.balances[cat.key] || 0) : 0;
         const userContri = activeData.contri ? (activeData.contri[cat.key] || 0) : 0;
         const yearlyGainVal = latestVal - (prevVal + userContri);
@@ -2277,27 +2225,124 @@
       updateDashboard();
     }
 
-    function saveData() { syncInputsToData(); localStorage.setItem('categoryPortfolioData', JSON.stringify(portfolioData)); alert('Saved successfully!'); }
-    function exportJSON() {}
-    function importJSON(event) {}
-    function resetDefaults() { localStorage.removeItem('categoryPortfolioData'); portfolioData = JSON.parse(JSON.stringify(defaultAccountData)); unifiedStore.isUserOverridden = false; initDashboard(); }
+    /* GITHUB ACTIONS DISPATCH LOGIC (APPROACH 2) */
+    function saveGitHubCredentials() {
+      const settings = {
+        owner: document.getElementById('ghOwner')?.value.trim() || '',
+        repo: document.getElementById('ghRepo')?.value.trim() || '',
+        token: document.getElementById('ghToken')?.value.trim() || ''
+      };
+      localStorage.setItem('githubDispatchConfig', JSON.stringify(settings));
+      return settings;
+    }
+
+    function loadGitHubCredentials() {
+      const saved = localStorage.getItem('githubDispatchConfig');
+      if (saved) {
+        const settings = JSON.parse(saved);
+        if (document.getElementById('ghOwner')) document.getElementById('ghOwner').value = settings.owner || '';
+        if (document.getElementById('ghRepo')) document.getElementById('ghRepo').value = settings.repo || '';
+        if (document.getElementById('ghToken')) document.getElementById('ghToken').value = settings.token || '';
+      }
+    }
+
+    async function saveData() {
+      syncInputsToData();
+      localStorage.setItem('categoryPortfolioData', JSON.stringify(portfolioData));
+
+      const ghConfig = saveGitHubCredentials();
+      
+      if (!ghConfig.owner || !ghConfig.repo || !ghConfig.token) {
+        alert("Saved locally to Browser Cache! To trigger an automated repository sync, enter your GitHub Username, Repo, and Token in the drawer bar.");
+        return;
+      }
+
+      const completePayload = {
+        categories: categoriesConfig,
+        irsBaseLimits: irsBaseLimits,
+        defaultAccountData: portfolioData
+      };
+
+      const targetUrl = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/dispatches`;
+
+      try {
+        const response = await fetch(targetUrl, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/vnd.github+json',
+            'Authorization': `Bearer ${ghConfig.token}`,
+            'Content-Type': 'application/json',
+            'X-GitHub-Api-Version': '2022-11-28'
+          },
+          body: JSON.stringify({
+            event_type: 'update-portfolio-data',
+            client_payload: {
+              data: completePayload
+            }
+          })
+        });
+
+        if (response.status === 204) {
+          alert("Success! Triggered GitHub Action workflow. Your updates will be written to portfolio-data.json and re-deployed automatically within 1-2 minutes.");
+        } else {
+          const errorData = await response.json();
+          alert(`Dispatch Failed: ${errorData.message || response.statusText}`);
+        }
+      } catch (error) {
+        console.error("GitHub Dispatch Error:", error);
+        alert(`Failed to trigger workflow: ${error.message}. Local changes were kept.`);
+      }
+    }
+
+    function exportJSON() {
+      syncInputsToData();
+      const exportObj = { categories: categoriesConfig, irsBaseLimits: irsBaseLimits, defaultAccountData: portfolioData };
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "portfolio-data.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function importJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (parsed.defaultAccountData) portfolioData = parsed.defaultAccountData;
+          if (parsed.categories) categoriesConfig = parsed.categories;
+          if (parsed.irsBaseLimits) irsBaseLimits = parsed.irsBaseLimits;
+          saveData();
+          initDashboard();
+          alert("Imported JSON successfully!");
+        } catch (err) {
+          alert("Invalid JSON file provided.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetDefaults() { 
+      localStorage.removeItem('categoryPortfolioData'); 
+      portfolioData = JSON.parse(JSON.stringify(defaultAccountData)); 
+      unifiedStore.isUserOverridden = false; 
+      initDashboard(); 
+    }
 
     window.onload = function() { 
       loadDataFromJSON();
       
-      // Attach click handlers to nav buttons for mobile reliability
       const navButtons = document.querySelectorAll('.nav-btn');
       navButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
-          // Get the tab ID from the onclick attribute
           const onclickAttr = this.getAttribute('onclick');
           const match = onclickAttr.match(/'([^']+)'/);
           const tabId = match ? match[1] : null;
-          
-          if (tabId) {
-            // Call switchMainTab with event and tab ID
-            switchMainTab(e, tabId);
-          }
+          if (tabId) switchMainTab(e, tabId);
         });
       });
     };
