@@ -118,6 +118,15 @@
       "categoryId": "cat_health",
       "date": "2026-03-04",
       "isRecurring": true
+    },
+    {
+      "id": "tx_1788538553710",
+      "amount": 2,
+      "description": "2",
+      "cardId": "card_1",
+      "categoryId": "cat_food",
+      "date": "2027-09-04",
+      "isRecurring": false
     }
   ]
 }
