@@ -46,15 +46,6 @@
   ],
   "cards": [
     {
-      "id": "card_1",
-      "name": "Sapphire Reserve",
-      "issuer": "VISA",
-      "masked": "8842",
-      "limit": 15000,
-      "paid": 1200,
-      "gradient": "from-indigo-600 to-slate-900"
-    },
-    {
       "id": "card_2",
       "name": "Amex Platinum",
       "issuer": "AMEX",
