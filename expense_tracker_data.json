@@ -120,39 +120,12 @@
       "isRecurring": true
     },
     {
-      "id": "tx_1788537932939",
-      "amount": 7,
-      "description": "7",
+      "id": "tx_1788538401819",
+      "amount": 9,
+      "description": "9",
       "cardId": "card_1",
       "categoryId": "cat_food",
-      "date": "2026-09-04",
-      "isRecurring": false
-    },
-    {
-      "id": "tx_1788537937046",
-      "amount": 7,
-      "description": "7",
-      "cardId": "card_1",
-      "categoryId": "cat_food",
-      "date": "2026-09-04",
-      "isRecurring": false
-    },
-    {
-      "id": "tx_1788537944126",
-      "amount": 7,
-      "description": "7",
-      "cardId": "card_1",
-      "categoryId": "cat_food",
-      "date": "2026-09-04",
-      "isRecurring": false
-    },
-    {
-      "id": "tx_1788537948678",
-      "amount": 7,
-      "description": "7",
-      "cardId": "card_1",
-      "categoryId": "cat_food",
-      "date": "2026-09-04",
+      "date": "2027-09-04",
       "isRecurring": false
     }
   ]
