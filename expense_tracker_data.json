@@ -46,15 +46,6 @@
   ],
   "cards": [
     {
-      "id": "card_2",
-      "name": "Amex Platinum",
-      "issuer": "AMEX",
-      "masked": "1004",
-      "limit": 25000,
-      "paid": 3400,
-      "gradient": "from-emerald-600 to-teal-950"
-    },
-    {
       "id": "card_3",
       "name": "Freedom Unlimited",
       "issuer": "VISA",
