@@ -1,0 +1,22 @@
+{
+  "monthlyBudget": 3000,
+  "categories": [
+    { "id": "cat_food", "label": "Food & Dining", "color": "#10b981", "icon": "utensils", "limit": 600 },
+    { "id": "cat_shop", "label": "Shopping", "color": "#ec4899", "icon": "shopping-bag", "limit": 400 },
+    { "id": "cat_util", "label": "Utilities & Bills", "color": "#6366f1", "icon": "zap", "limit": 500 },
+    { "id": "cat_trans", "label": "Transport", "color": "#f59e0b", "icon": "car", "limit": 300 },
+    { "id": "cat_ent", "label": "Entertainment", "color": "#8b5cf6", "icon": "film", "limit": 250 },
+    { "id": "cat_health", "label": "Healthcare", "color": "#06b6d4", "icon": "activity", "limit": 350 }
+  ],
+  "cards": [
+    { "id": "card_1", "name": "Sapphire Reserve", "issuer": "VISA", "masked": "8842", "limit": 15000, "paid": 1200, "gradient": "from-indigo-600 to-slate-900" },
+    { "id": "card_2", "name": "Amex Platinum", "issuer": "AMEX", "masked": "1004", "limit": 25000, "paid": 3400, "gradient": "from-emerald-600 to-teal-950" },
+    { "id": "card_3", "name": "Freedom Unlimited", "issuer": "VISA", "masked": "3391", "limit": 8000, "paid": 450, "gradient": "from-purple-600 to-indigo-950" }
+  ],
+  "transactions": [
+    { "id": "tx_101", "date": "2026-03-01", "description": "Whole Foods Market", "categoryId": "cat_food", "cardId": "card_1", "amount": 142.50, "isRecurring": false },
+    { "id": "tx_102", "date": "2026-03-02", "description": "Netflix Premium 4K", "categoryId": "cat_ent", "cardId": "card_3", "amount": 22.99, "isRecurring": true },
+    { "id": "tx_103", "date": "2026-03-03", "description": "Chevron Fuel Station", "categoryId": "cat_trans", "cardId": "card_1", "amount": 54.10, "isRecurring": false },
+    { "id": "tx_104", "date": "2026-03-04", "description": "Equinox Fitness Club", "categoryId": "cat_health", "cardId": "card_2", "amount": 280.00, "isRecurring": true }
+  ]
+}
