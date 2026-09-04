@@ -73,15 +73,5 @@
       "gradient": "from-purple-600 to-indigo-950"
     }
   ],
-  "transactions": [
-    {
-      "id": "tx_101",
-      "date": "2026-03-01",
-      "description": "Whole Foods Market",
-      "categoryId": "cat_food",
-      "cardId": "card_1",
-      "amount": 142.5,
-      "isRecurring": false
-    }
-  ]
+  "transactions": []
 }
