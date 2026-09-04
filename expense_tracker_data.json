@@ -44,16 +44,6 @@
       "limit": 350
     }
   ],
-  "cards": [
-    {
-      "id": "card_3",
-      "name": "Freedom Unlimited",
-      "issuer": "VISA",
-      "masked": "3391",
-      "limit": 8000,
-      "paid": 450,
-      "gradient": "from-purple-600 to-indigo-950"
-    }
-  ],
+  "cards": [],
   "transactions": []
 }
