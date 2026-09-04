@@ -127,6 +127,15 @@
       "categoryId": "cat_food",
       "date": "2026-09-04",
       "isRecurring": false
+    },
+    {
+      "id": "tx_1788537937046",
+      "amount": 7,
+      "description": "7",
+      "cardId": "card_1",
+      "categoryId": "cat_food",
+      "date": "2026-09-04",
+      "isRecurring": false
     }
   ]
 }
