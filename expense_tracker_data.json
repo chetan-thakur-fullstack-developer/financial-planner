@@ -91,15 +91,6 @@
       "cardId": "card_3",
       "amount": 22.99,
       "isRecurring": true
-    },
-    {
-      "id": "tx_103",
-      "date": "2026-03-03",
-      "description": "Chevron Fuel Station",
-      "categoryId": "cat_trans",
-      "cardId": "card_1",
-      "amount": 54.1,
-      "isRecurring": false
     }
   ]
 }
