@@ -118,6 +118,15 @@
       "cardId": "card_2",
       "amount": 280,
       "isRecurring": true
+    },
+    {
+      "id": "tx_1788539516736",
+      "amount": 5,
+      "description": "F",
+      "cardId": "card_1",
+      "categoryId": "cat_food",
+      "date": "2026-09-04",
+      "isRecurring": false
     }
   ]
 }
