@@ -82,15 +82,6 @@
       "cardId": "card_1",
       "amount": 142.5,
       "isRecurring": false
-    },
-    {
-      "id": "tx_102",
-      "date": "2026-03-02",
-      "description": "Netflix Premium 4K",
-      "categoryId": "cat_ent",
-      "cardId": "card_3",
-      "amount": 22.99,
-      "isRecurring": true
     }
   ]
 }
