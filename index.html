@@ -190,7 +190,7 @@
     .collapsible-content {
       overflow: hidden;
       transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease;
-      max-height: 2500px;
+      max-height: 3500px;
       opacity: 1;
     }
 
@@ -972,21 +972,8 @@
               </button>
             </div>
 
-            <div class="overflow-x-auto custom-scrollbar max-h-96">
-              <table id="expTransactionTable" class="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold">
-                    <th class="py-3 px-3">Date</th>
-                    <th class="py-3 px-3">Description</th>
-                    <th class="py-3 px-3">Category</th>
-                    <th class="py-3 px-3">Account / Card</th>
-                    <th class="py-3 px-3 text-right">Amount ($)</th>
-                    <th class="py-3 px-3 text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="expTransactionTableBody" class="divide-y divide-slate-800/60 font-medium text-slate-200"></tbody>
-              </table>
-            </div>
+            <!-- CONTAINER FOR NESTED YEAR & MONTH ACCORDIONS -->
+            <div id="expMonthlyGroupedContainer" class="space-y-4 custom-scrollbar max-h-[32rem] overflow-y-auto pr-1"></div>
           </div>
         </div>
 
@@ -1088,7 +1075,9 @@
         <i data-lucide="shield-alert" class="w-5 h-5 text-indigo-400 shrink-0 mt-0.5"></i>
         <div>
           <span class="font-bold text-slate-300 block mb-0.5">Educational Disclaimer & Scope of Platform:</span>
-          All information presented on this site is for knowledge and educational purposes only.
+          All information presented on this platform is provided for general informational and educational purposes only. The platform owner, operators, and authors are not licensed financial advisors, registered investment advisors, or legal/tax professionals. Nothing contained on this site constitutes investment, legal, tax, or other advice, nor does it constitute a recommendation, endorsement, or solicitation to buy or sell any security, cryptocurrency, or financial instrument.
+          <br>
+          Investing involves substantial risk, including the potential loss of principal. Past performance is not indicative of future results. Users are entirely responsible for making their own investment decisions and should conduct independent research or consult with a qualified, licensed financial professional before making any financial commitments. By using this platform, you agree that the platform owner is not liable for any financial losses, damages, or decisions made based on the information provided herein.
         </div>
       </div>
 
@@ -3088,39 +3077,140 @@
     }
 
     function renderTransactionTable() {
-      const tbody = document.getElementById('expTransactionTableBody');
-      if (!tbody) return;
-      tbody.innerHTML = "";
+      const container = document.getElementById('expMonthlyGroupedContainer');
+      if (!container) return;
+      container.innerHTML = "";
 
+      if (!expenseStore.transactions || expenseStore.transactions.length === 0) {
+        container.innerHTML = `<div class="p-4 text-center text-xs text-slate-400 font-semibold">No expense records found. Log a transaction to get started!</div>`;
+        return;
+      }
+
+      // Group Transactions by Year -> Month
+      const groupedByYear = {};
       const sortedTx = [...expenseStore.transactions].sort((a, b) => new Date(b.date) - new Date(a.date));
 
       sortedTx.forEach(tx => {
-        const category = expenseStore.categories.find(c => c.id === tx.categoryId) || { label: "General", color: "#64748b" };
-        const card = expenseStore.cards.find(c => c.id === tx.cardId) || { name: "Cash", masked: "0000" };
+        const txDate = new Date(tx.date);
+        const yearKey = txDate.getFullYear().toString();
+        const monthKey = `${yearKey}-${String(txDate.getMonth() + 1).padStart(2, '0')}`;
+        const monthLabel = txDate.toLocaleString('default', { month: 'long', year: 'numeric' });
 
-        tbody.innerHTML += `
-          <tr class="hover:bg-slate-800/40 transition-all">
-            <td class="py-3 px-3 text-slate-400 font-mono text-[11px]">${tx.date}</td>
-            <td class="py-3 px-3 font-bold text-slate-100 flex items-center gap-2">
-              ${tx.description}
-              ${tx.isRecurring ? '<span class="text-[9px] bg-purple-500/20 text-purple-300 border border-purple-500/30 px-1.5 py-0.2 rounded font-bold">SUB</span>' : ''}
-            </td>
-            <td class="py-3 px-3">
-              <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold" style="background-color: ${category.color}20; color: ${category.color}; border: 1px solid ${category.color}40;">
-                ${category.label}
-              </span>
-            </td>
-            <td class="py-3 px-3 text-slate-300 text-[11px]">${card.name} (••${card.masked})</td>
-            <td class="py-3 px-3 text-right font-bold text-rose-400 privacy-target">$${parseFloat(tx.amount).toFixed(2)}</td>
-            <td class="py-3 px-3 text-center">
-              <div class="flex items-center justify-center gap-1">
-                <button onclick="editTransaction('${tx.id}')" class="p-1 hover:text-indigo-400"><i data-lucide="edit-2" class="w-3.5 h-3.5"></i></button>
-                <button onclick="deleteTransaction('${tx.id}')" class="p-1 hover:text-rose-400"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+        if (!groupedByYear[yearKey]) {
+          groupedByYear[yearKey] = { year: yearKey, months: {}, total: 0, count: 0 };
+        }
+        if (!groupedByYear[yearKey].months[monthKey]) {
+          groupedByYear[yearKey].months[monthKey] = { label: monthLabel, items: [], total: 0 };
+        }
+
+        groupedByYear[yearKey].months[monthKey].items.push(tx);
+        groupedByYear[yearKey].months[monthKey].total += (parseFloat(tx.amount) || 0);
+        groupedByYear[yearKey].total += (parseFloat(tx.amount) || 0);
+        groupedByYear[yearKey].count++;
+      });
+
+      const yearKeys = Object.keys(groupedByYear).sort().reverse();
+
+      yearKeys.forEach((yearKey, yearIdx) => {
+        const yearGroup = groupedByYear[yearKey];
+        const isLatestYear = yearIdx === 0;
+
+        const monthKeys = Object.keys(yearGroup.months).sort().reverse();
+        let monthAccordionsHtml = '';
+
+        monthKeys.forEach((monthKey, monthIdx) => {
+          const monthGroup = yearGroup.months[monthKey];
+          const isLatestMonth = isLatestYear && monthIdx === 0;
+
+          let rowsHtml = '';
+          monthGroup.items.forEach(tx => {
+            const category = expenseStore.categories.find(c => c.id === tx.categoryId) || { label: "General", color: "#64748b" };
+            const card = expenseStore.cards.find(c => c.id === tx.cardId) || { name: "Cash", masked: "0000" };
+
+            rowsHtml += `
+              <tr class="hover:bg-slate-800/40 transition-all">
+                <td class="py-3 px-3 text-slate-400 font-mono text-[11px]">${tx.date}</td>
+                <td class="py-3 px-3 font-bold text-slate-100 flex items-center gap-2">
+                  ${tx.description}
+                  ${tx.isRecurring ? '<span class="text-[9px] bg-purple-500/20 text-purple-300 border border-purple-500/30 px-1.5 py-0.2 rounded font-bold">SUB</span>' : ''}
+                </td>
+                <td class="py-3 px-3">
+                  <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold" style="background-color: ${category.color}20; color: ${category.color}; border: 1px solid ${category.color}40;">
+                    ${category.label}
+                  </span>
+                </td>
+                <td class="py-3 px-3 text-slate-300 text-[11px]">${card.name} (••${card.masked})</td>
+                <td class="py-3 px-3 text-right font-bold text-rose-400 privacy-target">$${parseFloat(tx.amount).toFixed(2)}</td>
+                <td class="py-3 px-3 text-center">
+                  <div class="flex items-center justify-center gap-1">
+                    <button onclick="editTransaction('${tx.id}')" class="p-1 hover:text-indigo-400"><i data-lucide="edit-2" class="w-3.5 h-3.5"></i></button>
+                    <button onclick="deleteTransaction('${tx.id}')" class="p-1 hover:text-rose-400"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          });
+
+          monthAccordionsHtml += `
+            <div class="collapsible-container bg-slate-900/90 border border-slate-800/80 rounded-lg overflow-hidden ${!isLatestMonth ? 'collapsed' : ''}">
+              <div class="collapsible-header p-2.5 bg-slate-900 hover:bg-slate-800/60 border-b border-slate-800/60 transition-all" onclick="toggleCollapse(this)">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-400"></i>
+                  <span class="text-xs font-bold text-slate-200 uppercase tracking-wider">${monthGroup.label}</span>
+                  <span class="text-[9px] font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">${monthGroup.items.length} txns</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-extrabold text-rose-400 privacy-target">$${monthGroup.total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                  <i data-lucide="chevron-down" class="collapsible-icon w-3.5 h-3.5 text-slate-400"></i>
+                </div>
               </div>
-            </td>
-          </tr>
+              
+              <div class="collapsible-content">
+                <div class="overflow-x-auto custom-scrollbar">
+                  <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                      <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold bg-slate-950/40">
+                        <th class="py-2 px-3">Date</th>
+                        <th class="py-2 px-3">Description</th>
+                        <th class="py-2 px-3">Category</th>
+                        <th class="py-2 px-3">Account / Card</th>
+                        <th class="py-2 px-3 text-right">Amount ($)</th>
+                        <th class="py-2 px-3 text-center">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/60 font-medium text-slate-200">
+                      ${rowsHtml}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        container.innerHTML += `
+          <div class="collapsible-container bg-slate-900 border border-slate-800 rounded-xl overflow-hidden ${!isLatestYear ? 'collapsed' : ''}">
+            <div class="collapsible-header p-3 bg-slate-950/80 hover:bg-slate-800/60 border-b border-slate-800 transition-all" onclick="toggleCollapse(this)">
+              <div class="flex items-center gap-2">
+                <i data-lucide="folder" class="w-4 h-4 text-indigo-400"></i>
+                <span class="text-xs font-black text-slate-100 uppercase tracking-widest">YEAR ${yearGroup.year}</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">${yearGroup.count} Total Txns</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-black text-rose-400 privacy-target">$${yearGroup.total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+              </div>
+            </div>
+
+            <div class="collapsible-content p-3 space-y-3 bg-slate-950/30">
+              ${monthAccordionsHtml}
+            </div>
+          </div>
         `;
       });
+
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+      applyPrivacyState();
     }
 
     function renderSubscriptions() {
