@@ -173,6 +173,40 @@
     .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+    /* COLLAPSIBLE ACCORDION STYLES */
+    .collapsible-header {
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .collapsible-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .collapsible-content {
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease;
+      max-height: 2500px;
+      opacity: 1;
+    }
+
+    .collapsed .collapsible-content {
+      max-height: 0 !important;
+      opacity: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      border: none !important;
+    }
+
+    .collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans h-full antialiased flex overflow-hidden">
@@ -270,6 +304,16 @@
       </button>
 
       <div class="flex items-center gap-3 ml-auto">
+        <!-- GLOBAL DESKTOP COLLAPSE CONTROLS -->
+        <div class="hidden md:flex items-center gap-1.5 mr-2">
+          <button onclick="toggleAllSections(true)" class="px-2.5 py-1 text-[11px] font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition-all">
+            Expand All
+          </button>
+          <button onclick="toggleAllSections(false)" class="px-2.5 py-1 text-[11px] font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-700 transition-all">
+            Collapse All
+          </button>
+        </div>
+
         <!-- QUICK-ACCESS EXPENSE TRACKER HEADER BUTTON -->
         <button onclick="switchMainTab(event, 'tab-expenses')" class="px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm">
           <i data-lucide="receipt" class="w-3.5 h-3.5"></i>
@@ -347,29 +391,39 @@
 
       <!-- TAB 1: EXECUTIVE SUMMARY -->
       <div id="tab-overview" class="main-tab-content space-y-6">
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Historical Portfolio Trajectory</h3>
-          <div class="h-72"><canvas id="growthChart"></canvas></div>
+        <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
+          <div class="collapsible-header mb-4" onclick="toggleCollapse(this)">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Historical Portfolio Trajectory</h3>
+            <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+          </div>
+          <div class="collapsible-content">
+            <div class="h-72"><canvas id="growthChart"></canvas></div>
+          </div>
         </div>
 
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Multi-Year Executive Ledger Performance</h3>
-          <div class="overflow-x-auto">
-            <table id="comparisonTable" class="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold">
-                  <th class="py-3 px-4">Year</th>
-                  <th class="py-3 px-4">Beg. Balance</th>
-                  <th class="py-3 px-4">End Balance</th>
-                  <th class="py-3 px-4">YoY Growth</th>
-                  <th class="py-3 px-4">Total Contri</th>
-                  <th class="py-3 px-4">YoY Contri</th>
-                  <th class="py-3 px-4">Return ($)</th>
-                  <th class="py-3 px-4">Return (%)</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800/60 font-medium text-slate-200"></tbody>
-            </table>
+        <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
+          <div class="collapsible-header mb-4" onclick="toggleCollapse(this)">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Multi-Year Executive Ledger Performance</h3>
+            <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+          </div>
+          <div class="collapsible-content">
+            <div class="overflow-x-auto">
+              <table id="comparisonTable" class="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold">
+                    <th class="py-3 px-4">Year</th>
+                    <th class="py-3 px-4">Beg. Balance</th>
+                    <th class="py-3 px-4">End Balance</th>
+                    <th class="py-3 px-4">YoY Growth</th>
+                    <th class="py-3 px-4">Total Contri</th>
+                    <th class="py-3 px-4">YoY Contri</th>
+                    <th class="py-3 px-4">Return ($)</th>
+                    <th class="py-3 px-4">Return (%)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800/60 font-medium text-slate-200"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -377,299 +431,53 @@
       <!-- TAB 2: ASSET ALLOCATION & REBALANCING -->
       <div id="tab-allocation" class="main-tab-content space-y-6 hidden">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Current Asset Mix</h3>
-            <div class="h-56 flex justify-center"><canvas id="categoryChart"></canvas></div>
+          <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4">
+            <div class="collapsible-header" onclick="toggleCollapse(this)">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Current Asset Mix</h3>
+              <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+            </div>
+            <div class="collapsible-content">
+              <div class="h-56 flex justify-center"><canvas id="categoryChart"></canvas></div>
+            </div>
           </div>
 
-          <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Historical Allocation Evolution</h3>
-            <div class="h-64"><canvas id="historyChart"></canvas></div>
+          <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
+            <div class="collapsible-header mb-4" onclick="toggleCollapse(this)">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Historical Allocation Evolution</h3>
+              <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+            </div>
+            <div class="collapsible-content">
+              <div class="h-64"><canvas id="historyChart"></canvas></div>
+            </div>
           </div>
         </div>
 
         <!-- REBALANCING PLANNER -->
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-6">
-          <div class="flex flex-wrap items-start justify-between gap-4 border-b border-slate-800/80 pb-4">
-            <div class="space-y-1 max-w-xl">
-              <div class="flex items-center gap-2">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Portfolio Asset Rebalancing Planner</h3>
-                <i data-lucide="info" class="w-4 h-4 text-indigo-400 cursor-help" title="Module Overview: Calculates distribution deltas and generates trade execution plans to restore target allocation."></i>
-              </div>
-              <p class="text-xs text-slate-400 leading-relaxed">
-                <strong class="text-slate-300">Section Overview:</strong> Compares real-time holdings (<code class="text-indigo-300">Current %</code>) against target weightings (<code class="text-indigo-300">Target %</code>). Generates precise cross-account trades when drift tolerance is breached.
-              </p>
+        <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-6">
+          <div class="collapsible-header border-b border-slate-800/80 pb-4 mb-4" onclick="toggleCollapse(this)">
+            <div class="flex items-center gap-2">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Portfolio Asset Rebalancing Planner</h3>
+              <i data-lucide="info" class="w-4 h-4 text-indigo-400 cursor-help" title="Module Overview: Calculates distribution deltas and generates trade execution plans to restore target allocation."></i>
             </div>
-
-            <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl space-y-1.5 w-full sm:w-auto">
-              <div class="flex items-center justify-between gap-3">
-                <label for="driftTolerance" class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                  <i data-lucide="sliders" class="w-3.5 h-3.5 text-indigo-400"></i> Drift Tolerance:
-                </label>
-                <span id="driftToleranceVal" class="text-xs font-bold text-indigo-400">5.0%</span>
-              </div>
-              <input type="range" id="driftTolerance" min="0.5" max="15" step="0.5" value="5" oninput="updateDriftLabel(this.value); renderRebalancer();" class="w-full sm:w-36 h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-500">
-            </div>
+            <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
           </div>
 
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold">
-                  <th class="py-3 px-4">Asset Class</th>
-                  <th class="py-3 px-4">Current Value</th>
-                  <th class="py-3 px-4">Current %</th>
-                  <th class="py-3 px-4">Target %</th>
-                  <th class="py-3 px-4">Target Balance</th>
-                  <th class="py-3 px-4">Absolute Delta %</th>
-                  <th class="py-3 px-4">Rebalance Delta</th>
-                  <th class="py-3 px-4">Drift Status</th>
-                </tr>
-              </thead>
-              <tbody id="rebalanceTableBody" class="divide-y divide-slate-800/60 font-medium text-slate-200"></tbody>
-            </table>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-400">
-                <i data-lucide="file-text" class="w-4 h-4"></i>
-                <span>Action Plan Summary</span>
+          <div class="collapsible-content space-y-6">
+            <div class="flex flex-wrap items-start justify-between gap-4 border-b border-slate-800/80 pb-4">
+              <div class="space-y-1 max-w-xl">
+                <p class="text-xs text-slate-400 leading-relaxed">
+                  <strong class="text-slate-300">Section Overview:</strong> Compares real-time holdings (<code class="text-indigo-300">Current %</code>) against target weightings (<code class="text-indigo-300">Target %</code>). Generates precise cross-account trades when drift tolerance is breached.
+                </p>
               </div>
-            </div>
-            <pre id="actionPlanSummaryText" class="text-xs font-mono text-slate-300 whitespace-pre-wrap leading-relaxed bg-slate-950 p-4 rounded-lg border border-slate-800/80 custom-scrollbar max-h-48 overflow-y-auto">Calculating actions...</pre>
-          </div>
 
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
-                <i data-lucide="calculator" class="w-4 h-4 text-indigo-400"></i>
-                <span>Performance Fee Drag & Liquidity Metrics</span>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label class="text-xs text-slate-400 font-semibold block mb-1">Expense Ratio (%)</label>
-                <input type="number" step="0.01" id="rebalExpenseRatio" value="0.15" oninput="renderRebalancer()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-lg px-3 py-1.5 text-xs">
-              </div>
-              <div>
-                <label class="text-xs text-slate-400 font-semibold block mb-1">Idle Cash ($)</label>
-                <input type="number" id="rebalIdleCash" value="5000" oninput="renderRebalancer()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-lg px-3 py-1.5 text-xs">
-              </div>
-              <div class="bg-slate-950 p-3 rounded-lg border border-slate-800/80 flex flex-col justify-center">
-                <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Annual Performance Fee Drag</span>
-                <div id="annualFeeDragVal" class="privacy-target text-base font-bold text-rose-400 mt-0.5">$0.00 / yr</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Account Trajectory & Performance Basis</h3>
-          <div class="mini-charts-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
-        </div>
-      </div>
-
-      <!-- TAB 3: TAX & CONTRIBUTION TRACKER -->
-      <div id="tab-tax" class="main-tab-content space-y-6 hidden">
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
-          <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <div>
-              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Prorated IRS Goal Tracker (<span id="limitYearText">2026</span>)</h3>
-              <p class="text-xs text-slate-400">Prorated target evaluates expected pacing based on elapsed months.</p>
-            </div>
-            <div class="flex items-center gap-4 text-xs font-semibold bg-slate-900 border border-slate-800 p-2 rounded-lg">
-              <label class="flex items-center gap-2 cursor-pointer text-slate-300">
-                <input type="checkbox" id="catchUpCheck" onchange="renderIRSProgress()" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0"> Catch-up (50+)
-              </label>
-              <select id="hsaTypeSelect" onchange="renderIRSProgress()" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-slate-200">
-                <option value="family">HSA: Family</option>
-                <option value="self">HSA: Self-Only</option>
-              </select>
-              <select id="donor529Select" onchange="renderIRSProgress()" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-slate-200">
-                <option value="single">529: Single ($19k)</option>
-                <option value="joint">529: Joint ($38k)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-xs font-bold text-slate-300">401(k) Personal</span>
-                <span id="badge401k" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
-              </div>
-              <div class="flex justify-between text-xs text-slate-400 mb-2">
-                <span>Annual Limit ($):</span>
-                <input type="number" id="limit401k" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
-              </div>
-              <div id="label401kVal" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
-              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                <div id="bar401k" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
-              </div>
-            </div>
-
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-xs font-bold text-slate-300">Roth / Trad IRA</span>
-                <span id="badgeIra" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
-              </div>
-              <div class="flex justify-between text-xs text-slate-400 mb-2">
-                <span>Annual Limit ($):</span>
-                <input type="number" id="limitIra" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
-              </div>
-              <div id="labelIraVal" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
-              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                <div id="barIra" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
-              </div>
-            </div>
-
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-xs font-bold text-slate-300">HSA Goal</span>
-                <span id="badgeHsa" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
-              </div>
-              <div class="flex justify-between text-xs text-slate-400 mb-2">
-                <span>Annual Limit ($):</span>
-                <input type="number" id="limitHsa" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
-              </div>
-              <div id="labelHsaVal" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
-              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                <div id="barHsa" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
-              </div>
-            </div>
-
-            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-xs font-bold text-slate-300">Mysha 529</span>
-                <span id="badge529" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
-              </div>
-              <div class="flex justify-between text-xs text-slate-400 mb-2">
-                <span>Annual Limit ($):</span>
-                <input type="number" id="limit529" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
-              </div>
-              <div id="label529Val" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
-              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                <div id="bar529" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Tax Wrapper Location Bucket Breakdown</h3>
-          <div id="taxBucketContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-        </div>
-      </div>
-
-      <!-- TAB 4: STRATEGIC HUB & INSTANT PAYSTUB TOOL -->
-      <div id="tab-hub" class="main-tab-content space-y-6 hidden">
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-6">
-          <div class="flex items-center gap-2 border-b border-slate-800 pb-4">
-            <button id="btnSubTabOptimizer" onclick="switchHubSubTab('subtab-optimizer')" class="hub-tab-btn active">
-              📈 Texas Market Optimizer
-            </button>
-            <button id="btnSubTabPaystub" onclick="switchHubSubTab('subtab-paystub')" class="hub-tab-btn">
-              📋 Instant Paystub Tool
-            </button>
-          </div>
-
-          <!-- SUB-TAB A: TEXAS OPTIMIZER -->
-          <div id="subtab-optimizer" class="hub-sub-content space-y-6">
-            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
-              <h3 class="text-base font-bold uppercase tracking-wider text-slate-100 flex items-center gap-2">
-                <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
-                ✨ Texas & Macro Market Investment Optimizer
-              </h3>
-              <span class="text-[10px] font-mono px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-bold uppercase">
-                Active Focus Year: <span id="hubYearLabel">2026</span>
-              </span>
-            </div>
-
-            <div class="space-y-4">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-2">
-                <i data-lucide="map-pin" class="w-4 h-4"></i>
-                Module A1: The Texas Savings Runway Accelerator
-              </h4>
-              <div id="texasAcceleratorContainer"></div>
-            </div>
-
-            <div class="space-y-4 pt-4 border-t border-slate-800">
-              <div id="macroMatrixContainer"></div>
-            </div>
-          </div>
-
-          <!-- SUB-TAB B: PAYSTUB TOOL -->
-          <div id="subtab-paystub" class="hub-sub-content space-y-4 hidden">
-            <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
-              <h3 class="text-base font-bold uppercase tracking-wider text-slate-100 flex items-center gap-2">
-                <i data-lucide="receipt" class="w-5 h-5 text-emerald-400"></i>
-                📋 Minimal-Input Instant Paystub Calculator
-              </h3>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-2 bg-slate-900 p-2 rounded-lg border border-slate-800">
-              <button id="btnPaySectionBase" onclick="switchPaySection('pay-sec-base')" class="paystub-subtab-btn active">⚙️ Base Salary & Taxes</button>
-              <button id="btnPaySectionPre" onclick="switchPaySection('pay-sec-pre')" class="paystub-subtab-btn">🛡️ Pre-Tax Setup</button>
-              <button id="btnPaySectionPost" onclick="switchPaySection('pay-sec-post')" class="paystub-subtab-btn">💎 Post-Tax Setup</button>
-              <button id="btnPaySectionWithhold" onclick="switchPaySection('pay-sec-withhold')" class="paystub-subtab-btn">➕ Extra Withholdings</button>
-            </div>
-
-            <div id="pay-sec-base" class="paystub-section-panel bg-slate-900 p-4 rounded-xl border border-slate-800">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                <div>
-                  <label for="payCustomSalary" class="text-xs text-emerald-400 font-bold block mb-1">Annual Gross Salary ($)</label>
-                  <input type="number" id="payCustomSalary" value="185000" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs font-bold rounded-lg px-3 py-1.5">
+              <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl space-y-1.5 w-full sm:w-auto">
+                <div class="flex items-center justify-between gap-3">
+                  <label for="driftTolerance" class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                    <i data-lucide="sliders" class="w-3.5 h-3.5 text-indigo-400"></i> Drift Tolerance:
+                  </label>
+                  <span id="driftToleranceVal" class="text-xs font-bold text-indigo-400">5.0%</span>
                 </div>
-                <div>
-                  <label for="payFrequency" class="text-xs text-slate-300 font-semibold block mb-1">Pay Frequency</label>
-                  <select id="payFrequency" onchange="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-1.5">
-                    <option value="26" selected>Bi-Weekly (26 Paychecks)</option>
-                    <option value="24">Semi-Monthly (24 Paychecks)</option>
-                    <option value="12">Monthly (12 Paychecks)</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="paystubFilingStatus" class="text-xs text-slate-300 font-semibold block mb-1">Tax Filing Status</label>
-                  <select id="paystubFilingStatus" onchange="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-1.5">
-                    <option value="single">Single</option>
-                    <option value="mfj" selected>Married Filing Jointly (MFJ)</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="manualStateTaxRate" class="text-xs text-slate-300 font-semibold block mb-1">State Tax Rate (%)</label>
-                  <input type="number" step="0.1" id="manualStateTaxRate" value="0.0" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-1.5">
-                </div>
-                <div>
-                  <label for="manualLocalTaxRate" class="text-xs text-slate-300 font-semibold block mb-1">Local Tax Rate (%)</label>
-                  <input type="number" step="0.1" id="manualLocalTaxRate" value="0.0" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-1.5">
-                </div>
-              </div>
-            </div>
-
-            <div id="pay-sec-pre" class="paystub-section-panel hidden bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
-              <div id="preTaxDeductionsList" class="space-y-2"></div>
-            </div>
-
-            <div id="pay-sec-post" class="paystub-section-panel hidden bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
-              <div id="postTaxDeductionsList" class="space-y-2"></div>
-            </div>
-
-            <div id="pay-sec-withhold" class="paystub-section-panel hidden bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label class="text-[11px] text-slate-400 block mb-1">Additional Federal ($/paycheck)</label>
-                  <input type="number" id="addWithholdFed" value="0" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded px-2.5 py-1.5">
-                </div>
-                <div>
-                  <label class="text-[11px] text-slate-400 block mb-1">Additional State ($/paycheck)</label>
-                  <input type="number" id="addWithholdState" value="0" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded px-2.5 py-1.5">
-                </div>
-                <div>
-                  <label class="text-[11px] text-slate-400 block mb-1">Additional Local ($/paycheck)</label>
-                  <input type="number" id="addWithholdLocal" value="0" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded px-2.5 py-1.5">
-                </div>
+                <input type="range" id="driftTolerance" min="0.5" max="15" step="0.5" value="5" oninput="updateDriftLabel(this.value); renderRebalancer();" class="w-full sm:w-36 h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-500">
               </div>
             </div>
 
@@ -677,13 +485,294 @@
               <table class="w-full text-left text-xs border-collapse">
                 <thead>
                   <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold">
-                    <th class="py-3 px-4">Payroll Item Description</th>
-                    <th class="py-3 px-4">Annual Total ($)</th>
-                    <th class="py-3 px-4">Per Pay Period ($)</th>
+                    <th class="py-3 px-4">Asset Class</th>
+                    <th class="py-3 px-4">Current Value</th>
+                    <th class="py-3 px-4">Current %</th>
+                    <th class="py-3 px-4">Target %</th>
+                    <th class="py-3 px-4">Target Balance</th>
+                    <th class="py-3 px-4">Absolute Delta %</th>
+                    <th class="py-3 px-4">Rebalance Delta</th>
+                    <th class="py-3 px-4">Drift Status</th>
                   </tr>
                 </thead>
-                <tbody id="paystubReceiptBody" class="divide-y divide-slate-800/60 font-medium text-slate-200"></tbody>
+                <tbody id="rebalanceTableBody" class="divide-y divide-slate-800/60 font-medium text-slate-200"></tbody>
               </table>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-400">
+                  <i data-lucide="file-text" class="w-4 h-4"></i>
+                  <span>Action Plan Summary</span>
+                </div>
+              </div>
+              <pre id="actionPlanSummaryText" class="text-xs font-mono text-slate-300 whitespace-pre-wrap leading-relaxed bg-slate-950 p-4 rounded-lg border border-slate-800/80 custom-scrollbar max-h-48 overflow-y-auto">Calculating actions...</pre>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
+                  <i data-lucide="calculator" class="w-4 h-4 text-indigo-400"></i>
+                  <span>Performance Fee Drag & Liquidity Metrics</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="text-xs text-slate-400 font-semibold block mb-1">Expense Ratio (%)</label>
+                  <input type="number" step="0.01" id="rebalExpenseRatio" value="0.15" oninput="renderRebalancer()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-lg px-3 py-1.5 text-xs">
+                </div>
+                <div>
+                  <label class="text-xs text-slate-400 font-semibold block mb-1">Idle Cash ($)</label>
+                  <input type="number" id="rebalIdleCash" value="5000" oninput="renderRebalancer()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-lg px-3 py-1.5 text-xs">
+                </div>
+                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800/80 flex flex-col justify-center">
+                  <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Annual Performance Fee Drag</span>
+                  <div id="annualFeeDragVal" class="privacy-target text-base font-bold text-rose-400 mt-0.5">$0.00 / yr</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
+          <div class="collapsible-header mb-4" onclick="toggleCollapse(this)">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Account Trajectory & Performance Basis</h3>
+            <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+          </div>
+          <div class="collapsible-content">
+            <div class="mini-charts-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: TAX & CONTRIBUTION TRACKER -->
+      <div id="tab-tax" class="main-tab-content space-y-6 hidden">
+        <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
+          <div class="collapsible-header mb-4" onclick="toggleCollapse(this)">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Prorated IRS Goal Tracker (<span id="limitYearText">2026</span>)</h3>
+            <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+          </div>
+
+          <div class="collapsible-content space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <p class="text-xs text-slate-400">Prorated target evaluates expected pacing based on elapsed months.</p>
+              <div class="flex items-center gap-4 text-xs font-semibold bg-slate-900 border border-slate-800 p-2 rounded-lg">
+                <label class="flex items-center gap-2 cursor-pointer text-slate-300">
+                  <input type="checkbox" id="catchUpCheck" onchange="renderIRSProgress()" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0"> Catch-up (50+)
+                </label>
+                <select id="hsaTypeSelect" onchange="renderIRSProgress()" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-slate-200">
+                  <option value="family">HSA: Family</option>
+                  <option value="self">HSA: Self-Only</option>
+                </select>
+                <select id="donor529Select" onchange="renderIRSProgress()" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-slate-200">
+                  <option value="single">529: Single ($19k)</option>
+                  <option value="joint">529: Joint ($38k)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-bold text-slate-300">401(k) Personal</span>
+                  <span id="badge401k" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
+                </div>
+                <div class="flex justify-between text-xs text-slate-400 mb-2">
+                  <span>Annual Limit ($):</span>
+                  <input type="number" id="limit401k" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
+                </div>
+                <div id="label401kVal" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
+                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div id="bar401k" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-bold text-slate-300">Roth / Trad IRA</span>
+                  <span id="badgeIra" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
+                </div>
+                <div class="flex justify-between text-xs text-slate-400 mb-2">
+                  <span>Annual Limit ($):</span>
+                  <input type="number" id="limitIra" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
+                </div>
+                <div id="labelIraVal" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
+                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div id="barIra" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-bold text-slate-300">HSA Goal</span>
+                  <span id="badgeHsa" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
+                </div>
+                <div class="flex justify-between text-xs text-slate-400 mb-2">
+                  <span>Annual Limit ($):</span>
+                  <input type="number" id="limitHsa" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
+                </div>
+                <div id="labelHsaVal" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
+                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div id="barHsa" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-bold text-slate-300">Mysha 529</span>
+                  <span id="badge529" class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">--</span>
+                </div>
+                <div class="flex justify-between text-xs text-slate-400 mb-2">
+                  <span>Annual Limit ($):</span>
+                  <input type="number" id="limit529" oninput="renderIRSProgress()" class="w-20 bg-slate-800 border border-slate-700 text-right px-1.5 py-0.5 rounded text-slate-100">
+                </div>
+                <div id="label529Val" class="privacy-target text-xs font-bold text-slate-200 mb-2">$0</div>
+                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div id="bar529" class="h-full bg-indigo-500 transition-all duration-300" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
+          <div class="collapsible-header mb-4" onclick="toggleCollapse(this)">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Tax Wrapper Location Bucket Breakdown</h3>
+            <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+          </div>
+          <div class="collapsible-content">
+            <div id="taxBucketContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: STRATEGIC HUB & INSTANT PAYSTUB TOOL -->
+      <div id="tab-hub" class="main-tab-content space-y-6 hidden">
+        <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-6">
+          <div class="collapsible-header border-b border-slate-800 pb-4" onclick="toggleCollapse(this)">
+            <div class="flex items-center gap-2">
+              <button id="btnSubTabOptimizer" onclick="event.stopPropagation(); switchHubSubTab('subtab-optimizer')" class="hub-tab-btn active">
+                📈 Texas Market Optimizer
+              </button>
+              <button id="btnSubTabPaystub" onclick="event.stopPropagation(); switchHubSubTab('subtab-paystub')" class="hub-tab-btn">
+                📋 Instant Paystub Tool
+              </button>
+            </div>
+            <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+          </div>
+
+          <div class="collapsible-content space-y-6">
+            <!-- SUB-TAB A: TEXAS OPTIMIZER -->
+            <div id="subtab-optimizer" class="hub-sub-content space-y-6">
+              <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <h3 class="text-base font-bold uppercase tracking-wider text-slate-100 flex items-center gap-2">
+                  <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
+                  ✨ Texas & Macro Market Investment Optimizer
+                </h3>
+                <span class="text-[10px] font-mono px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-bold uppercase">
+                  Active Focus Year: <span id="hubYearLabel">2026</span>
+                </span>
+              </div>
+
+              <div class="space-y-4">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-2">
+                  <i data-lucide="map-pin" class="w-4 h-4"></i>
+                  Module A1: The Texas Savings Runway Accelerator
+                </h4>
+                <div id="texasAcceleratorContainer"></div>
+              </div>
+
+              <div class="space-y-4 pt-4 border-t border-slate-800">
+                <div id="macroMatrixContainer"></div>
+              </div>
+            </div>
+
+            <!-- SUB-TAB B: PAYSTUB TOOL -->
+            <div id="subtab-paystub" class="hub-sub-content space-y-4 hidden">
+              <div class="border-b border-slate-800 pb-3 flex justify-between items-center">
+                <h3 class="text-base font-bold uppercase tracking-wider text-slate-100 flex items-center gap-2">
+                  <i data-lucide="receipt" class="w-5 h-5 text-emerald-400"></i>
+                  📋 Minimal-Input Instant Paystub Calculator
+                </h3>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-2 bg-slate-900 p-2 rounded-lg border border-slate-800">
+                <button id="btnPaySectionBase" onclick="switchPaySection('pay-sec-base')" class="paystub-subtab-btn active">⚙️ Base Salary & Taxes</button>
+                <button id="btnPaySectionPre" onclick="switchPaySection('pay-sec-pre')" class="paystub-subtab-btn">🛡️ Pre-Tax Setup</button>
+                <button id="btnPaySectionPost" onclick="switchPaySection('pay-sec-post')" class="paystub-subtab-btn">💎 Post-Tax Setup</button>
+                <button id="btnPaySectionWithhold" onclick="switchPaySection('pay-sec-withhold')" class="paystub-subtab-btn">➕ Extra Withholdings</button>
+              </div>
+
+              <div id="pay-sec-base" class="paystub-section-panel bg-slate-900 p-4 rounded-xl border border-slate-800">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                  <div>
+                    <label for="payCustomSalary" class="text-xs text-emerald-400 font-bold block mb-1">Annual Gross Salary ($)</label>
+                    <input type="number" id="payCustomSalary" value="185000" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs font-bold rounded-lg px-3 py-1.5">
+                  </div>
+                  <div>
+                    <label for="payFrequency" class="text-xs text-slate-300 font-semibold block mb-1">Pay Frequency</label>
+                    <select id="payFrequency" onchange="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-1.5">
+                      <option value="26" selected>Bi-Weekly (26 Paychecks)</option>
+                      <option value="24">Semi-Monthly (24 Paychecks)</option>
+                      <option value="12">Monthly (12 Paychecks)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="paystubFilingStatus" class="text-xs text-slate-300 font-semibold block mb-1">Tax Filing Status</label>
+                    <select id="paystubFilingStatus" onchange="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-1.5">
+                      <option value="single">Single</option>
+                      <option value="mfj" selected>Married Filing Jointly (MFJ)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="manualStateTaxRate" class="text-xs text-slate-300 font-semibold block mb-1">State Tax Rate (%)</label>
+                    <input type="number" step="0.1" id="manualStateTaxRate" value="0.0" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-1.5">
+                  </div>
+                  <div>
+                    <label for="manualLocalTaxRate" class="text-xs text-slate-300 font-semibold block mb-1">Local Tax Rate (%)</label>
+                    <input type="number" step="0.1" id="manualLocalTaxRate" value="0.0" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-1.5">
+                  </div>
+                </div>
+              </div>
+
+              <div id="pay-sec-pre" class="paystub-section-panel hidden bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+                <div id="preTaxDeductionsList" class="space-y-2"></div>
+              </div>
+
+              <div id="pay-sec-post" class="paystub-section-panel hidden bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+                <div id="postTaxDeductionsList" class="space-y-2"></div>
+              </div>
+
+              <div id="pay-sec-withhold" class="paystub-section-panel hidden bg-slate-900/60 p-4 rounded-xl border border-slate-800 space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label class="text-[11px] text-slate-400 block mb-1">Additional Federal ($/paycheck)</label>
+                    <input type="number" id="addWithholdFed" value="0" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded px-2.5 py-1.5">
+                  </div>
+                  <div>
+                    <label class="text-[11px] text-slate-400 block mb-1">Additional State ($/paycheck)</label>
+                    <input type="number" id="addWithholdState" value="0" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded px-2.5 py-1.5">
+                  </div>
+                  <div>
+                    <label class="text-[11px] text-slate-400 block mb-1">Additional Local ($/paycheck)</label>
+                    <input type="number" id="addWithholdLocal" value="0" oninput="calculatePaystub()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 text-xs rounded px-2.5 py-1.5">
+                  </div>
+                </div>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold">
+                      <th class="py-3 px-4">Payroll Item Description</th>
+                      <th class="py-3 px-4">Annual Total ($)</th>
+                      <th class="py-3 px-4">Per Pay Period ($)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="paystubReceiptBody" class="divide-y divide-slate-800/60 font-medium text-slate-200"></tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -691,29 +780,38 @@
 
       <!-- TAB 5: ADVANCED PROJECTIONS -->
       <div id="tab-projections" class="main-tab-content space-y-6 hidden">
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
-          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Compound Wealth Growth Projection Engine</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 bg-slate-900 p-4 rounded-xl border border-slate-800">
-            <div>
-              <label class="text-xs text-slate-400 font-semibold block mb-1">Starting Portfolio Value ($)</label>
-              <input type="number" id="projStartingBal" value="198906" oninput="syncProjectionsAndPropagate()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded px-3 py-1.5 text-xs">
-            </div>
-            <div>
-              <label class="text-xs text-slate-400 font-semibold block mb-1">Monthly Contribution ($)</label>
-              <input type="number" id="projMonthlyContri" value="2000" oninput="syncProjectionsAndPropagate()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded px-3 py-1.5 text-xs">
-            </div>
-            <div>
-              <label class="text-xs text-slate-400 font-semibold block mb-1">Expected Return (%)</label>
-              <input type="number" step="0.1" id="projAnnualReturn" value="8.0" oninput="syncProjectionsAndPropagate()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded px-3 py-1.5 text-xs">
-            </div>
+        <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all">
+          <div class="collapsible-header mb-4" onclick="toggleCollapse(this)">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Compound Wealth Growth Projection Engine</h3>
+            <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
           </div>
-          <div class="h-64"><canvas id="projectionChart"></canvas></div>
+
+          <div class="collapsible-content space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-900 p-4 rounded-xl border border-slate-800">
+              <div>
+                <label class="text-xs text-slate-400 font-semibold block mb-1">Starting Portfolio Value ($)</label>
+                <input type="number" id="projStartingBal" value="198906" oninput="syncProjectionsAndPropagate()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded px-3 py-1.5 text-xs">
+              </div>
+              <div>
+                <label class="text-xs text-slate-400 font-semibold block mb-1">Monthly Contribution ($)</label>
+                <input type="number" id="projMonthlyContri" value="2000" oninput="syncProjectionsAndPropagate()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded px-3 py-1.5 text-xs">
+              </div>
+              <div>
+                <label class="text-xs text-slate-400 font-semibold block mb-1">Expected Return (%)</label>
+                <input type="number" step="0.1" id="projAnnualReturn" value="8.0" oninput="syncProjectionsAndPropagate()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded px-3 py-1.5 text-xs">
+              </div>
+            </div>
+            <div class="h-64"><canvas id="projectionChart"></canvas></div>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-2">FIRE Target</h3>
-            <div class="space-y-3">
+          <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
+            <div class="collapsible-header mb-2" onclick="toggleCollapse(this)">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">FIRE Target</h3>
+              <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+            </div>
+            <div class="collapsible-content space-y-3">
               <div>
                 <label class="text-xs text-slate-400 block">Annual Expenses ($)</label>
                 <input type="number" id="fireAnnualExpenses" value="60000" oninput="propagateUnifiedDataStore()" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-slate-100 mt-1">
@@ -742,9 +840,12 @@
             </div>
           </div>
 
-          <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-2">Emergency Liquidity</h3>
-            <div class="space-y-3">
+          <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
+            <div class="collapsible-header mb-2" onclick="toggleCollapse(this)">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Emergency Liquidity</h3>
+              <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+            </div>
+            <div class="collapsible-content space-y-3">
               <div>
                 <label class="text-xs text-slate-400 block">Monthly Expenses ($)</label>
                 <input type="number" id="efMonthlyExp" value="5000" oninput="propagateUnifiedDataStore()" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-slate-100 mt-1">
@@ -771,9 +872,12 @@
             </div>
           </div>
 
-          <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-2">Inflation Simulator</h3>
-            <div class="space-y-3">
+          <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm">
+            <div class="collapsible-header mb-2" onclick="toggleCollapse(this)">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Inflation Simulator</h3>
+              <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+            </div>
+            <div class="collapsible-content space-y-3">
               <div>
                 <label class="text-xs text-slate-400 block">Est. Inflation (%)</label>
                 <input type="number" step="0.1" id="infInflationRate" value="2.5" oninput="propagateUnifiedDataStore()" class="w-full bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-slate-100 mt-1">
@@ -796,7 +900,6 @@
       <div id="tab-expenses" class="main-tab-content space-y-6 hidden">
         <!-- TOP METRICS HEADER -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- Global Monthly Budget Card -->
           <div class="metric-card bg-slate-850 border border-slate-800/80 rounded-xl p-4 hover:border-slate-700 transition-all shadow-sm">
             <div class="flex justify-between items-center text-slate-400">
               <span class="text-[11px] font-semibold uppercase tracking-wider">Monthly Budget Ceiling</span>
@@ -815,7 +918,6 @@
             <div id="expBudgetSubtext" class="sub privacy-target text-[10px] font-bold mt-1 text-slate-400"></div>
           </div>
 
-          <!-- Total Monthly Spending Card -->
           <div class="metric-card bg-slate-850 border border-slate-800/80 rounded-xl p-4 hover:border-slate-700 transition-all shadow-sm">
             <div class="flex justify-between items-center text-slate-400">
               <span class="text-[11px] font-semibold uppercase tracking-wider">Total Monthly Spent</span>
@@ -825,7 +927,6 @@
             <div id="expMetricSpentPace" class="sub privacy-target text-[10px] font-bold mt-1 text-slate-400"></div>
           </div>
 
-          <!-- Aggregate Unpaid Card Balance -->
           <div class="metric-card bg-slate-850 border border-slate-800/80 rounded-xl p-4 hover:border-slate-700 transition-all shadow-sm">
             <div class="flex justify-between items-center text-slate-400">
               <span class="text-[11px] font-semibold uppercase tracking-wider">Total Credit Outstanding</span>
@@ -835,7 +936,6 @@
             <div id="expMetricCreditPaid" class="sub privacy-target text-[10px] font-bold mt-1 text-slate-400"></div>
           </div>
 
-          <!-- Active Recurring Subscriptions -->
           <div class="metric-card bg-slate-850 border border-slate-800/80 rounded-xl p-4 hover:border-slate-700 transition-all shadow-sm">
             <div class="flex justify-between items-center text-slate-400">
               <span class="text-[11px] font-semibold uppercase tracking-wider">Recurring Subscriptions</span>
@@ -846,14 +946,18 @@
           </div>
         </div>
 
-        <!-- SECTION 1: TRANSACTION HISTORY & ACTIVITY LEDGER (REPLACED PAYMENT ACCOUNTS TO BE FIRST) -->
-        <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4">
-          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+        <!-- SECTION 1: TRANSACTION HISTORY & ACTIVITY LEDGER -->
+        <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4">
+          <div class="collapsible-header border-b border-slate-800 pb-3" onclick="toggleCollapse(this)">
             <div class="flex items-center gap-2">
               <i data-lucide="list-checks" class="w-5 h-5 text-emerald-400"></i>
               <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Transaction History & Activity Ledger</h3>
             </div>
-            <div class="flex items-center gap-2">
+            <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+          </div>
+
+          <div class="collapsible-content space-y-4">
+            <div class="flex flex-wrap items-center justify-end gap-2 pt-2">
               <button onclick="document.getElementById('importExpenseFileInput').click()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
                 <i data-lucide="upload" class="w-3.5 h-3.5"></i> Import JSON
               </button>
@@ -867,47 +971,57 @@
                 <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> Log Expense
               </button>
             </div>
-          </div>
 
-          <div class="overflow-x-auto custom-scrollbar max-h-96">
-            <table id="expTransactionTable" class="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold">
-                  <th class="py-3 px-3">Date</th>
-                  <th class="py-3 px-3">Description</th>
-                  <th class="py-3 px-3">Category</th>
-                  <th class="py-3 px-3">Account / Card</th>
-                  <th class="py-3 px-3 text-right">Amount ($)</th>
-                  <th class="py-3 px-3 text-center">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="expTransactionTableBody" class="divide-y divide-slate-800/60 font-medium text-slate-200"></tbody>
-            </table>
+            <div class="overflow-x-auto custom-scrollbar max-h-96">
+              <table id="expTransactionTable" class="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold">
+                    <th class="py-3 px-3">Date</th>
+                    <th class="py-3 px-3">Description</th>
+                    <th class="py-3 px-3">Category</th>
+                    <th class="py-3 px-3">Account / Card</th>
+                    <th class="py-3 px-3 text-right">Amount ($)</th>
+                    <th class="py-3 px-3 text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="expTransactionTableBody" class="divide-y divide-slate-800/60 font-medium text-slate-200"></tbody>
+              </table>
+            </div>
           </div>
         </div>
 
         <!-- SECTION 2: CREDIT CARDS MATRIX & PACING INDICATORS -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div class="lg:col-span-2 bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div class="lg:col-span-2 collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4">
+            <div class="collapsible-header border-b border-slate-800 pb-3" onclick="toggleCollapse(this)">
               <div class="flex items-center gap-2">
                 <i data-lucide="credit-card" class="w-5 h-5 text-indigo-400"></i>
                 <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Payment Accounts & Credit Card Matrix</h3>
               </div>
-              <button onclick="openCardModal()" class="px-3 py-1.5 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
-                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Card
-              </button>
+              <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
             </div>
-            <div id="expCardsContainer" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 overflow-x-auto custom-scrollbar pb-2"></div>
+            
+            <div class="collapsible-content space-y-4">
+              <div class="flex justify-end pt-2">
+                <button onclick="openCardModal()" class="px-3 py-1.5 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all">
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Card
+                </button>
+              </div>
+              <div id="expCardsContainer" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 overflow-x-auto custom-scrollbar pb-2"></div>
+            </div>
           </div>
 
-          <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-                <div class="flex items-center gap-2">
-                  <i data-lucide="gauge" class="w-5 h-5 text-emerald-400"></i>
-                  <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Monthly Pacing Indicator</h3>
-                </div>
+          <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4 flex flex-col justify-between">
+            <div class="collapsible-header border-b border-slate-800 pb-3" onclick="toggleCollapse(this)">
+              <div class="flex items-center gap-2">
+                <i data-lucide="gauge" class="w-5 h-5 text-emerald-400"></i>
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Monthly Pacing Indicator</h3>
+              </div>
+              <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
+            </div>
+
+            <div class="collapsible-content space-y-4">
+              <div class="flex justify-between items-center mb-2">
                 <span id="expPaceStatusBadge" class="text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-400"></span>
               </div>
 
@@ -921,40 +1035,50 @@
                 </div>
                 <p id="expPaceAdviceText" class="text-[11px] text-slate-400 leading-normal pt-1"></p>
               </div>
-            </div>
 
-            <div class="space-y-3 pt-4 border-t border-slate-800">
-              <h4 class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Category Sub-Budgets Overview</h4>
-              <div id="expCategoryPacingList" class="space-y-2.5 max-h-48 overflow-y-auto custom-scrollbar pr-1"></div>
+              <div class="space-y-3 pt-4 border-t border-slate-800">
+                <h4 class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Category Sub-Budgets Overview</h4>
+                <div id="expCategoryPacingList" class="space-y-2.5 max-h-48 overflow-y-auto custom-scrollbar pr-1"></div>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- SECTION 3: CATEGORY CHARTS & RECURRING SUBSCRIPTIONS -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div class="bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all flex flex-col justify-between space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div class="collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all flex flex-col justify-between space-y-4">
+            <div class="collapsible-header border-b border-slate-800 pb-3" onclick="toggleCollapse(this)">
               <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
                 <i data-lucide="pie-chart" class="w-4 h-4 text-indigo-400"></i> Category Distribution
               </h3>
+              <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
             </div>
-            <div class="h-60 relative flex justify-center items-center">
-              <canvas id="expCategoryChart"></canvas>
+
+            <div class="collapsible-content space-y-4">
+              <div class="h-60 relative flex justify-center items-center">
+                <canvas id="expCategoryChart"></canvas>
+              </div>
+              <div id="expCategoryRankList" class="space-y-2 border-t border-slate-800 pt-4 text-xs max-h-40 overflow-y-auto custom-scrollbar"></div>
             </div>
-            <div id="expCategoryRankList" class="space-y-2 border-t border-slate-800 pt-4 text-xs max-h-40 overflow-y-auto custom-scrollbar"></div>
           </div>
 
-          <div class="lg:col-span-2 bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div class="lg:col-span-2 collapsible-container bg-slate-850 border border-slate-800/80 rounded-xl p-6 shadow-sm hover:border-slate-700 transition-all space-y-4">
+            <div class="collapsible-header border-b border-slate-800 pb-3" onclick="toggleCollapse(this)">
               <div class="flex items-center gap-2">
                 <i data-lucide="repeat" class="w-5 h-5 text-purple-400"></i>
                 <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Smart Recurring Subscriptions & Bill Audit</h3>
               </div>
-              <button onclick="openTransactionDrawer()" class="px-3 py-1.5 bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/30 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
-                <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Subscription
-              </button>
+              <i data-lucide="chevron-down" class="collapsible-icon w-4 h-4 text-slate-400"></i>
             </div>
-            <div id="expSubscriptionsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+
+            <div class="collapsible-content space-y-4">
+              <div class="flex justify-end pt-2">
+                <button onclick="openTransactionDrawer()" class="px-3 py-1.5 bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/30 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all">
+                  <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Subscription
+                </button>
+              </div>
+              <div id="expSubscriptionsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1167,6 +1291,37 @@
   </div>
 
   <script>
+    /* ==========================================================================
+       COLLAPSIBLE FUNCTIONALITY MANAGEMENT
+       ========================================================================== */
+    function toggleCollapse(headerElement) {
+      const container = headerElement.closest('.collapsible-container');
+      if (container) {
+        container.classList.toggle('collapsed');
+      }
+    }
+
+    function autoCollapseMobileSections() {
+      const isMobile = window.innerWidth <= 768;
+      document.querySelectorAll('.collapsible-container').forEach(container => {
+        if (isMobile) {
+          container.classList.add('collapsed');
+        } else {
+          container.classList.remove('collapsed');
+        }
+      });
+    }
+
+    function toggleAllSections(expand = true) {
+      document.querySelectorAll('.collapsible-container').forEach(container => {
+        if (expand) {
+          container.classList.remove('collapsed');
+        } else {
+          container.classList.add('collapsed');
+        }
+      });
+    }
+
     /* ==========================================================================
        ORIGINAL PORTFOLIO DASHBOARD ENGINE & STATE MANAGEMENT
        ========================================================================== */
@@ -2799,7 +2954,7 @@
         const utilPct = Math.min(100, (card.pendingBalance / (card.limit || 1)) * 100);
 
         container.innerHTML += `
-          <div class="relative bg-gradient-to-br ${card.gradient} rounded-xl p-4 border border-slate-700/60 shadow-lg text-white flex flex-col justify-between shrink-0 min-w-[220px]">
+          <div class="relative bg-gradient-to-br ${card.gradient} rounded-xl p-4 border border-slate-700/60 shadow-lg text-white flex flex-col justify-between shrink-0 min-w-[20px]">
             <div class="flex justify-between items-start">
               <div>
                 <span class="text-[9px] font-extrabold uppercase tracking-widest text-slate-300 block">${card.issuer}</span>
@@ -3182,7 +3337,10 @@
     window.onload = function() {
       loadDataFromJSON();
       loadExpenseDataFromJSON();
+      autoCollapseMobileSections();
     };
+
+    window.addEventListener('resize', autoCollapseMobileSections);
   </script>
 </body>
 </html>
